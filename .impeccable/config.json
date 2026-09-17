@@ -1,0 +1,27 @@
+{
+  "buildPath": "code",
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "repeated-container-text",
+        "value": "*",
+        "files": [
+          "extension/src/popup/popup.html"
+        ],
+        "createdAt": "2026-09-17T13:47:36.265Z",
+        "reason": "the On/Off words beside each switch state the setting without relying on colour (brief section 20); one per switch, by design"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "extension/src/**/*.html"
+        ],
+        "createdAt": "2026-09-17T13:47:43.488Z",
+        "reason": "user pinned: brief section 14 names Warm Sand #F3E8D2 as the background"
+      }
+    ]
+  }
+}

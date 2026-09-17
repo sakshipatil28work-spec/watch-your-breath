@@ -1,0 +1,11 @@
+node_modules/
+extension/dist/
+extension/*.zip
+web/.next/
+web/out/
+web/next-env.d.ts
+.impeccable/live/
+.impeccable/review/
+.impeccable/decision/
+*.log
+.DS_Store

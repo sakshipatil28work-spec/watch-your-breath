@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Watch Your Breath</title>
+    <link rel="icon" href="icons/icon32.png" />
+    <link rel="stylesheet" href="fonts/fonts.css" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body class="onboarding">
+    <main class="sticker" id="app" data-view="setup">
+      <section class="view" id="view-setup" aria-labelledby="phrase">
+        <div class="emblem" id="emblem"></div>
+        <h1 class="sr-only" id="phrase">Watch your breath.</h1>
+        <p class="onboarding-sub">A small reminder to notice the breath you're already breathing.</p>
+
+        <form class="onboarding-form" id="form">
+          <div class="row">
+            <label class="row-label" for="select-interval">Reminder frequency</label>
+            <select class="select" id="select-interval">
+              <option value="30">Every 30 minutes</option>
+              <option value="60" selected>Every 1 hour</option>
+              <option value="120">Every 2 hours</option>
+              <option value="custom">Custom</option>
+            </select>
+          </div>
+          <div class="row row-custom row-stack" id="row-custom" hidden>
+            <div class="row">
+              <label class="row-label sr-only" for="input-custom">Custom minutes</label>
+              <span class="field-suffix">
+                <input class="input" id="input-custom" type="number" inputmode="numeric" min="5" max="720" step="5" value="45" aria-describedby="hint-custom" />
+                <span>minutes</span>
+              </span>
+            </div>
+            <p class="hint hint-right" id="hint-custom">Between 5 minutes and 12 hours.</p>
+          </div>
+
+          <fieldset class="radios radios-row">
+            <legend class="row-label">Notification style</legend>
+            <label class="radio"><input type="radio" name="layout" value="compact" checked /><span class="radio-mark" aria-hidden="true"></span><span>Compact</span></label>
+            <label class="radio"><input type="radio" name="layout" value="expanded" /><span class="radio-mark" aria-hidden="true"></span><span>Expanded</span></label>
+          </fieldset>
+
+          <fieldset class="radios radios-row">
+            <legend class="row-label">Reminder sound</legend>
+            <label class="radio"><input type="radio" name="sound" value="on" checked /><span class="radio-mark" aria-hidden="true"></span><span>On</span></label>
+            <label class="radio"><input type="radio" name="sound" value="off" /><span class="radio-mark" aria-hidden="true"></span><span>Off</span></label>
+          </fieldset>
+
+          <button type="submit" class="button" id="submit">Start reminders</button>
+        </form>
+      </section>
+
+      <section class="view onboarding-done" id="view-done" hidden aria-labelledby="done-title">
+        <div class="emblem emblem-small" id="emblem-done"></div>
+        <h1 class="phrase" id="done-title">You're set.</h1>
+        <p class="hint" id="done-sub">Your first reminder comes in about an hour, with its own small drawing. Pin the icon to your toolbar if you'd like it close by.</p>
+        <button type="button" class="button button-secondary" id="close">Close this tab</button>
+      </section>
+    </main>
+    <script type="module" src="onboarding.js"></script>
+  </body>
+</html>

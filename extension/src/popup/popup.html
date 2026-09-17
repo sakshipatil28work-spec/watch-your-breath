@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="color-scheme" content="light" />
+    <title>Watch Your Breath</title>
+    <link rel="stylesheet" href="fonts/fonts.css" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="sticker" id="app" data-view="home">
+      <!-- HOME -->
+      <section class="view view-home" id="view-home" aria-labelledby="phrase">
+        <button type="button" class="gear-button" id="open-settings" aria-label="Settings"></button>
+        <div class="emblem" id="emblem"></div>
+        <h1 class="sr-only" id="phrase">Watch your breath.</h1>
+        <p class="sr-only">Just a moment.</p>
+
+        <div class="rows">
+          <div class="row">
+            <span class="row-label" id="label-reminders">Reminders</span>
+            <button
+              type="button"
+              class="toggle"
+              id="toggle-enabled"
+              role="switch"
+              aria-checked="false"
+              aria-labelledby="label-reminders"
+            >
+              <span class="toggle-track" aria-hidden="true"><span class="toggle-knob"></span></span>
+              <span class="toggle-text" id="toggle-enabled-text">Off</span>
+            </button>
+          </div>
+
+          <div class="row">
+            <label class="row-label" for="select-interval">Every</label>
+            <select class="select" id="select-interval">
+              <option value="30">30 minutes</option>
+              <option value="60">1 hour</option>
+              <option value="120">2 hours</option>
+              <option value="custom">Custom</option>
+            </select>
+          </div>
+
+          <div class="row row-custom row-stack" id="row-custom" hidden>
+            <div class="row">
+              <label class="row-label sr-only" for="input-custom">Custom minutes</label>
+              <span class="field-suffix">
+                <input class="input" id="input-custom" type="number" inputmode="numeric" min="5" max="720" step="5" aria-describedby="hint-custom" />
+                <span>minutes</span>
+              </span>
+            </div>
+            <p class="hint hint-right" id="hint-custom">Between 5 minutes and 12 hours.</p>
+          </div>
+
+          <div class="row">
+            <label class="row-label" for="select-layout">Notification</label>
+            <select class="select" id="select-layout">
+              <option value="compact">Compact</option>
+              <option value="expanded">Expanded</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <span class="row-label" id="label-sound">Sound</span>
+            <button
+              type="button"
+              class="toggle toggle-sound"
+              id="toggle-sound"
+              role="switch"
+              aria-checked="true"
+              aria-labelledby="label-sound"
+            >
+              <span class="bell-glyph" id="bell-glyph" aria-hidden="true"></span>
+              <span class="toggle-track" aria-hidden="true"><span class="toggle-knob"></span></span>
+              <span class="toggle-text" id="toggle-sound-text">On</span>
+            </button>
+          </div>
+        </div>
+
+        <p class="status" id="status" aria-live="polite"></p>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="view view-settings" id="view-settings" hidden aria-labelledby="settings-title">
+        <header class="settings-header">
+          <button type="button" class="back-button" id="close-settings" aria-label="Back"></button>
+          <h2 class="settings-title" id="settings-title">Settings</h2>
+        </header>
+
+        <section class="group" aria-labelledby="g-reminders">
+          <h3 class="group-title" id="g-reminders">Reminders</h3>
+          <div class="row">
+            <span class="row-label" id="label-reminders-2">Reminders</span>
+            <button
+              type="button"
+              class="toggle"
+              id="toggle-enabled-2"
+              role="switch"
+              aria-checked="false"
+              aria-labelledby="label-reminders-2"
+            >
+              <span class="toggle-track" aria-hidden="true"><span class="toggle-knob"></span></span>
+              <span class="toggle-text" id="toggle-enabled-2-text">Off</span>
+            </button>
+          </div>
+          <div class="row">
+            <label class="row-label" for="select-interval-2">Frequency</label>
+            <select class="select" id="select-interval-2">
+              <option value="30">30 minutes</option>
+              <option value="60">1 hour</option>
+              <option value="120">2 hours</option>
+              <option value="custom">Custom</option>
+            </select>
+          </div>
+          <div class="row row-custom row-stack" id="row-custom-2" hidden>
+            <div class="row">
+              <label class="row-label sr-only" for="input-custom-2">Custom minutes</label>
+              <span class="field-suffix">
+                <input class="input" id="input-custom-2" type="number" inputmode="numeric" min="5" max="720" step="5" aria-describedby="hint-custom-2" />
+                <span>minutes</span>
+              </span>
+            </div>
+            <p class="hint hint-right" id="hint-custom-2">Between 5 minutes and 12 hours.</p>
+          </div>
+        </section>
+
+        <section class="group" aria-labelledby="g-layout">
+          <h3 class="group-title" id="g-layout">Notification</h3>
+          <fieldset class="radios" id="layout-radios">
+            <legend class="sr-only">Notification layout</legend>
+            <label class="radio radio-stack">
+              <input type="radio" name="layout" value="compact" />
+              <span class="radio-mark" aria-hidden="true"></span>
+              <span class="radio-text"><span>Compact</span><small>Illustration and a short reminder</small></span>
+            </label>
+            <label class="radio radio-stack">
+              <input type="radio" name="layout" value="expanded" />
+              <span class="radio-mark" aria-hidden="true"></span>
+              <span class="radio-text"><span>Expanded</span><small>Illustration, reminder and an optional reflection</small></span>
+            </label>
+          </fieldset>
+          <div class="card-preview" id="card-preview">
+            <iframe id="card-frame" title="Reminder preview" src="card.html?preview=1" scrolling="no"></iframe>
+          </div>
+          <div class="row row-preview">
+            <button type="button" class="button button-secondary" id="send-preview">Send one now</button>
+            <span class="hint" id="preview-hint" role="status">Shows the next reminder right away, so you can see how it arrives.</span>
+          </div>
+          <div class="notice" id="denied-note" hidden>
+            <p class="hint">
+              Chrome is set to block notifications from this extension. Reminders still arrive as cards; only the backup
+              notification, used when a card can't open, would be hidden. To allow it, open Chrome's notification
+              settings and switch Watch Your Breath on.
+            </p>
+            <button type="button" class="button button-secondary button-small" id="open-chrome-settings">
+              Open Chrome settings
+            </button>
+          </div>
+        </section>
+
+        <section class="group" aria-labelledby="g-sound">
+          <h3 class="group-title" id="g-sound">Sound</h3>
+          <div class="row">
+            <span class="row-label" id="label-sound-2">Reminder sound</span>
+            <button
+              type="button"
+              class="toggle"
+              id="toggle-sound-2"
+              role="switch"
+              aria-checked="true"
+              aria-labelledby="label-sound-2"
+            >
+              <span class="toggle-track" aria-hidden="true"><span class="toggle-knob"></span></span>
+              <span class="toggle-text" id="toggle-sound-2-text">On</span>
+            </button>
+          </div>
+          <div class="row row-preview">
+            <button type="button" class="button button-secondary button-play" id="play-bell">
+              <span class="play-glyph" aria-hidden="true"></span>Play bell
+            </button>
+            <span class="hint" id="bell-hint" role="status">A single soft bell. It plays once with each reminder.</span>
+          </div>
+        </section>
+
+        <section class="group group-quiet" id="group-quiet" aria-labelledby="g-quiet">
+          <h3 class="group-title" id="g-quiet">Quiet hours</h3>
+          <p class="hint">No reminders between these times. <span class="quiet-now" id="quiet-now"></span></p>
+          <div class="row row-times">
+            <label class="time-field"><span class="row-label">Start</span><input class="input input-time" id="input-quiet-start" type="time" /></label>
+            <label class="time-field"><span class="row-label">End</span><input class="input input-time" id="input-quiet-end" type="time" /></label>
+          </div>
+        </section>
+
+        <section class="group" aria-labelledby="g-optional">
+          <h3 class="group-title" id="g-optional">Optional</h3>
+          <div class="row row-stack">
+            <div class="row">
+              <span class="row-label" id="label-randomize">Randomize reminder timing</span>
+              <button
+                type="button"
+                class="toggle"
+                id="toggle-randomize"
+                role="switch"
+                aria-checked="false"
+                aria-labelledby="label-randomize"
+                aria-describedby="hint-randomize"
+              >
+                <span class="toggle-track" aria-hidden="true"><span class="toggle-knob"></span></span>
+                <span class="toggle-text" id="toggle-randomize-text">Off</span>
+              </button>
+            </div>
+            <p class="hint" id="hint-randomize">
+              Lets each reminder drift a little, so it never lands on the same predictable minute.
+            </p>
+          </div>
+        </section>
+
+        <section class="group group-about" aria-labelledby="g-about">
+          <h3 class="group-title" id="g-about">About</h3>
+          <p class="about">Watch Your Breath is a small reminder to notice something that is already happening.</p>
+          <p class="hint" id="version"></p>
+        </section>
+      </section>
+    </main>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="color-scheme" content="light" />
+    <title>Watch your breath.</title>
+    <link rel="icon" href="icons/icon32.png" />
+    <link rel="stylesheet" href="fonts/fonts.css" />
+    <link rel="stylesheet" href="card.css" />
+  </head>
+  <body>
+    <main class="card" id="card" data-layout="compact" role="status" aria-live="polite">
+      <div class="card-art" id="art">
+        <img id="illustration" src="assets/illustrations/breath-flow.png" alt="" width="108" height="108" decoding="async" />
+      </div>
+      <div class="card-copy">
+        <h1 class="card-title" id="title"></h1>
+        <p class="card-supporting" id="supporting"></p>
+        <button type="button" class="card-more" id="more" hidden aria-expanded="false" aria-controls="reflection" aria-label="Read a little more">
+          <span class="sr-only">Read a little more</span>
+          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.2 6.2 C4.8 7.8 6.4 9.4 8 11 C9.6 9.3 11.2 7.7 12.8 6.1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="card-reflection" id="reflection">
+          <p id="reflection-text"></p>
+          <button type="button" class="card-close-button" id="close-button">Close</button>
+        </div>
+      </div>
+      <button type="button" class="card-x" id="close" aria-label="Close">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.4 3.6 C6.4 6.5 9.4 9.4 12.4 12.3 M12.6 3.4 C9.6 6.4 6.6 9.4 3.6 12.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+    </main>
+    <script type="module" src="card.js"></script>
+  </body>
+</html>

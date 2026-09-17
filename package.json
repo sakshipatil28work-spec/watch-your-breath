@@ -1,0 +1,19 @@
+{
+  "name": "watch-your-breath",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A gentle reminder to notice the breath you're already breathing.",
+  "workspaces": [
+    "illustrations",
+    "extension",
+    "web"
+  ],
+  "scripts": {
+    "crop": "npm run crop -w illustrations",
+    "dev:web": "npm run dev -w web",
+    "build:web": "npm run build -w web",
+    "build:extension": "npm run build -w extension",
+    "package:extension": "npm run package -w extension",
+    "build": "npm run build:extension && npm run build:web"
+  }
+}

@@ -1,0 +1,573 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-17T14:07:59.774Z",
+  "title": "Design System: Watch Your Breath",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "primary",
+        "displayName": "Ink",
+        "canonical": "#243c3a",
+        "tonalRamp": [
+          "oklch(15% 0.025 190)",
+          "oklch(24% 0.03 190)",
+          "oklch(32% 0.03 190)",
+          "oklch(45% 0.03 190)",
+          "oklch(58% 0.03 190)",
+          "oklch(72% 0.025 190)",
+          "oklch(85% 0.018 190)",
+          "oklch(95% 0.01 190)"
+        ]
+      },
+      "ink-soft": {
+        "role": "primary",
+        "displayName": "Ink Soft",
+        "canonical": "rgba(36, 60, 58, 0.72)",
+        "tonalRamp": [
+          "rgba(36,60,58,1)",
+          "rgba(36,60,58,0.9)",
+          "rgba(36,60,58,0.8)",
+          "rgba(36,60,58,0.72)",
+          "rgba(36,60,58,0.6)",
+          "rgba(36,60,58,0.45)",
+          "rgba(36,60,58,0.3)",
+          "rgba(36,60,58,0.15)"
+        ]
+      },
+      "ink-faint": {
+        "role": "primary",
+        "displayName": "Ink Faint",
+        "canonical": "rgba(36, 60, 58, 0.34)",
+        "tonalRamp": [
+          "rgba(36,60,58,1)",
+          "rgba(36,60,58,0.85)",
+          "rgba(36,60,58,0.7)",
+          "rgba(36,60,58,0.55)",
+          "rgba(36,60,58,0.34)",
+          "rgba(36,60,58,0.25)",
+          "rgba(36,60,58,0.15)",
+          "rgba(36,60,58,0.08)"
+        ]
+      },
+      "ink-hair": {
+        "role": "primary",
+        "displayName": "Ink Hair",
+        "canonical": "rgba(36, 60, 58, 0.18)",
+        "tonalRamp": [
+          "rgba(36,60,58,1)",
+          "rgba(36,60,58,0.8)",
+          "rgba(36,60,58,0.6)",
+          "rgba(36,60,58,0.45)",
+          "rgba(36,60,58,0.3)",
+          "rgba(36,60,58,0.18)",
+          "rgba(36,60,58,0.1)",
+          "rgba(36,60,58,0.05)"
+        ]
+      },
+      "ink-shade": {
+        "role": "primary",
+        "displayName": "Ink Shade (popup drop)",
+        "canonical": "rgba(36, 60, 58, 0.14)",
+        "tonalRamp": [
+          "rgba(36,60,58,1)",
+          "rgba(36,60,58,0.8)",
+          "rgba(36,60,58,0.6)",
+          "rgba(36,60,58,0.45)",
+          "rgba(36,60,58,0.3)",
+          "rgba(36,60,58,0.14)",
+          "rgba(36,60,58,0.08)",
+          "rgba(36,60,58,0.04)"
+        ]
+      },
+      "rust": {
+        "role": "secondary",
+        "displayName": "Rust / Burnt Clay (chosen state)",
+        "canonical": "#a85f43",
+        "tonalRamp": [
+          "oklch(18% 0.06 40)",
+          "oklch(28% 0.09 40)",
+          "oklch(38% 0.11 40)",
+          "oklch(52% 0.11 40)",
+          "oklch(62% 0.1 40)",
+          "oklch(72% 0.08 40)",
+          "oklch(85% 0.05 40)",
+          "oklch(95% 0.02 40)"
+        ]
+      },
+      "rust-deep": {
+        "role": "secondary",
+        "displayName": "Rust Deep (button fill)",
+        "canonical": "#8c4d36",
+        "tonalRamp": [
+          "oklch(16% 0.06 40)",
+          "oklch(26% 0.09 40)",
+          "oklch(36% 0.11 40)",
+          "oklch(45% 0.11 40)",
+          "oklch(58% 0.1 40)",
+          "oklch(70% 0.08 40)",
+          "oklch(84% 0.05 40)",
+          "oklch(94% 0.02 40)"
+        ]
+      },
+      "rust-deeper": {
+        "role": "secondary",
+        "displayName": "Rust Deeper (button hover)",
+        "canonical": "#7a4230",
+        "tonalRamp": [
+          "oklch(14% 0.06 40)",
+          "oklch(24% 0.09 40)",
+          "oklch(34% 0.1 40)",
+          "oklch(40% 0.1 40)",
+          "oklch(54% 0.1 40)",
+          "oklch(66% 0.08 40)",
+          "oklch(82% 0.05 40)",
+          "oklch(93% 0.02 40)"
+        ]
+      },
+      "clay": {
+        "role": "secondary",
+        "displayName": "Clay (the desk)",
+        "canonical": "#e4c4a6",
+        "tonalRamp": [
+          "oklch(18% 0.04 60)",
+          "oklch(30% 0.06 60)",
+          "oklch(44% 0.07 60)",
+          "oklch(58% 0.08 60)",
+          "oklch(70% 0.07 60)",
+          "oklch(82% 0.06 60)",
+          "oklch(89% 0.045 60)",
+          "oklch(96% 0.02 60)"
+        ]
+      },
+      "clay-wash": {
+        "role": "secondary",
+        "displayName": "Clay Wash",
+        "canonical": "rgba(168, 95, 67, 0.18)",
+        "tonalRamp": [
+          "rgba(168,95,67,1)",
+          "rgba(168,95,67,0.8)",
+          "rgba(168,95,67,0.6)",
+          "rgba(168,95,67,0.45)",
+          "rgba(168,95,67,0.3)",
+          "rgba(168,95,67,0.18)",
+          "rgba(168,95,67,0.1)",
+          "rgba(168,95,67,0.05)"
+        ]
+      },
+      "ochre": {
+        "role": "tertiary",
+        "displayName": "Ochre (numerals, bell on)",
+        "canonical": "#c0954a",
+        "tonalRamp": [
+          "oklch(18% 0.05 80)",
+          "oklch(32% 0.08 80)",
+          "oklch(46% 0.1 80)",
+          "oklch(58% 0.11 80)",
+          "oklch(68% 0.11 80)",
+          "oklch(80% 0.09 80)",
+          "oklch(90% 0.06 80)",
+          "oklch(96% 0.03 80)"
+        ]
+      },
+      "sage": {
+        "role": "tertiary",
+        "displayName": "Sage (quiet hours only)",
+        "canonical": "#87947a",
+        "tonalRamp": [
+          "oklch(18% 0.025 130)",
+          "oklch(30% 0.03 130)",
+          "oklch(42% 0.035 130)",
+          "oklch(54% 0.035 130)",
+          "oklch(63% 0.035 130)",
+          "oklch(76% 0.03 130)",
+          "oklch(86% 0.02 130)",
+          "oklch(95% 0.01 130)"
+        ]
+      },
+      "cream": {
+        "role": "neutral",
+        "displayName": "Warm Sand",
+        "canonical": "#f3e8d2",
+        "tonalRamp": [
+          "oklch(18% 0.02 85)",
+          "oklch(30% 0.03 85)",
+          "oklch(45% 0.04 85)",
+          "oklch(60% 0.05 85)",
+          "oklch(75% 0.045 85)",
+          "oklch(86% 0.035 85)",
+          "oklch(93% 0.028 85)",
+          "oklch(97% 0.012 85)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper (die-cut edge)",
+        "canonical": "#f9f2e4",
+        "tonalRamp": [
+          "oklch(18% 0.015 85)",
+          "oklch(32% 0.02 85)",
+          "oklch(48% 0.03 85)",
+          "oklch(64% 0.03 85)",
+          "oklch(78% 0.028 85)",
+          "oklch(88% 0.022 85)",
+          "oklch(96% 0.018 85)",
+          "oklch(98% 0.008 85)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The philosophy triad only; each line stepped further right."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles, the popup phrase (27px) and first-run phrase (34px)."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Small Eczar labels above previews (1.125rem) and the install note (1.375rem)."
+      },
+      "script": {
+        "displayName": "Script",
+        "purpose": "\"Just a moment.\": 1.5-1.75rem at the close, 1.6rem under the hero on mobile."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Paragraphs held to 30-44ch; 14px in the popup."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Hints, popup-demo status, icon specimen labels. Sentence case, no tracking."
+      },
+      "display-steps": {
+        "displayName": "Display steps",
+        "purpose": "The four breakpoint sizes of the philosophy triad (base / 420px / sm / lg)."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "01 / 02 / 03 above the steps, in ochre."
+      },
+      "headline-popup": {
+        "displayName": "Headline (popup)",
+        "purpose": "The phrase in the popup (27px) and first-run (34px)."
+      },
+      "tagline": {
+        "displayName": "Tagline",
+        "purpose": "The one-sentence tagline under the hero."
+      },
+      "step-title": {
+        "displayName": "Step title",
+        "purpose": "SET IT / FORGET IT / NOTICE IT; the only uppercase in the world."
+      },
+      "title-popup": {
+        "displayName": "Title (popup)",
+        "purpose": "Settings title 22px, group titles 17px."
+      },
+      "script-popup": {
+        "displayName": "Script (popup)",
+        "purpose": "\"Just a moment.\" 20px; active status 17px."
+      },
+      "body-small": {
+        "displayName": "Body small",
+        "purpose": "Header name, nav, footer, toast copy, popup demo body."
+      },
+      "label-popup": {
+        "displayName": "Label (popup)",
+        "purpose": "Row labels 14px, card Close 13.5px, toggle words and small buttons 13px, status 12.5px, hints 12px."
+      },
+      "card-title": {
+        "displayName": "Card title",
+        "purpose": "A reminder title: 21px on the card, 1.25rem on the site mirror and grid."
+      },
+      "script-supporting": {
+        "displayName": "Script (supporting)",
+        "purpose": "Every reminder supporting line: 17px on the card, 1.0625rem on the site."
+      }
+    },
+    "shadows": [
+      {
+        "name": "sticker-lift",
+        "value": "0 0 0 4px #f9f2e4, 0 3px 10px rgba(36, 60, 58, 0.14)",
+        "purpose": "The popup sticker: die-cut paper edge plus a soft ink drop. Popup, first-run and the site replica only."
+      },
+      {
+        "name": "card-edge",
+        "value": "0 0 0 4px #f9f2e4",
+        "purpose": "The reminder card: paper edge, no drop."
+      },
+      {
+        "name": "toggle-halo",
+        "value": "0 0 0 3px #f9f2e4",
+        "purpose": "Paper ring around the toggle track on hover (popup)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "breath",
+        "value": "9s",
+        "purpose": "The one clock. Every illustration moves on it."
+      },
+      {
+        "name": "ease-breath",
+        "value": "cubic-bezier(0.45, 0, 0.55, 1)",
+        "purpose": "Easing for all breath keyframes."
+      },
+      {
+        "name": "emblem-breathe",
+        "value": "0%,100% scale(1) translateX(0); 42% scale(1.025) translateX(1.5px); 62% scale(1.02) translateX(1.5px)",
+        "purpose": "Emblem and sticker crop. Hero uses scale(1.012) translateX(2px)."
+      },
+      {
+        "name": "motion-flow",
+        "value": "45% translateX(2.5px) scaleX(1.02); 65% translateX(2px) scaleX(1.015)",
+        "purpose": "Reminder illustrations whose entry names flow."
+      },
+      {
+        "name": "motion-ripple",
+        "value": "45% scale(1.03); 65% scale(1.025)",
+        "purpose": "Reminder illustrations whose entry names ripple."
+      },
+      {
+        "name": "motion-drift",
+        "value": "45% translate(2px,-2px) rotate(-1.2deg); 65% translate(1.5px,-1.5px) rotate(-1deg)",
+        "purpose": "Reminder illustrations whose entry names drift."
+      },
+      {
+        "name": "motion-breathe",
+        "value": "42% scale(1.025); 62% scale(1.02)",
+        "purpose": "Reminder illustrations whose entry names breathe."
+      },
+      {
+        "name": "arrive",
+        "value": "520ms cubic-bezier(0.2, 0.8, 0.3, 1) both; opacity 0 to 1, translateY(6px) to 0",
+        "purpose": "The reminder card entering, once."
+      },
+      {
+        "name": "ease-out-soft",
+        "value": "cubic-bezier(0.2, 0.8, 0.3, 1)",
+        "purpose": "Toggle knob (260ms), radio dot (180ms), gear rotation (400ms), card chevron (320ms)."
+      },
+      {
+        "name": "settle",
+        "value": "3.2s cubic-bezier(0.2, 0.6, 0.3, 1) forwards; scale 1 to 1.7, opacity 0.35 to 0; second ring delayed 0.7s",
+        "purpose": "Two rings settle outward once when a reminder has just fired."
+      },
+      {
+        "name": "state",
+        "value": "150-220ms ease-out",
+        "purpose": "Button lift, line colour, track fill, bell colour."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation: none; transition: none",
+        "purpose": "prefers-reduced-motion stops every breath, the arrival and the settling rings, and removes control transitions."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "xs",
+        "value": "420px"
+      },
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "container",
+        "value": "1200px"
+      },
+      {
+        "name": "popup",
+        "value": "320px"
+      },
+      {
+        "name": "card",
+        "value": "448px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Burnt-clay stamp on sand: the one action.",
+      "html": "<button class=\"ds-btn-primary\">Add to Chrome</button>",
+      "css": ".ds-btn-primary { font-family: Mukta, system-ui, sans-serif; font-weight: 500; font-size: 1.0625rem; line-height: 1; color: #f3e8d2; background: #8c4d36; border: 1.5px solid #8c4d36; border-radius: 9px 11px 8px 12px / 11px 8px 12px 9px; padding: 14px 24px; cursor: pointer; transition: transform 160ms ease-out, background-color 160ms ease-out; } .ds-btn-primary:hover { transform: translateY(-1px); background: #7a4230; border-color: #7a4230; } .ds-btn-primary:active { transform: translateY(0); } .ds-btn-primary:focus-visible { outline: 2px solid #243c3a; outline-offset: 4px; } .ds-btn-primary[disabled] { opacity: 0.5; transform: none; cursor: default; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Outline in ink; fills with paper on hover.",
+      "html": "<button class=\"ds-btn-secondary\">Retry</button>",
+      "css": ".ds-btn-secondary { font-family: Mukta, system-ui, sans-serif; font-weight: 500; font-size: 1.0625rem; line-height: 1; color: #243c3a; background: transparent; border: 1.5px solid #243c3a; border-radius: 9px 11px 8px 12px / 11px 8px 12px 9px; padding: 14px 24px; cursor: pointer; transition: transform 160ms ease-out, background-color 160ms ease-out; } .ds-btn-secondary:hover { background: #f9f2e4; transform: translateY(-1px); } .ds-btn-secondary:active { transform: translateY(0); } .ds-btn-secondary:focus-visible { outline: 2px solid #243c3a; outline-offset: 4px; }"
+    },
+    {
+      "name": "Quiet Link Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Bare ink text with a faint underline that turns rust on hover.",
+      "html": "<a class=\"ds-btn-quiet\" href=\"#\">How it works</a>",
+      "css": ".ds-btn-quiet { font-family: Mukta, system-ui, sans-serif; font-weight: 500; font-size: 1.0625rem; color: #243c3a; background: transparent; padding: 4px; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 6px; text-decoration-color: rgba(36,60,58,0.34); transition: text-decoration-color 160ms ease-out; } .ds-btn-quiet:hover { text-decoration-color: #a85f43; } .ds-btn-quiet:focus-visible { outline: 2px solid #243c3a; outline-offset: 4px; border-radius: 4px; }"
+    },
+    {
+      "name": "Written-line Select",
+      "kind": "input",
+      "refersTo": "control-line",
+      "description": "A native select drawn as a line under the value with an ink chevron.",
+      "html": "<label class=\"ds-row\"><span class=\"ds-row-label\">Every</span><select class=\"ds-select\"><option>30 minutes</option><option selected>1 hour</option><option>2 hours</option><option>Custom</option></select></label>",
+      "css": ".ds-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 28px; font-family: Mukta, system-ui, sans-serif; font-size: 14px; color: #243c3a; } .ds-row-label { font-weight: 500; } .ds-select { appearance: none; -webkit-appearance: none; font: inherit; color: #243c3a; background: transparent; border: 0; border-bottom: 1.5px solid #243c3a; border-radius: 0; padding: 3px 22px 2px 0; min-width: 130px; text-align: right; text-align-last: right; direction: rtl; cursor: pointer; background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.2 6.2 C4.8 7.8 6.4 9.4 8 11 C9.6 9.3 11.2 7.7 12.8 6.1' fill='none' stroke='%23243C3A' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\"); background-repeat: no-repeat; background-position: right 2px center; background-size: 14px 14px; transition: border-color 160ms ease-out; } .ds-select option { direction: ltr; text-align: left; } .ds-select:hover { border-bottom-color: #a85f43; } .ds-select:focus-visible { outline: 2px solid #243c3a; outline-offset: 3px; border-radius: 4px; }"
+    },
+    {
+      "name": "Written-line Time Input",
+      "kind": "input",
+      "refersTo": "control-line",
+      "description": "Quiet-hours time field; the line goes sage when quiet is active.",
+      "html": "<div class=\"ds-time-field\"><span class=\"ds-time-label\">From</span><input class=\"ds-input-time\" type=\"time\" value=\"22:00\"></div>",
+      "css": ".ds-time-field { display: grid; gap: 2px; font-family: Mukta, system-ui, sans-serif; color: #243c3a; } .ds-time-label { font-size: 12px; color: rgba(36,60,58,0.72); } .ds-input-time { appearance: none; -webkit-appearance: none; font: inherit; font-size: 14px; font-variant-numeric: tabular-nums; width: 104px; color: #243c3a; background: transparent; border: 0; border-bottom: 1.5px solid #243c3a; border-radius: 0; padding: 3px 0 2px; transition: border-color 160ms ease-out; } .ds-input-time:hover { border-bottom-color: #a85f43; } .ds-input-time:focus-visible { outline: 2px solid #243c3a; outline-offset: 3px; border-radius: 4px; } .ds-input-time.is-quiet { border-bottom: 2px solid #87947a; }"
+    },
+    {
+      "name": "Toggle",
+      "kind": "custom",
+      "refersTo": "toggle-track",
+      "description": "Hand-drawn pill switch; the knob is the drawn ring, filled with rust when on. The word beside it names the state.",
+      "html": "<button class=\"ds-toggle\" role=\"switch\" aria-checked=\"true\" type=\"button\"><span class=\"ds-toggle-track\" aria-hidden=\"true\"><span class=\"ds-toggle-knob\"></span></span><span class=\"ds-toggle-text\">On</span></button>",
+      "css": ".ds-toggle { display: inline-flex; align-items: center; gap: 8px; padding: 2px 2px 2px 4px; background: none; border: 0; color: #243c3a; font-family: Mukta, system-ui, sans-serif; font-size: 13px; cursor: pointer; border-radius: 14px 16px 13px 15px / 15px 13px 16px 14px; } .ds-toggle-track { position: relative; display: inline-block; width: 42px; height: 24px; border: 1.5px solid #243c3a; border-radius: 14px 16px 13px 15px / 15px 13px 16px 14px; background: transparent; transition: background-color 220ms ease-out; } .ds-toggle-knob { position: absolute; top: 2px; left: 2px; width: 17px; height: 17px; border-radius: 62% 38% 55% 45% / 45% 55% 40% 60%; border: 1.5px solid #243c3a; box-sizing: border-box; background: transparent; transition: transform 260ms cubic-bezier(0.2, 0.8, 0.3, 1), background-color 220ms ease-out; } .ds-toggle[aria-checked=\"true\"] .ds-toggle-track { background: rgba(168, 95, 67, 0.18); } .ds-toggle[aria-checked=\"true\"] .ds-toggle-knob { transform: translateX(18px) rotate(12deg); background: #a85f43; } .ds-toggle-text { min-width: 22px; color: rgba(36,60,58,0.72); } .ds-toggle[aria-checked=\"true\"] .ds-toggle-text { color: #243c3a; font-weight: 500; } .ds-toggle:hover .ds-toggle-track { box-shadow: 0 0 0 3px #f9f2e4; } .ds-toggle:focus-visible { outline: 2px solid #243c3a; outline-offset: 3px; }"
+    },
+    {
+      "name": "Radio",
+      "kind": "custom",
+      "refersTo": "control-line",
+      "description": "The ring as the mark; chosen, a rust blob sits in it. (Panel stand-in draws the ring as a stroke; the build uses the ring.png crop.)",
+      "html": "<label class=\"ds-radio\"><input type=\"radio\" name=\"style\" checked><span class=\"ds-radio-mark\"></span><span>Minimal</span></label>",
+      "css": ".ds-radio { display: flex; align-items: center; gap: 10px; cursor: pointer; font-family: Mukta, system-ui, sans-serif; font-size: 14px; color: #243c3a; } .ds-radio input { position: absolute; opacity: 0; width: 1px; height: 1px; } .ds-radio-mark { width: 18px; height: 18px; box-sizing: border-box; border: 1.5px solid #243c3a; border-radius: 55% 45% 50% 50% / 48% 52% 48% 52%; display: inline-grid; place-items: center; flex: none; } .ds-radio-mark::after { content: \"\"; width: 9px; height: 9px; border-radius: 62% 38% 55% 45% / 45% 55% 40% 60%; background: #a85f43; transform: scale(0); transition: transform 180ms cubic-bezier(0.2, 0.8, 0.3, 1); } .ds-radio input:checked + .ds-radio-mark::after { transform: scale(1); } .ds-radio input:focus-visible + .ds-radio-mark { outline: 2px solid #243c3a; outline-offset: 3px; }"
+    },
+    {
+      "name": "Sticker",
+      "kind": "card",
+      "refersTo": "sticker",
+      "description": "The one container: the popup itself, on a clay desk with a die-cut paper edge.",
+      "html": "<div class=\"ds-desk\"><div class=\"ds-sticker\"><p class=\"ds-phrase\">Watch your breath.</p><p class=\"ds-moment\">Just a moment.</p><p class=\"ds-status\">Next reminder around 6:45 pm.</p></div></div>",
+      "css": ".ds-desk { background: #e4c4a6; padding: 10px; width: 320px; } .ds-sticker { position: relative; background: #f3e8d2; color: #243c3a; border: 1.5px solid #243c3a; border-radius: 18px 22px 16px 24px / 22px 16px 24px 18px; box-shadow: 0 0 0 4px #f9f2e4, 0 3px 10px rgba(31, 59, 62, 0.14); padding: 22px 22px 20px; min-height: 200px; font-family: Mukta, system-ui, sans-serif; font-size: 14px; line-height: 1.45; } .ds-phrase { font-family: Eczar, Georgia, serif; font-weight: 700; font-size: 27px; line-height: 1.1; letter-spacing: -0.005em; text-align: center; margin: 0; } .ds-moment { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 600; font-size: 20px; line-height: 1.2; text-align: center; color: rgba(36,60,58,0.72); margin: 4px 0 0; } .ds-status { margin: 14px 0 0; font-size: 12.5px; color: rgba(36,60,58,0.72); text-align: center; }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "button-secondary",
+      "description": "Name in Eczar on the left; a quiet link and a secondary button on the right. No bar, no border.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-nav-brand\" href=\"#\">Watch Your Breath</a><nav class=\"ds-nav-links\"><a class=\"ds-nav-link\" href=\"#\">How it works</a><a class=\"ds-nav-cta\" href=\"#\">Add to Chrome</a></nav></header>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 32px; background: #f3e8d2; color: #243c3a; } .ds-nav-brand { font-family: Eczar, Georgia, serif; font-weight: 600; font-size: 1.125rem; line-height: 1; color: #243c3a; text-decoration: none; } .ds-nav-links { display: flex; align-items: center; gap: 28px; } .ds-nav-link { font-family: Mukta, system-ui, sans-serif; font-size: 0.9375rem; color: #243c3a; text-decoration: none; text-underline-offset: 6px; text-decoration-thickness: 1.5px; text-decoration-color: #a85f43; } .ds-nav-link:hover { text-decoration: underline; } .ds-nav-cta { font-family: Mukta, system-ui, sans-serif; font-weight: 500; font-size: 0.9375rem; line-height: 1; color: #243c3a; background: transparent; border: 1.5px solid #243c3a; border-radius: 9px 11px 8px 12px / 11px 8px 12px 9px; padding: 10px 16px; text-decoration: none; transition: transform 150ms ease-out, background-color 150ms ease-out; } .ds-nav-cta:hover { background: #f9f2e4; transform: translateY(-1px); } .ds-nav-brand:focus-visible, .ds-nav-link:focus-visible, .ds-nav-cta:focus-visible { outline: 2px solid #243c3a; outline-offset: 4px; border-radius: 4px; }"
+    },
+    {
+      "name": "Icon Button (gear)",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "30px round hit area with the hand-drawn gear glyph; rotates 22deg on hover.",
+      "html": "<button class=\"ds-gear\" type=\"button\" aria-label=\"Settings\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><g fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.8\"><path d=\"M12 4.9 C15.7 4.7 19.2 8 19.1 11.9 C19 15.8 15.9 19.2 12.1 19.1 C8.2 19 4.9 15.7 5 12 C5.1 8.2 8.3 5.1 12 4.9 Z\"/><path d=\"M12 9.6 C13.4 9.5 14.5 10.7 14.4 12 C14.3 13.4 13.3 14.4 12 14.4 C10.6 14.4 9.6 13.3 9.6 12 C9.6 10.7 10.7 9.7 12 9.6 Z\"/><path d=\"M19.1 12.9 L22.3 13.2 M17.1 17 L19.4 19.5 M12.3 19.2 L12.7 22.5 M7.2 17.4 L4.9 20 M4.9 12.6 L1.6 12.9 M6.7 7.2 L4.3 4.9 M11.5 4.8 L11.2 1.5 M16.6 6.5 L18.9 4\"/></g></svg></button>",
+      "css": ".ds-gear { display: inline-grid; place-items: center; width: 30px; height: 30px; padding: 0; color: rgba(36,60,58,0.72); background: transparent; border: 0; border-radius: 50%; cursor: pointer; transition: color 160ms ease-out, transform 400ms cubic-bezier(0.2, 0.8, 0.3, 1); } .ds-gear svg { width: 20px; height: 20px; display: block; } .ds-gear:hover { color: #243c3a; transform: rotate(22deg); } .ds-gear:focus-visible { outline: 2px solid #243c3a; outline-offset: 3px; }"
+    },
+    {
+      "name": "Step Numeral",
+      "kind": "custom",
+      "refersTo": "numeral",
+      "description": "01 / 02 / 03 in ochre above an uppercase Eczar step title; ochre appears nowhere else.",
+      "html": "<div class=\"ds-step\"><span class=\"ds-step-num\" aria-hidden=\"true\">01</span><h3 class=\"ds-step-title\">Set it</h3><p class=\"ds-step-body\">Choose how often you’d like to be reminded.</p></div>",
+      "css": ".ds-step { display: grid; gap: 12px; color: #243c3a; max-width: 30ch; } .ds-step-num { font-family: Eczar, Georgia, serif; font-weight: 600; font-size: 4.5rem; line-height: 0.9; color: #c0954a; font-variant-numeric: tabular-nums; } .ds-step-title { font-family: Eczar, Georgia, serif; font-weight: 700; font-size: 1.75rem; line-height: 1; text-transform: uppercase; letter-spacing: 0.01em; margin: 12px 0 0; } .ds-step-body { font-family: Mukta, system-ui, sans-serif; font-size: 1.0625rem; line-height: 1.6; margin: 0; }"
+    },
+    {
+      "name": "Reminder Card",
+      "kind": "card",
+      "refersTo": "reminder-card",
+      "description": "How a reminder arrives: one drawing in a paper circle beside its own title and supporting line, a small x at bottom right. (Panel stand-in shows an empty circle; the build places a cut from the author's sheet.)",
+      "html": "<div class=\"ds-card\" data-motion=\"breathe\"><span class=\"ds-card-art\"><span class=\"ds-card-img\" aria-hidden=\"true\"></span></span><div class=\"ds-card-copy\"><p class=\"ds-card-title\">Nothing to change.</p><p class=\"ds-card-supporting\">Just notice.</p></div><button class=\"ds-card-x\" type=\"button\" aria-label=\"Dismiss\"><svg viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M3.4 3.6 C6.4 6.5 9.4 9.4 12.4 12.3 M12.6 3.4 C9.6 6.4 6.6 9.4 3.6 12.4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\"/></svg></button></div>",
+      "css": ".ds-card { position: relative; width: 448px; max-width: 100%; display: grid; grid-template-columns: 112px minmax(0,1fr); gap: 14px; align-items: center; margin: 10px; padding: 14px 40px 14px 14px; min-height: 116px; background: #f3e8d2; color: #243c3a; border: 1.5px solid #243c3a; border-radius: 16px 20px 14px 22px / 20px 14px 22px 16px; box-shadow: 0 0 0 4px #f9f2e4; font-family: Mukta, system-ui, sans-serif; animation: ds-arrive 520ms cubic-bezier(0.2, 0.8, 0.3, 1) both; } @keyframes ds-arrive { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } } .ds-card-art { width: 112px; height: 112px; display: grid; place-items: center; border-radius: 52% 48% 50% 50% / 50% 50% 48% 52%; background: #f9f2e4; overflow: hidden; } .ds-card-img { width: 96px; height: 96px; box-sizing: border-box; border: 1.5px solid #243c3a; border-radius: 55% 45% 50% 50% / 48% 52% 48% 52%; transform-origin: 50% 55%; animation: ds-breathe 9s cubic-bezier(0.45, 0, 0.55, 1) infinite; } @keyframes ds-breathe { 0%,100% { transform: scale(1); } 42% { transform: scale(1.025); } 62% { transform: scale(1.02); } } .ds-card-copy { min-width: 0; display: grid; gap: 2px; } .ds-card-title { font-family: Eczar, Georgia, serif; font-weight: 700; font-size: 21px; line-height: 1.15; letter-spacing: -0.005em; margin: 0; text-wrap: balance; } .ds-card-supporting { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 600; font-size: 17px; line-height: 1.2; color: rgba(36,60,58,0.72); margin: 0; } .ds-card-x { position: absolute; right: 8px; bottom: 8px; width: 28px; height: 28px; padding: 0; display: grid; place-items: center; color: rgba(36,60,58,0.34); background: transparent; border: 0; border-radius: 50%; cursor: pointer; transition: color 160ms ease-out; } .ds-card-x:hover { color: #243c3a; } .ds-card-x:focus-visible { outline: 2px solid #243c3a; outline-offset: 3px; } .ds-card-x svg { width: 16px; height: 16px; } @media (prefers-reduced-motion: reduce) { .ds-card, .ds-card-img { animation: none; } }"
+    },
+    {
+      "name": "Sound Toggle",
+      "kind": "custom",
+      "refersTo": "bell-on",
+      "description": "The toggle with the bell glyph before it; the bell turns ochre when sound is on.",
+      "html": "<button class=\"ds-toggle ds-toggle-sound\" role=\"switch\" aria-checked=\"true\" type=\"button\"><span class=\"ds-bell\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" focusable=\"false\"><g fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.8\"><path d=\"M6.2 16.5 C6.6 13.8 6.2 11.2 7 9 C7.9 6.6 9.9 5 12 5 C14.1 5 16.1 6.6 17 9 C17.8 11.2 17.4 13.8 17.8 16.5 Z\"/><path d=\"M10.2 18.6 C10.8 19.6 11.4 20 12 20 C12.6 20 13.2 19.6 13.8 18.6\"/></g></svg></span><span class=\"ds-toggle-track\" aria-hidden=\"true\"><span class=\"ds-toggle-knob\"></span></span><span class=\"ds-toggle-text\">On</span></button>",
+      "css": ".ds-toggle { display: inline-flex; align-items: center; gap: 8px; padding: 2px 2px 2px 4px; background: none; border: 0; color: #243c3a; font-family: Mukta, system-ui, sans-serif; font-size: 13px; cursor: pointer; border-radius: 14px 16px 13px 15px / 15px 13px 16px 14px; } .ds-bell { width: 18px; height: 18px; margin-right: 2px; color: rgba(36,60,58,0.34); transition: color 200ms ease-out; } .ds-bell svg { width: 100%; height: 100%; display: block; } .ds-toggle[aria-checked=\"true\"] .ds-bell { color: #c0954a; } .ds-toggle-track { position: relative; display: inline-block; width: 42px; height: 24px; border: 1.5px solid #243c3a; border-radius: 14px 16px 13px 15px / 15px 13px 16px 14px; background: transparent; transition: background-color 220ms ease-out; } .ds-toggle-knob { position: absolute; top: 2px; left: 2px; width: 17px; height: 17px; border-radius: 62% 38% 55% 45% / 45% 55% 40% 60%; border: 1.5px solid #243c3a; box-sizing: border-box; background: transparent; transition: transform 260ms cubic-bezier(0.2, 0.8, 0.3, 1), background-color 220ms ease-out; } .ds-toggle[aria-checked=\"true\"] .ds-toggle-track { background: rgba(168, 95, 67, 0.18); } .ds-toggle[aria-checked=\"true\"] .ds-toggle-knob { transform: translateX(18px) rotate(12deg); background: #a85f43; border-color: #a85f43; } .ds-toggle-text { min-width: 22px; color: rgba(36,60,58,0.72); } .ds-toggle[aria-checked=\"true\"] .ds-toggle-text { color: #243c3a; font-weight: 500; } .ds-toggle:hover .ds-toggle-track { box-shadow: 0 0 0 3px #f9f2e4; } .ds-toggle:focus-visible { outline: 2px solid #243c3a; outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Sticker Brought to Life",
+    "overview": "The whole world is one hand-drawn body of work: deep teal ink on warm sand, wind lines and leaves carrying two phrases through space. Every visual on the site and in the Chrome extension is a cut from the author's drawings (the hero sticker in `web/public/illustrations/hero.png`, cropped by `illustrations/scripts/crop.mjs`, and the twelve-panel reminder sheet, cut by `illustrations/scripts/reminders.mjs`), or ink type set next to it, or one of the small hand-drawn UI glyphs (gear, back arrow, chevron, silent, bell, play, and the card's ×). Nothing else is drawn. The illustration is the page structure: the emblem is the origin, and the sweep of wind lines from its right side is the only thing that separates sections.\n\nAround the ink sit a few earthy tones from the author's swatch sheet, used sparingly: burnt clay (rust) for the one thing that asks for a click, ochre for the three step numerals and the bell when sound is on, clay for the desk a sticker rests on, and sage for quiet hours alone. The drawings themselves stay pure ink. Density is low and warm. The site is a single column of sand with no cards, no rules and no panels; sections part by voids and by the flow line passing through. The extension has two stickers: the popup (320px, emblem and a handful of rows) and the reminder card (448px, one of twelve illustrations in a paper circle beside its own words). Controls are drawn in ink, not boxed: a written line under a value, a pill switch whose knob is the drawn ring, a radio whose mark is the drawn ring.\n\nMotion is a single slow breath. Every drawing moves on the same nine-second clock, each illustration in its own way (flow, ripple, drift, breathe); nothing pulses, bounces or spins, and reduced-motion turns it all off. Sound is one bell, the author's recording, played once. Rejected outright by the build: centered-hero-plus-cards layouts, gradients, glassmorphism, dashboards, generated or stock drawings.",
+    "keyCharacteristics": [
+      "One ink (#243c3a) on warm sand (#f3e8d2) for every drawing and all text; tone within ink comes from alpha (72 / 34 / 18 percent), never from grey.",
+      "Burnt clay is the action family: rust (#a85f43) on knobs, dots and one philosophy line; rust-deep (#8c4d36) as the button fill; rust-deeper (#7a4230) on hover.",
+      "Ochre (#c0954a) on the step numerals and the bell when on; clay (#e4c4a6) as the desk; sage (#87947a) only when quiet hours are on.",
+      "Eczar bold for everything spoken, Mukta for everything operated, Cormorant Garamond italic for the supporting line under every title.",
+      "Twelve reminders, each an illustration designed with its own words and its own motion; never recombined.",
+      "Organic corners: every radius is an eight-value elliptical shape so no two corners match.",
+      "Flat sand; the only lift is the sticker's 4px paper edge and, on the popup alone, a soft ink drop.",
+      "One nine-second breath, `cubic-bezier(0.45, 0, 0.55, 1)`, on every illustration; a 520ms rise as a card arrives."
+    ],
+    "rules": [
+      {
+        "name": "The One Ink Rule",
+        "body": "Ink is the only colour of the drawings and of text (thinned by alpha for hierarchy, never swapped for grey), and burnt clay is the one colour that asks for a click. An illustration is never recoloured, tinted or placed on anything but sand or paper.",
+        "section": "colors"
+      },
+      {
+        "name": "The Quiet Sage Rule",
+        "body": "Sage means \"quiet hours are on right now\" and nothing else. Never use it as decoration, a second accent, or a success colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Job Rule",
+        "body": "Each earthy tone holds one job: the rust family for actions and chosen states (plus the one philosophy line), ochre for the numerals and the bell, clay for the desk, sage for quiet. A tone that takes a second job breaks the sheet.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "A title is Eczar bold; the line beneath it is Cormorant Garamond italic in ink-soft. \"Watch your breath.\" / \"Just a moment.\" is the first pair; every reminder repeats the pairing with its own words. The italic is never lent to anything that is not a supporting line (the popup's momentary status being the one exception the build carries).",
+        "section": "typography"
+      },
+      {
+        "name": "The No Uppercase Label Rule",
+        "body": "Small text is sentence case with normal tracking. The only uppercase in the world is the three step titles, set in Eczar 700 at 1.75rem as headings, not as labels.",
+        "section": "typography"
+      },
+      {
+        "name": "The Paper Edge Rule",
+        "body": "A sticker is lifted by its die-cut paper edge, never by a shadow alone. Only the popup adds a drop; the card, the toast and every control stay flat.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do cut every image from the author's drawings (`hero.png` via `crop.mjs`, the twelve-panel sheet via `reminders.mjs`); every crop carries its provenance chunk and stays pure ink.",
+      "Do keep each reminder's illustration, title, supporting line, reflection and motion together as designed in `lib/reminders.ts`; a new reminder is a new drawing with its own words, never a recombination.",
+      "Do use the hand-drawn UI glyphs (gear, back arrow, chevron, silent, bell, play, ×) as the only vector marks, in `currentColor` at 1.7–1.8px stroke.",
+      "Do put burnt clay on the one thing that asks for a click (rust-deep button, rust on-knob and chosen dot, rust hover line) and leave everything else ink.",
+      "Do keep every border at 1.5px and every radius one of the organic tokens; a symmetric radius is a foreign object here.",
+      "Do run all motion on the nine-second clock (`cubic-bezier(0.45, 0, 0.55, 1)`; flow, ripple, drift or breathe as the reminder names) and turn it off under `prefers-reduced-motion` with transitions removed too.",
+      "Do show sage only when quiet hours are active now, and always pair it with the word (\"Quiet hours now.\" / \"Quiet now\").",
+      "Do set controls as written lines under a value and keep the state word beside every toggle.",
+      "Do part site sections with a sand void and the flow crop; let the illustration overlap the text block rather than sit above it."
+    ],
+    "donts": [
+      "Don't instruct breathing, or show counts, timers, scores, streaks, achievements or sessions in any surface; the copy is \"reminder\", and each reminder says its own two lines.",
+      "Don't pulse, bounce, spin or loop anything faster than the nine-second breath; the settling rings and the card's arrival run once, and the bell is never looped.",
+      "Don't add cards, panels, horizontal rules or bordered sections on the site; the sticker frame belongs to the popup, the reminder card and their site mirrors only.",
+      "Don't recolour or tint a drawing, place one on anything but sand or paper, set text in ochre or clay, or use sage as decoration. Masks that fade a crop into sand are the only gradients.",
+      "Don't give an earthy tone a second job: no ochre outside the numerals and the bell, no rust on non-actions beyond the one philosophy line, no clay as a card fill.",
+      "Don't generate, trace or import any drawing, icon set, lotus, lung or breath diagram; if it is not a cut from the author's sheets or one of the UI glyphs it does not exist.",
+      "Don't set a supporting line in anything but Cormorant Garamond italic, or lend that italic to body copy, labels or buttons.",
+      "Don't add uppercase tracked labels, kickers or eyebrows above headings, or number the reminders.",
+      "Don't put a drop shadow on anything but the popup sticker; the card gets its paper edge only.",
+      "Don't make sound the only way a reminder arrives."
+    ]
+  }
+}
