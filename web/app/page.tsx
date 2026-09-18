@@ -51,7 +51,7 @@ export default function Home() {
         {/* ---------- hero ---------- */}
         <section
           aria-labelledby="hero-title"
-          className="mx-auto max-w-[1200px] px-5 sm:px-8 pt-6 sm:pt-10 pb-20 lg:pb-28"
+          className="mx-auto max-w-[1200px] px-5 sm:px-8 pt-6 sm:pt-10 pb-14 lg:pb-20"
         >
           <HeroArt className="reveal w-full max-w-[1100px] mx-auto lg:-ml-6" />
           <p
@@ -88,7 +88,7 @@ export default function Home() {
         </section>
 
         {/* ---------- how it works ---------- */}
-        <section id="how-it-works" aria-labelledby="how-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 pt-4 pb-16 lg:pb-24 scroll-mt-10">
+        <section id="how-it-works" aria-labelledby="how-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 pt-4 pb-14 lg:pb-18 scroll-mt-10">
           <Flow className="w-[62%] sm:w-[44%] lg:w-[36%] -mt-10 lg:-mt-16 mb-10 lg:mb-14" />
           <h2 id="how-title" className="font-display font-bold text-[2.25rem] sm:text-[3rem] leading-none tracking-[-0.01em]">
             How it works.
@@ -112,7 +112,7 @@ export default function Home() {
         </section>
 
         {/* ---------- in your toolbar ---------- */}
-        <section aria-labelledby="toolbar-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 py-16 lg:py-24">
+        <section aria-labelledby="toolbar-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 py-14 lg:py-18">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-20 items-start">
             <div className="max-w-[34rem]">
               <h2 id="toolbar-title" className="font-display font-bold text-[2.25rem] sm:text-[3rem] leading-none tracking-[-0.01em] text-balance">
@@ -141,7 +141,7 @@ export default function Home() {
         </section>
 
         {/* ---------- the twelve reminders ---------- */}
-        <section aria-labelledby="twelve-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 py-16 lg:py-24">
+        <section aria-labelledby="twelve-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 py-14 lg:py-18">
           <h2 id="twelve-title" className="font-display font-bold text-[2.25rem] sm:text-[3rem] leading-none tracking-[-0.01em] text-balance">
             A different small thought each time.
           </h2>
@@ -172,7 +172,7 @@ export default function Home() {
         </section>
 
         {/* ---------- philosophy ---------- */}
-        <section aria-labelledby="phil-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 py-20 lg:py-32 relative">
+        <section aria-labelledby="phil-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 py-16 lg:py-24 relative">
           <h2 id="phil-title" className="sr-only">
             What this is, and is not
           </h2>
@@ -188,7 +188,7 @@ export default function Home() {
         </section>
 
         {/* ---------- close ---------- */}
-        <section aria-labelledby="close-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 pt-6 pb-16 lg:pb-24">
+        <section aria-labelledby="close-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 pt-6 pb-14 lg:pb-18">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
             <div className="flex items-center gap-6 sm:gap-10">
               <Emblem className="w-[140px] sm:w-[200px] shrink-0" label="" />
