@@ -116,12 +116,21 @@ for (let i = 0; i < IDS.length; i++) {
   const note = `panel ${String(i + 1).padStart(2, "0")} box ${[l, t, r, b].join(",")}, trimmed to ${meta.width}×${meta.height}`;
   writeFileSync(join(EXT, `${id}.png`), withProvenance(trimmed, note));
   writeFileSync(join(WEB, `${id}.png`), withProvenance(trimmed, note));
-  // fallback icon: centred on a warm-sand square
-  const icon = await sharp({ create: { width: 192, height: 192, channels: 4, background: SAND } })
-    .composite([{ input: await sharp(trimmed).resize(160, 160, { fit: "inside" }).png().toBuffer(), gravity: "centre" }])
+  // notification icon: the drawing filling a rounded warm-sand tile, so it
+  // reads at the size the system shows it (the tile is the sticker's corner
+  // language; a circle would force wide drawings small)
+  const tight = await sharp(await keyed.png().toBuffer()).trim({ threshold: 12 }).png().toBuffer();
+  const tile = Buffer.from(
+    `<svg width="192" height="192" xmlns="http://www.w3.org/2000/svg"><rect width="192" height="192" rx="52" ry="52" fill="${SAND}"/></svg>`
+  );
+  const icon = await sharp({ create: { width: 192, height: 192, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
+    .composite([
+      { input: tile, gravity: "centre" },
+      { input: await sharp(tight).resize(172, 172, { fit: "inside" }).png().toBuffer(), gravity: "centre" },
+    ])
     .png()
     .toBuffer();
-  writeFileSync(join(EXT, `${id}-icon.png`), withProvenance(icon, `${note}; on a 192×192 warm-sand square`));
+  writeFileSync(join(EXT, `${id}-icon.png`), withProvenance(icon, `${note}; filling a 192×192 rounded warm-sand tile`));
   sheetCells.push({ id, buf: trimmed, w: meta.width, h: meta.height });
   console.log(`${id}: ${meta.width}×${meta.height}`);
 }
