@@ -63,8 +63,8 @@ function guideFor(browser: Browser): Guide {
 }
 
 /**
- * The install card the primary button leads to. It names the visitor's browser,
- * offers that browser's packaged build, and lights up briefly when arrived at
+ * The install card the primary button leads to. It names the visitor’s browser,
+ * offers that browser’s packaged build, and lights up briefly when arrived at
  * by link (see #install:target in globals.css), so the click is seen to land.
  */
 export function InstallNote() {
@@ -85,7 +85,7 @@ export function InstallNote() {
         </div>
       )}
       {g.steps.length > 0 && (
-        <ol className="mt-5 grid gap-2.5 text-[1rem] leading-relaxed list-none p-0 m-0">
+        <ol className="mt-5 grid gap-2.5 text-[1rem] leading-relaxed list-none p-0 m-0 text-pretty">
           {g.steps.map((s, i) => (
             <li key={i} className="grid grid-cols-[1.75rem_1fr] gap-1 items-baseline">
               <span className="font-display font-semibold text-ochre tabular-nums">{String(i + 1).padStart(2, "0")}</span>
@@ -94,7 +94,7 @@ export function InstallNote() {
           ))}
         </ol>
       )}
-      <p className="mt-4 text-[0.9375rem] leading-relaxed text-ink-soft">{g.after}</p>
+      <p className="mt-4 text-[0.9375rem] leading-relaxed text-ink-soft text-pretty">{g.after}</p>
     </div>
   );
 }

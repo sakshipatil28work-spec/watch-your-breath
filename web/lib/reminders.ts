@@ -62,7 +62,7 @@ export const REMINDERS: readonly Reminder[] = [
   {
     id: "a-little-pause",
     title: "A little pause.",
-    supporting: "That's all.",
+    supporting: "That’s all.",
     reflection: "One breath is enough. Then carry on with what you were doing.",
     illustrationId: "floating-leaf",
     motion: "drift",
@@ -116,7 +116,7 @@ export const REMINDERS: readonly Reminder[] = [
   {
     id: "let-it-move",
     title: "Let the breath move.",
-    supporting: "Don't force it.",
+    supporting: "Don’t force it.",
     reflection: "The breath knows its own pace. Let it come and go as it does.",
     illustrationId: "wind-and-leaf",
     motion: "flow",

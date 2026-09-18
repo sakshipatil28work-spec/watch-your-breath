@@ -13,8 +13,8 @@ type Props = {
 
 /**
  * A reminder as it reads: illustration on the left, the words on the right.
- * (It arrives as the system's own notification; this is its content in our
- * hand, not the operating system's chrome.)
+ * (It arrives as the system’s own notification; this is its content in our
+ * hand, not the operating system’s chrome.)
  */
 export function NotificationPreview({ reminder = REMINDERS[0], layout = "compact", open = false, className }: Props) {
   const showMore = layout === "expanded" && reminder.reflection;

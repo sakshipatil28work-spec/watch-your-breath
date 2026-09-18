@@ -128,7 +128,7 @@ export function PopupDemo() {
 
           <p className="mt-3.5 text-center text-[0.78rem] text-ink-soft min-h-[1.4em]" aria-live="polite">
             {!enabled
-              ? "Reminders are off. Switch them on when you're ready."
+              ? "Reminders are off. Switch them on when you’re ready."
               : quietNow
                 ? "Quiet hours now."
                 : next

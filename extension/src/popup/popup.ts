@@ -130,7 +130,7 @@ function renderStatus() {
   el.dataset.tone = "on";
 }
 
-/** Swap a hint's text for a moment, then put the original back. */
+/** Swap a hint’s text for a moment, then put the original back. */
 function flash(el: HTMLElement, text: string, error = false, ms = 2800) {
   const original = el.dataset.original ?? el.textContent ?? "";
   el.dataset.original = original;
@@ -203,7 +203,7 @@ previewBtn.addEventListener("click", () => {
     .then((res?: { ok: boolean }) => Boolean(res?.ok))
     .catch(() => false)
     .then((ok) => {
-      flash($("preview-hint"), ok ? COPY.settings.previewSent : "Couldn't show it. Try once more.", !ok);
+      flash($("preview-hint"), ok ? COPY.settings.previewSent : "Couldn’t show it. Try once more.", !ok);
       setTimeout(() => (previewBtn.disabled = false), 1200);
     });
 });

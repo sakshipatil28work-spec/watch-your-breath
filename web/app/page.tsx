@@ -105,7 +105,7 @@ export default function Home() {
                 <h3 className="font-display font-bold text-[1.75rem] leading-none uppercase tracking-[0.01em] mt-3">
                   {step.title}
                 </h3>
-                <p className="max-w-[30ch] text-[1.0625rem] leading-relaxed">{step.body}</p>
+                <p className="max-w-[30ch] text-[1.0625rem] leading-relaxed text-pretty">{step.body}</p>
               </li>
             ))}
           </ol>
@@ -115,17 +115,17 @@ export default function Home() {
         <section aria-labelledby="toolbar-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 py-14 lg:py-18">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-20 items-start">
             <div className="max-w-[34rem]">
-              <h2 id="toolbar-title" className="font-display font-bold text-[2.25rem] sm:text-[3rem] leading-none tracking-[-0.01em] text-balance">
+              <h2 id="toolbar-title" className="font-display font-bold text-[2.25rem] sm:text-[3rem] leading-[1.08] tracking-[-0.01em] text-balance">
                 A small sticker in your toolbar.
               </h2>
-              <p className="mt-6 text-[1.0625rem] leading-relaxed max-w-[44ch]">
+              <p className="mt-6 text-[1.0625rem] leading-relaxed max-w-[44ch] text-pretty">
                 Click the icon, turn reminders on, choose how often. That is the whole interface. Quiet hours, the notification
                 layout and the bell live one tap deeper, and nothing is counted, scored or streaked. Free, with no account, and nothing leaves your browser. Try it
                 here.
               </p>
               <div className="mt-10">
                 <p className="font-display font-semibold text-[1.125rem] leading-tight">How a reminder arrives</p>
-                <p className="mt-1 text-[0.9375rem] text-ink-soft max-w-[40ch]">
+                <p className="mt-1 text-[0.9375rem] text-ink-soft max-w-[40ch] text-pretty">
                   A soft bell, then a notification at the corner of your screen: the drawing and a few words. It leaves
                   on its own.
                 </p>
@@ -142,10 +142,10 @@ export default function Home() {
 
         {/* ---------- the twelve reminders ---------- */}
         <section aria-labelledby="twelve-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 py-14 lg:py-18">
-          <h2 id="twelve-title" className="font-display font-bold text-[2.25rem] sm:text-[3rem] leading-none tracking-[-0.01em] text-balance">
+          <h2 id="twelve-title" className="font-display font-bold text-[2.25rem] sm:text-[3rem] leading-[1.08] tracking-[-0.01em] text-balance">
             A different small thought each time.
           </h2>
-          <p className="mt-5 max-w-[48ch] text-[1.0625rem] leading-relaxed">
+          <p className="mt-5 max-w-[48ch] text-[1.0625rem] leading-relaxed text-pretty">
             Twelve reminders, each drawn with its own words. They take turns, never the same one twice in a row, and every
             one is shown before any repeats.
           </p>
@@ -182,7 +182,7 @@ export default function Home() {
             <p className="sm:pl-[12%] lg:pl-[16%] text-rust">{COPY.philosophy[1]}</p>
             <p className="sm:pl-[24%] lg:pl-[32%]">{COPY.philosophy[2]}</p>
           </div>
-          <p className="mt-10 lg:mt-14 max-w-[44ch] text-[1.0625rem] sm:text-[1.125rem] leading-relaxed sm:ml-[24%] lg:ml-[32%]">
+          <p className="mt-10 lg:mt-14 max-w-[44ch] text-[1.0625rem] sm:text-[1.125rem] leading-relaxed sm:ml-[24%] lg:ml-[32%] text-pretty">
             {COPY.philosophyBody}
           </p>
         </section>

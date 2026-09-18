@@ -2,7 +2,7 @@ import { ext } from "./ext.ts";
 // The reminder library. Copy and illustration are designed together: each
 // entry names the one illustration that carries its meaning. Never recombine.
 // Illustrations live in assets/illustrations/<illustrationId>.png, cut from the
-// author's sheet by illustrations/scripts/reminders.mjs.
+// author’s sheet by illustrations/scripts/reminders.mjs.
 
 export type IllustrationId =
   | "breath-flow"
@@ -64,7 +64,7 @@ export const REMINDERS: readonly Reminder[] = [
   {
     id: "a-little-pause",
     title: "A little pause.",
-    supporting: "That's all.",
+    supporting: "That’s all.",
     reflection: "One breath is enough. Then carry on with what you were doing.",
     illustrationId: "floating-leaf",
     motion: "drift",
@@ -118,7 +118,7 @@ export const REMINDERS: readonly Reminder[] = [
   {
     id: "let-it-move",
     title: "Let the breath move.",
-    supporting: "Don't force it.",
+    supporting: "Don’t force it.",
     reflection: "The breath knows its own pace. Let it come and go as it does.",
     illustrationId: "wind-and-leaf",
     motion: "flow",

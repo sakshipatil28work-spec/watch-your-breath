@@ -43,6 +43,7 @@ html {
   font-size: 14px;
   line-height: 1.45;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   scrollbar-width: thin;
   scrollbar-color: var(--ink-faint) transparent;
 }
@@ -90,6 +91,22 @@ body {
 
 [hidden] {
   display: none !important;
+}
+
+/* descriptions never strand a single word on their last line; headings balance */
+.hint,
+.about,
+.status,
+.notice-message,
+.onboarding-sub,
+.radio-text small {
+  text-wrap: pretty;
+}
+
+.settings-title,
+.group-title,
+.notice-title {
+  text-wrap: balance;
 }
 
 /* paper grain over the sticker */

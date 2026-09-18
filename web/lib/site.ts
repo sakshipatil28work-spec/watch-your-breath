@@ -2,7 +2,7 @@
 
 export const SITE = {
   name: "Watch Your Breath",
-  tagline: "A gentle reminder to notice the breath that's already happening.",
+  tagline: "A gentle reminder to notice the breath that’s already happening.",
   /** what the bell is, for the site */
   bell: "A single soft bell, once per reminder.",
   url: "https://watchyourbreath.vercel.app",
@@ -21,7 +21,7 @@ export const SITE = {
   },
   /** Firefox Add-ons listing, once published. */
   firefoxAddonUrl: null as string | null,
-  /** Where it runs. Safari would need its own build through Apple's tools; not yet. */
+  /** Where it runs. Safari would need its own build through Apple’s tools; not yet. */
   browsers: "Works in Chrome, Edge, Brave, Opera, Arc, Vivaldi and Firefox.",
 } as const;
 
@@ -40,7 +40,7 @@ export const COPY = {
     {
       number: "01",
       title: "Set it",
-      body: "Choose how often you'd like to be reminded.",
+      body: "Choose how often you’d like to be reminded.",
     },
     {
       number: "02",
@@ -55,6 +55,6 @@ export const COPY = {
   ],
   philosophy: ["Nothing to fix.", "Nothing to achieve.", "Simply notice."],
   philosophyBody:
-    "This isn't a practice. There's no technique, no timer, no score. The breath is already here. The reminder only points at it, then gets out of the way.",
+    "This isn’t a practice. There’s no technique, no timer, no score. The breath is already here. The reminder only points at it, then gets out of the way.",
   about: "Watch Your Breath is a small reminder to notice something that is already happening.",
 } as const;

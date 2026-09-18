@@ -4,7 +4,7 @@ export const COPY = {
   name: "Watch Your Breath",
   phrase: "Watch your breath.",
   moment: "Just a moment.",
-  tagline: "A gentle reminder to notice the breath that's already happening.",
+  tagline: "A gentle reminder to notice the breath that’s already happening.",
   about: "Watch Your Breath is a small reminder to notice something that is already happening.",
 
   notification: {
@@ -14,12 +14,12 @@ export const COPY = {
 
   onboarding: {
     heading: "Watch your breath.",
-    sub: "A small reminder to notice the breath that's already happening.",
+    sub: "A small reminder to notice the breath that’s already happening.",
     frequency: "Reminder frequency",
     cta: "Start reminders",
-    done: "You're set.",
+    done: "You’re set.",
     doneSub: (interval: string) =>
-      `Your first reminder comes in about ${interval}, with its own small drawing. Pin the icon to your toolbar if you'd like it close by.`,
+      `Your first reminder comes in about ${interval}, with its own small drawing. Pin the icon to your toolbar if you’d like it close by.`,
     close: "Close this tab",
   },
 
@@ -29,7 +29,7 @@ export const COPY = {
     custom: "Custom",
     minutes: "minutes",
     settings: "Settings",
-    off: "Reminders are off. Switch them on when you're ready.",
+    off: "Reminders are off. Switch them on when you’re ready.",
     quiet: (until: string) => `Quiet hours until ${until}. Reminders pick up after.`,
     next: (at: string) => `Next reminder around ${at}.`,
     scheduling: "Setting the next reminder…",
@@ -57,13 +57,13 @@ export const COPY = {
     sound: "Reminder sound",
     playBell: "Play bell",
     bellHint: "A single soft bell. It plays once with each reminder.",
-    bellFailed: "Couldn't play the bell. Check that your sound is on, then try again.",
+    bellFailed: "Couldn’t play the bell. Check that your sound is on, then try again.",
     about: "About",
     version: (v: string) => `Version ${v}`,
   },
 
   denied: {
-    body: "Chrome is set to block notifications from this extension, so reminders cannot be shown. To allow them, open Chrome's notification settings and switch Watch Your Breath on.",
+    body: "Chrome is set to block notifications from this extension, so reminders cannot be shown. To allow them, open Chrome’s notification settings and switch Watch Your Breath on.",
     open: "Open Chrome settings",
   },
 

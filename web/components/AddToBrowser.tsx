@@ -6,7 +6,7 @@ import { SITE, COPY } from "@/lib/site";
 
 export type Browser = "chrome" | "edge" | "firefox" | "other";
 
-/** The visitor's browser, read once from the user agent. "other" also covers the server render. */
+/** The visitor’s browser, read once from the user agent. "other" also covers the server render. */
 function detect(): Browser {
   const ua = navigator.userAgent;
   if (/firefox|fxios/i.test(ua)) return "firefox";
@@ -21,7 +21,7 @@ export const useBrowser = () => useSyncExternalStore(subscribe, detect, () => "o
  * The primary action, named for the browser the visitor is in: "Add to Firefox"
  * in Firefox, "Add to Edge" in Edge, "Add to Chrome" in Chrome and its
  * relatives, and "Get the extension" anywhere else (or before we know). Points
- * at that browser's store listing once it exists, at the install note until then.
+ * at that browser’s store listing once it exists, at the install note until then.
  */
 export function AddToBrowser({
   className,
