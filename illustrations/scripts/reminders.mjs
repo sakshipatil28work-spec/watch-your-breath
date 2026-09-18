@@ -102,6 +102,52 @@ function withProvenance(png, note) {
   return Buffer.concat([png.subarray(0, at), chunk, png.subarray(at)]);
 }
 
+const ICON = 192;
+const DISC_R = ICON / 2;
+const INSET = 6; // breathing room between ink and the disc's edge
+
+/** Does every visible pixel of `png` (placed centred on the icon) lie inside the disc? */
+async function fitsInDisc(png) {
+  const { data, info } = await sharp(png).raw().toBuffer({ resolveWithObject: true });
+  const ox = (ICON - info.width) / 2;
+  const oy = (ICON - info.height) / 2;
+  const limit = (DISC_R - INSET) ** 2;
+  for (let y = 0; y < info.height; y++) {
+    for (let x = 0; x < info.width; x++) {
+      if (data[(y * info.width + x) * 4 + 3] < 40) continue; // transparent or faint edge
+      const dx = ox + x + 0.5 - DISC_R;
+      const dy = oy + y + 0.5 - DISC_R;
+      if (dx * dx + dy * dy > limit) return false;
+    }
+  }
+  return true;
+}
+
+/** The drawing on a sand disc, at the largest size whose ink stays inside the circle. */
+async function discIcon(tight) {
+  let size = ICON - 2 * INSET;
+  let placed = null;
+  while (size >= 96) {
+    const candidate = await sharp(tight).resize(size, size, { fit: "inside" }).png().toBuffer();
+    if (await fitsInDisc(candidate)) {
+      placed = candidate;
+      break;
+    }
+    size -= 4;
+  }
+  if (!placed) placed = await sharp(tight).resize(96, 96, { fit: "inside" }).png().toBuffer();
+  const disc = Buffer.from(
+    `<svg width="${ICON}" height="${ICON}" xmlns="http://www.w3.org/2000/svg"><circle cx="${DISC_R}" cy="${DISC_R}" r="${DISC_R}" fill="${SAND}"/></svg>`
+  );
+  return sharp({ create: { width: ICON, height: ICON, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
+    .composite([
+      { input: disc, gravity: "centre" },
+      { input: placed, gravity: "centre" },
+    ])
+    .png()
+    .toBuffer();
+}
+
 let sheetCells = [];
 for (let i = 0; i < IDS.length; i++) {
   const id = IDS[i];
@@ -116,21 +162,13 @@ for (let i = 0; i < IDS.length; i++) {
   const note = `panel ${String(i + 1).padStart(2, "0")} box ${[l, t, r, b].join(",")}, trimmed to ${meta.width}×${meta.height}`;
   writeFileSync(join(EXT, `${id}.png`), withProvenance(trimmed, note));
   writeFileSync(join(WEB, `${id}.png`), withProvenance(trimmed, note));
-  // notification icon: the drawing filling a rounded warm-sand tile, so it
-  // reads at the size the system shows it (the tile is the sticker's corner
-  // language; a circle would force wide drawings small)
+  // notification icon: a warm-sand disc (the system shows it small, beside
+  // the words) with the drawing as large as it can be while every stroke stays
+  // inside the circle. Sized per drawing: a wide drawing sits smaller than a
+  // round one, rather than one fixed size that fits the worst case.
   const tight = await sharp(await keyed.png().toBuffer()).trim({ threshold: 12 }).png().toBuffer();
-  const tile = Buffer.from(
-    `<svg width="192" height="192" xmlns="http://www.w3.org/2000/svg"><rect width="192" height="192" rx="52" ry="52" fill="${SAND}"/></svg>`
-  );
-  const icon = await sharp({ create: { width: 192, height: 192, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
-    .composite([
-      { input: tile, gravity: "centre" },
-      { input: await sharp(tight).resize(172, 172, { fit: "inside" }).png().toBuffer(), gravity: "centre" },
-    ])
-    .png()
-    .toBuffer();
-  writeFileSync(join(EXT, `${id}-icon.png`), withProvenance(icon, `${note}; filling a 192×192 rounded warm-sand tile`));
+  const icon = await discIcon(tight);
+  writeFileSync(join(EXT, `${id}-icon.png`), withProvenance(icon, `${note}; on a 192×192 warm-sand disc, fitted to the circle`));
   sheetCells.push({ id, buf: trimmed, w: meta.width, h: meta.height });
   console.log(`${id}: ${meta.width}×${meta.height}`);
 }
