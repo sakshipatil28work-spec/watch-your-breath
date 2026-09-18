@@ -61,7 +61,7 @@ export default function Home() {
           >
             Just a moment.
           </p>
-          <div className="mt-6 sm:mt-2 lg:-mt-6 max-w-[34rem] lg:ml-auto lg:mr-[3%]">
+          <div className="mt-6 sm:mt-4 lg:mt-5 max-w-[34rem] lg:ml-auto lg:mr-[3%]">
             <h1
               id="hero-title"
               className={
@@ -118,7 +118,7 @@ export default function Home() {
               <h2 id="toolbar-title" className="font-display font-bold text-[2.25rem] sm:text-[3rem] leading-[1.08] tracking-[-0.01em] text-balance">
                 A small sticker in your toolbar.
               </h2>
-              <p className="mt-6 text-[1.0625rem] leading-relaxed max-w-[44ch] text-pretty">
+              <p className="mt-5 text-[1.125rem] sm:text-[1.25rem] leading-[1.5] max-w-[46ch] text-pretty">
                 Click the icon, turn reminders on, choose how often. That is the whole interface. Quiet hours, the notification
                 layout and the bell live one tap deeper, and nothing is counted, scored or streaked. Free, with no account, and nothing leaves your browser. Try it
                 here.
@@ -145,9 +145,9 @@ export default function Home() {
           <h2 id="twelve-title" className="font-display font-bold text-[2.25rem] sm:text-[3rem] leading-[1.08] tracking-[-0.01em] text-balance">
             A different small thought each time.
           </h2>
-          <p className="mt-5 max-w-[48ch] text-[1.0625rem] leading-relaxed text-pretty">
-            Twelve reminders, each drawn with its own words. They take turns, never the same one twice in a row, and every
-            one is shown before any repeats.
+          <p className="mt-5 max-w-[58ch] text-[1.125rem] sm:text-[1.25rem] leading-[1.5] text-pretty">
+            Twelve reminders, each drawn with its own words. They take turns: never the same one twice, and all twelve
+            before any repeats.
           </p>
           <ol className="mt-12 grid gap-x-8 gap-y-12 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 list-none p-0 m-0">
             {REMINDERS.map((r, i) => (
@@ -182,7 +182,7 @@ export default function Home() {
             <p className="sm:pl-[12%] lg:pl-[16%] text-rust">{COPY.philosophy[1]}</p>
             <p className="sm:pl-[24%] lg:pl-[32%]">{COPY.philosophy[2]}</p>
           </div>
-          <p className="mt-10 lg:mt-14 max-w-[44ch] text-[1.0625rem] sm:text-[1.125rem] leading-relaxed sm:ml-[24%] lg:ml-[32%] text-pretty">
+          <p className="mt-10 lg:mt-14 max-w-[46ch] text-[1.125rem] sm:text-[1.25rem] leading-[1.5] sm:ml-[24%] lg:ml-[32%] text-pretty">
             {COPY.philosophyBody}
           </p>
         </section>
