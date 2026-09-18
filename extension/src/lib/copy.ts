@@ -52,7 +52,7 @@ export const COPY = {
     compact: "Compact",
     expanded: "Expanded",
     preview: "Send one now",
-    previewHint: "Shows the next reminder right away, so you can see how it arrives.",
+    previewHint: "Shows it right away, so you can see how one arrives.",
     previewSent: "Sent. It will close on its own.",
     sound: "Reminder sound",
     playBell: "Play bell",
@@ -63,7 +63,7 @@ export const COPY = {
   },
 
   denied: {
-    body: "Chrome is set to block notifications from this extension. Reminders still arrive as cards; only the backup notification, used when a card can't open, would be hidden. To allow it, open Chrome's notification settings and switch Watch Your Breath on.",
+    body: "Chrome is set to block notifications from this extension, so reminders cannot be shown. To allow them, open Chrome's notification settings and switch Watch Your Breath on.",
     open: "Open Chrome settings",
   },
 

@@ -122,14 +122,14 @@ export default function Home() {
                 A small sticker in your toolbar.
               </h2>
               <p className="mt-6 text-[1.0625rem] leading-relaxed max-w-[44ch]">
-                Click the icon, turn reminders on, choose how often. That is the whole interface. Quiet hours, the card
+                Click the icon, turn reminders on, choose how often. That is the whole interface. Quiet hours, the notification
                 layout and the bell live one tap deeper, and nothing is counted, scored or streaked. Try it here; it works.
               </p>
               <div className="mt-10">
                 <p className="font-display font-semibold text-[1.125rem] leading-tight">How a reminder arrives</p>
                 <p className="mt-1 text-[0.9375rem] text-ink-soft max-w-[40ch]">
-                  A soft bell, then a small card at the corner of your browser. It leaves on its own, or the moment you
-                  close it.
+                  A soft bell, then a notification at the corner of your screen: the drawing and a few words. It leaves
+                  on its own.
                 </p>
                 <NotificationPreview reminder={REMINDERS[1]} className="mt-4" />
               </div>

@@ -34,9 +34,7 @@ const STUB = `<script>
       sendMessage: (msg, cb) => {
         let res;
         if (msg.type === "wyb:ensure") res = store.state;
-        else if (msg.type === "wyb:preview") { window.open("/card.html?id=nothing-to-change&layout=" + store.settings.layout + "&sound=0", "wyb-card", "popup,width=412,height=188"); res = { ok: true }; }
-        else if (msg.type === "wyb:card-close") { window.close(); res = { ok: true }; }
-        else if (msg.type === "wyb:card-resize") { try { window.resizeTo(msg.width || 412, msg.height); } catch {} res = { ok: true }; }
+        else if (msg.type === "wyb:preview") { console.log("[stub] a system notification would show now"); res = { ok: true }; }
         cb && cb(res);
         return Promise.resolve(res);
       },

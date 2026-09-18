@@ -42,8 +42,6 @@ function copyStatic() {
   cpSync(join(root, "src/popup/popup.html"), join(dist, "popup.html"));
   cpSync(join(root, "src/popup/popup.css"), join(dist, "popup.css"));
   cpSync(join(root, "src/popup/onboarding.html"), join(dist, "onboarding.html"));
-  cpSync(join(root, "src/card/card.html"), join(dist, "card.html"));
-  cpSync(join(root, "src/card/card.css"), join(dist, "card.css"));
   if (target !== "firefox") cpSync(join(root, "src/offscreen/offscreen.html"), join(dist, "offscreen.html"));
   cpSync(join(root, "assets"), join(dist, "assets"), { recursive: true });
   cpSync(join(root, "fonts"), join(dist, "fonts"), { recursive: true });
@@ -54,7 +52,6 @@ const entryPoints = {
   background: join(root, "src/background/index.ts"),
   popup: join(root, "src/popup/popup.ts"),
   onboarding: join(root, "src/popup/onboarding.ts"),
-  card: join(root, "src/card/card.ts"),
 };
 if (target !== "firefox") entryPoints.offscreen = join(root, "src/offscreen/offscreen.ts");
 

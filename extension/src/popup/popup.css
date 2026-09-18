@@ -731,29 +731,44 @@ body {
   outline-offset: 3px;
 }
 
-/* the settings preview is the real card, in a frame */
-.card-preview {
-  margin-top: 4px;
-  border-radius: var(--corner);
-  overflow: hidden;
-  background: var(--clay);
-  padding: 6px 0 2px;
+/* the settings preview: the next reminder, shaped like the notification it becomes */
+.notice-preview {
+  margin-top: 6px;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 10px 12px;
+  background: var(--paper-edge);
+  border: 1px solid var(--ink-hair);
+  border-radius: var(--corner); /* icon corners + padding */
 }
 
-.card-preview iframe {
+.notice-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--corner-sm);
   display: block;
-  width: 412px;
-  height: 168px;
-  border: 0;
-  transform: scale(0.66);
-  transform-origin: 0 0;
-  margin-bottom: calc(168px * -0.34);
-  pointer-events: none;
 }
 
-.card-preview[data-layout="expanded"] iframe {
-  height: 198px;
-  margin-bottom: calc(198px * -0.34);
+.notice-text p {
+  margin: 0;
+}
+
+.notice-title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.notice-message {
+  margin-top: 2px !important;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+  white-space: pre-line;
 }
 
 .notice {

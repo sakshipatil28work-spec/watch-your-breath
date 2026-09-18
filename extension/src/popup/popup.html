@@ -132,26 +132,30 @@
             <label class="radio radio-stack">
               <input type="radio" name="layout" value="compact" />
               <span class="radio-mark" aria-hidden="true"></span>
-              <span class="radio-text"><span>Compact</span><small>Illustration and a short reminder</small></span>
+              <span class="radio-text"><span>Compact</span><small>The drawing and a short reminder</small></span>
             </label>
             <label class="radio radio-stack">
               <input type="radio" name="layout" value="expanded" />
               <span class="radio-mark" aria-hidden="true"></span>
-              <span class="radio-text"><span>Expanded</span><small>Illustration, reminder and an optional reflection</small></span>
+              <span class="radio-text"><span>Expanded</span><small>The drawing, the reminder and a short reflection</small></span>
             </label>
           </fieldset>
-          <div class="card-preview" id="card-preview">
-            <iframe id="card-frame" title="Reminder preview" src="card.html?preview=1" scrolling="no"></iframe>
+          <p class="hint">Reminders arrive as your system's notifications, at the corner of the screen. The next one reads:</p>
+          <div class="notice-preview" id="notice-preview" role="img" aria-labelledby="preview-title preview-message">
+            <img class="notice-icon" id="preview-icon" alt="" width="48" height="48" />
+            <div class="notice-text">
+              <p class="notice-title" id="preview-title"></p>
+              <p class="notice-message" id="preview-message"></p>
+            </div>
           </div>
           <div class="row row-preview">
             <button type="button" class="button button-secondary" id="send-preview">Send one now</button>
-            <span class="hint" id="preview-hint" role="status">Shows the next reminder right away, so you can see how it arrives.</span>
+            <span class="hint" id="preview-hint" role="status">Shows it right away, so you can see how one arrives.</span>
           </div>
           <div class="notice" id="denied-note" hidden>
             <p class="hint">
-              Chrome is set to block notifications from this extension. Reminders still arrive as cards; only the backup
-              notification, used when a card can't open, would be hidden. To allow it, open Chrome's notification
-              settings and switch Watch Your Breath on.
+              Chrome is set to block notifications from this extension, so reminders cannot be shown. To allow them,
+              open Chrome's notification settings and switch Watch Your Breath on.
             </p>
             <button type="button" class="button button-secondary button-small" id="open-chrome-settings">
               Open Chrome settings

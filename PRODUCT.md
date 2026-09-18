@@ -37,7 +37,7 @@ It is a reminder, not a practice. It never teaches breathing, never times an inh
 
 Confirmed:
 - A library of twelve reminders (copy + supporting copy + optional reflection + one illustration each, designed together, never recombined), shown in a shuffled cycle: every reminder before any repeats, never the same twice in a row. Illustrations are the author's twelve-panel sheet, cut per panel.
-- The reminder arrives as a small illustrated card (illustration left, copy right, close at bottom right), in a Compact or Expanded layout (Expanded adds a chevron that reveals the reflection). The author's bell recording plays once per reminder; Sound on/off with a preview.
+- The reminder arrives as a system notification (the OS's own toast at the corner of the screen, so it shows over any app): the illustration as its icon, the reminder as its words, in a Compact or Expanded layout (Expanded adds the short reflection). The author's bell recording plays once per reminder; Sound on/off with a preview.
 - Reminders ON/OFF; frequency: 30 min / 1 hour / 2 hours / custom minutes.
 - Quiet hours start/end.
 - Notification layout: Compact (default) / Expanded. Sound: on (default) / off.

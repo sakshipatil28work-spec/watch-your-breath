@@ -1,9 +1,9 @@
-// Background: schedules reminders with alarms and shows each one as a small
-// illustrated card (its own little window at the bottom right of the browser)
-// while the browser is the app in front. Otherwise, or if a window cannot be
-// opened, a system notification carries the same reminder and the bell plays from here instead: through an offscreen document
-// in Chrome (a service worker has no audio), or directly in Firefox (whose
-// background page does).
+// Background: schedules reminders with alarms and delivers each one as a
+// system notification, the kind the operating system shows at the corner of
+// the screen over whatever is in use: the illustration as its icon, the
+// reminder as its words, and our bell once. The bell plays from an offscreen
+// document in Chrome (a service worker has no audio) or directly in Firefox
+// (whose background page does).
 //
 // Runs as a service worker in Chrome and as an event page in Firefox; the
 // same code, via `ext`.
@@ -25,10 +25,6 @@ import { ext, isFirefox } from "../lib/ext.ts";
 
 const ALARM = "wyb:reminder";
 const NOTIFICATION_ID = "wyb:reminder";
-
-// Card window size (outer, including Chrome's small title bar).
-const CARD = { compact: { width: 412, height: 188 }, expanded: { width: 412, height: 188 } };
-let cardWindowId: number | null = null;
 
 // ---------- scheduling ----------
 
@@ -63,61 +59,14 @@ async function nextReminder(): Promise<Reminder> {
 
 // ---------- showing ----------
 
-/** The card: a small popup window at the bottom right of the last-used browser window. */
-async function showCard(r: Reminder, s: Settings): Promise<boolean> {
-  try {
-    // one card at a time
-    if (cardWindowId != null) {
-      try {
-        await ext.windows.remove(cardWindowId);
-      } catch {
-        /* already gone */
-      }
-      cardWindowId = null;
-    }
-    const size = CARD[s.layout];
-    let left: number | undefined;
-    let top: number | undefined;
-    let anchor: chrome.windows.Window | undefined;
-    try {
-      anchor = await ext.windows.getLastFocused({ windowTypes: ["normal"] });
-      if (anchor.left != null && anchor.top != null && anchor.width && anchor.height) {
-        left = Math.max(0, anchor.left + anchor.width - size.width - 24);
-        top = Math.max(0, anchor.top + anchor.height - size.height - 24);
-      }
-    } catch {
-      /* no anchor window: let Chrome place it */
-    }
-    const params = new URLSearchParams({ id: r.id, layout: s.layout, sound: s.soundEnabled ? "1" : "0" });
-    const create: chrome.windows.CreateData = {
-      url: ext.runtime.getURL(`card.html?${params}`),
-      type: "popup",
-      width: size.width,
-      height: size.height,
-      left,
-      top,
-    };
-    // Chrome can open the card without taking focus. Firefox cannot, so there
-    // we open it and hand focus straight back to the window that had it.
-    if (!isFirefox) create.focused = false;
-    const win = await ext.windows.create(create);
-    cardWindowId = win?.id ?? null;
-    if (isFirefox && anchor?.id != null) {
-      await ext.windows.update(anchor.id, { focused: true }).catch(() => undefined);
-    }
-    return cardWindowId != null;
-  } catch {
-    return false;
-  }
-}
-
-/** Fallback: the system notification, illustration as its icon. */
-async function showNotification(r: Reminder, s: Settings): Promise<void> {
+/** The reminder, as the system's own notification: illustration, words, and (separately) the bell. */
+async function show(r: Reminder, s: Settings): Promise<void> {
   await ext.notifications.clear(NOTIFICATION_ID);
   const options: chrome.notifications.NotificationOptions<true> = {
     type: "basic",
     iconUrl: illustrationUrl(r, "icon"),
     title: r.title,
+    // Compact: the one supporting line. Expanded: the short reflection too.
     message: s.layout === "expanded" && r.reflection ? `${r.supporting}\n${r.reflection}` : r.supporting,
   };
   if (!isFirefox) {
@@ -126,14 +75,14 @@ async function showNotification(r: Reminder, s: Settings): Promise<void> {
     options.priority = 0;
   }
   await ext.notifications.create(NOTIFICATION_ID, options);
-  if (s.soundEnabled) await ringFromBackground();
+  if (s.soundEnabled) await ring();
 }
 
 /**
- * Play the bell without a card. Chrome's service worker cannot play audio, so
- * it asks an offscreen document to; Firefox's background page simply plays it.
+ * Play the bell once. Chrome's service worker cannot play audio, so it asks
+ * an offscreen document to; Firefox's background page simply plays it.
  */
-async function ringFromBackground(): Promise<void> {
+async function ring(): Promise<void> {
   try {
     const url = ext.runtime.getURL(BELL_URL);
     if (typeof Audio === "function") {
@@ -155,26 +104,6 @@ async function ringFromBackground(): Promise<void> {
   } catch {
     /* no sound is still a reminder */
   }
-}
-
-/**
- * Is the browser the app in front? A card is a browser window; when the
- * browser is not in front, Windows and macOS keep a new unfocused window
- * behind the app in use, so nobody would see it. Then the system notification
- * carries the reminder: it shows over everything.
- */
-async function browserInFront(): Promise<boolean> {
-  try {
-    const w = await ext.windows.getLastFocused();
-    return w?.focused === true;
-  } catch {
-    return false;
-  }
-}
-
-async function show(r: Reminder, s: Settings): Promise<void> {
-  const ok = (await browserInFront()) && (await showCard(r, s));
-  if (!ok) await showNotification(r, s);
 }
 
 async function fire(): Promise<void> {
@@ -212,12 +141,9 @@ ext.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === ALARM) void fire();
 });
 
+// a click is a dismissal; there is nothing to open
 ext.notifications.onClicked.addListener((id) => {
   if (id === NOTIFICATION_ID) void ext.notifications.clear(id);
-});
-
-ext.windows.onRemoved.addListener((id) => {
-  if (id === cardWindowId) cardWindowId = null;
 });
 
 // Any settings change (popup, onboarding) reschedules from now.
@@ -227,11 +153,9 @@ onSettingsChanged((s) => {
 
 type Msg =
   | { type: "wyb:preview" } // show the next reminder now (settings → "Send one now")
-  | { type: "wyb:ensure" }
-  | { type: "wyb:card-resize"; width?: number; height: number }
-  | { type: "wyb:card-close" };
+  | { type: "wyb:ensure" };
 
-ext.runtime.onMessage.addListener((msg: Msg, sender, sendResponse) => {
+ext.runtime.onMessage.addListener((msg: Msg, _sender, sendResponse) => {
   switch (msg?.type) {
     case "wyb:preview": {
       loadSettings()
@@ -245,33 +169,6 @@ ext.runtime.onMessage.addListener((msg: Msg, sender, sendResponse) => {
         .then(() => loadState())
         .then((st: RuntimeState) => sendResponse(st));
       return true;
-    }
-    case "wyb:card-resize": {
-      const id = sender.tab?.windowId ?? cardWindowId;
-      if (id != null) {
-        void ext.windows.getLastFocused({ windowTypes: ["normal"] })
-          .then((anchor) => {
-            // keep the card pinned to the bottom-right corner as it changes size
-            const width = msg.width ? Math.round(msg.width) : undefined;
-            const height = Math.round(msg.height);
-            const update: chrome.windows.UpdateInfo = { height };
-            if (width) update.width = width;
-            if (anchor.left != null && anchor.top != null && anchor.width && anchor.height) {
-              update.left = Math.max(0, anchor.left + anchor.width - (width ?? CARD.compact.width) - 24);
-              update.top = Math.max(0, anchor.top + anchor.height - height - 24);
-            }
-            return ext.windows.update(id, update);
-          })
-          .catch(() => undefined);
-      }
-      sendResponse({ ok: true });
-      return false;
-    }
-    case "wyb:card-close": {
-      const id = sender.tab?.windowId ?? cardWindowId;
-      if (id != null) void ext.windows.remove(id).catch(() => undefined);
-      sendResponse({ ok: true });
-      return false;
     }
     default:
       return false;

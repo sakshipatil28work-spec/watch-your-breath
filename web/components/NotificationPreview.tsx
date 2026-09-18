@@ -12,15 +12,16 @@ type Props = {
 };
 
 /**
- * The reminder card as it arrives: illustration on the left, copy on the right,
- * a small × at the bottom right. Mirrors extension/src/card/card.css.
+ * A reminder as it reads: illustration on the left, the words on the right.
+ * (It arrives as the system's own notification; this is its content in our
+ * hand, not the operating system's chrome.)
  */
 export function NotificationPreview({ reminder = REMINDERS[0], layout = "compact", open = false, className }: Props) {
   const showMore = layout === "expanded" && reminder.reflection;
   return (
     <div
       role="img"
-      aria-label={`Reminder card: ${reminder.title} ${reminder.supporting}`}
+      aria-label={`Reminder: ${reminder.title} ${reminder.supporting}`}
       className={[
         "relative grid grid-cols-[108px_minmax(0,1fr)] gap-3.5 items-center w-fit min-w-[300px] max-w-[392px] rounded-[var(--radius-sticker)] border-[1.5px] border-ink bg-cream px-3.5 pr-9 py-3.5 shadow-[0_0_0_4px_var(--color-paper)]",
         open ? "items-start" : "",

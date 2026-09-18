@@ -14,7 +14,7 @@ import { isQuiet, quietEndAfter, formatClock } from "../lib/schedule.ts";
 import { COPY } from "../lib/copy.ts";
 import { playReminderSound } from "../lib/audio.ts";
 import { ext } from "../lib/ext.ts";
-import { REMINDERS } from "../lib/reminders.ts";
+import { REMINDERS, illustrationUrl } from "../lib/reminders.ts";
 import { emblemHtml, gearSvg, arrowLeftSvg, bellSvg, playSvg, chevronDataUri } from "../ui/ink.ts";
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -51,7 +51,6 @@ const customInputs = [$("input-custom"), $("input-custom-2")] as HTMLInputElemen
 const quietStart = $("input-quiet-start") as HTMLInputElement;
 const quietEnd = $("input-quiet-end") as HTMLInputElement;
 const layoutRadios = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="layout"]'));
-const cardFrame = $("card-frame") as HTMLIFrameElement;
 
 function setToggle(btn: HTMLButtonElement, on: boolean) {
   btn.setAttribute("aria-checked", String(on));
@@ -83,12 +82,14 @@ function render(s: Settings) {
   renderStatus();
 }
 
-/** The settings preview is the real card, rendered small, showing the reminder that will come next. */
+/** The settings preview: the reminder that will come next, worded as its notification will be. */
 function renderPreview(s: Settings) {
   const nextId = state.cycle[0] ?? REMINDERS.find((r) => r.id !== state.lastReminderId)?.id ?? REMINDERS[0].id;
-  const url = `card.html?preview=1&id=${encodeURIComponent(nextId)}&layout=${s.layout}&sound=0`;
-  if (cardFrame.getAttribute("src") !== url) cardFrame.setAttribute("src", url);
-  $("card-preview").dataset.layout = s.layout;
+  const r = REMINDERS.find((x) => x.id === nextId) ?? REMINDERS[0];
+  ($("preview-icon") as HTMLImageElement).src = illustrationUrl(r, "icon");
+  $("preview-title").textContent = r.title;
+  $("preview-message").textContent =
+    s.layout === "expanded" && r.reflection ? `${r.supporting}\n${r.reflection}` : r.supporting;
 }
 
 function renderQuiet(s: Settings) {
