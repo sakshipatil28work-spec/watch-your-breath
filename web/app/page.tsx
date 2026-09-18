@@ -133,24 +133,6 @@ export default function Home() {
                 </p>
                 <NotificationPreview reminder={REMINDERS[1]} className="mt-4" />
               </div>
-              <div className="mt-10">
-                <p className="font-display font-semibold text-[1.125rem] leading-tight">Recognisable even at sixteen pixels.</p>
-                <ul className="mt-4 flex items-end gap-7 list-none p-0 m-0" aria-label="The icon at 128, 48, 32 and 16 pixels">
-                  {[128, 48, 32, 16].map((s) => (
-                    <li key={s} className="grid justify-items-center gap-2">
-                      <Image
-                        src={`/illustrations/icon-${s}.png`}
-                        alt={`Icon at ${s} pixels`}
-                        width={s}
-                        height={s}
-                        style={{ width: s, height: s }}
-                        unoptimized
-                      />
-                      <span className="text-[0.75rem] text-ink-soft tabular-nums">{s}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </div>
             <div className="flex justify-center lg:justify-end lg:pt-2">
               <div className="p-6 sm:p-10 bg-clay rounded-[var(--radius-sticker)]">
