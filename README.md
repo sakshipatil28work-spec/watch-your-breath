@@ -74,7 +74,7 @@ npm run dev:web      # http://localhost:3000
 npm run build:web
 ```
 
-Deploy on Vercel with **Root Directory** set to `web` (Framework: Next.js; no other settings needed, the site has no workspace dependencies). The `Add to Chrome` button reads `chromeStoreUrl` in `web/lib/site.ts`; until the store listing exists it points at the install note on the page.
+Deploy on Vercel with **Root Directory** set to `web` (Framework: Next.js; no other settings needed, the site has no workspace dependencies). The primary button names the visitor's browser (Add to Chrome / Edge / Firefox, or Get the extension) and reads `chromeStoreUrl` / `firefoxAddonUrl` in `web/lib/site.ts`; until a listing exists it points at the install note on the page.
 
 ## Design
 

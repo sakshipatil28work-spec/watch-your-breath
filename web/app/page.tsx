@@ -2,7 +2,7 @@ import Image from "next/image";
 import { HeroArt, heroExists } from "@/illustrations/HeroArt";
 import { Flow } from "@/illustrations/Flow";
 import { Emblem } from "@/illustrations/Emblem";
-import { AddToChrome } from "@/components/AddToChrome";
+import { AddToBrowser } from "@/components/AddToBrowser";
 import { ButtonLink } from "@/components/Button";
 import { PopupDemo } from "@/components/PopupDemo";
 import { NotificationPreview } from "@/components/NotificationPreview";
@@ -39,13 +39,10 @@ export default function Home() {
           >
             {COPY.howItWorks}
           </a>
-          <ButtonLink
-            href={SITE.chromeStoreUrl ?? "#install"}
+          <AddToBrowser
             variant="secondary"
             className="px-3.5 sm:px-4 py-2.5 text-[0.875rem] sm:text-[0.9375rem] whitespace-nowrap"
-          >
-            {COPY.addToChrome}
-          </ButtonLink>
+          />
         </nav>
       </header>
 
@@ -81,7 +78,7 @@ export default function Home() {
               {SITE.tagline}
             </p>
             <div className="reveal mt-7 flex flex-wrap items-center gap-4" style={{ "--i": 3 } as React.CSSProperties}>
-              <AddToChrome />
+              <AddToBrowser />
               <ButtonLink href="#how-it-works" variant="quiet">
                 {COPY.howItWorks}
               </ButtonLink>
@@ -222,7 +219,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-4">
-              <AddToChrome />
+              <AddToBrowser />
               <ButtonLink href="#how-it-works" variant="quiet">
                 {COPY.howItWorks}
               </ButtonLink>

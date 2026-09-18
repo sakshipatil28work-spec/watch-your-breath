@@ -25,7 +25,13 @@ export const SITE = {
 export const COPY = {
   phrase: "Watch your breath.",
   moment: "Just a moment.",
-  addToChrome: "Add to Chrome",
+  /** the primary button, by the browser the visitor is in */
+  addTo: {
+    chrome: "Add to Chrome",
+    edge: "Add to Edge",
+    firefox: "Add to Firefox",
+    other: "Get the extension",
+  },
   howItWorks: "How it works",
   steps: [
     {

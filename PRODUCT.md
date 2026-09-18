@@ -44,7 +44,7 @@ Confirmed:
 - Randomize reminders toggle.
 - Notification permission denied state with plain explanation and retry.
 - Preferences persist in chrome.storage.local; no account.
-- Landing page: hero, How it works (Set it / Forget it / Notice it), Philosophy, CTA. "Add to Chrome" points to a placeholder constant until a Chrome Web Store listing exists.
+- Landing page: hero, How it works (Set it / Forget it / Notice it), Philosophy, CTA. The primary button is named for the visitor's browser ("Add to Chrome", "Add to Edge", "Add to Firefox", else "Get the extension") and points to a placeholder constant until the store listings exist.
 
 Hard rules (product law, not style):
 1. Never tell the user how to breathe. 2. Never score breathing. 3. Never track breathing quality. 4. No streaks. 5. No achievements. 6. Nothing competitive. 7. Interactions extremely short. 8. Everything dismissable immediately. 9. No account. 10. Reminders can be turned off at any time.
