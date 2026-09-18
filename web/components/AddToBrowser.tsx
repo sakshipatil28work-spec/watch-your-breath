@@ -4,7 +4,7 @@ import { useSyncExternalStore } from "react";
 import { ButtonLink } from "./Button";
 import { SITE, COPY } from "@/lib/site";
 
-type Browser = "chrome" | "edge" | "firefox" | "other";
+export type Browser = "chrome" | "edge" | "firefox" | "other";
 
 /** The visitor's browser, read once from the user agent. "other" also covers the server render. */
 function detect(): Browser {
@@ -15,7 +15,7 @@ function detect(): Browser {
   return "other";
 }
 const subscribe = () => () => {};
-const useBrowser = () => useSyncExternalStore(subscribe, detect, () => "other" as Browser);
+export const useBrowser = () => useSyncExternalStore(subscribe, detect, () => "other" as Browser);
 
 /**
  * The primary action, named for the browser the visitor is in: "Add to Firefox"

@@ -12,10 +12,13 @@ export const SITE = {
    */
   chromeStoreUrl: null as string | null,
   /**
-   * A downloadable packaged build (zip), once one is published somewhere.
-   * Null until then: the install note then points at building from source.
+   * The packaged builds, served by the site itself until the store listings
+   * exist. Copied from extension/ by `npm run sync-downloads`.
    */
-  packagedBuildUrl: null as string | null,
+  downloads: {
+    chrome: "/downloads/watch-your-breath-chrome.zip",
+    firefox: "/downloads/watch-your-breath-firefox.zip",
+  },
   /** Firefox Add-ons listing, once published. */
   firefoxAddonUrl: null as string | null,
   /** Where it runs. Safari would need its own build through Apple's tools; not yet. */

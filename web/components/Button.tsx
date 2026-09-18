@@ -23,5 +23,14 @@ export function Button({ variant = "primary", className, ...rest }: ButtonProps)
 }
 
 export function ButtonLink({ variant = "primary", className, ...rest }: LinkProps) {
-  return <Link className={[base, variants[variant], className].filter(Boolean).join(" ")} {...rest} />;
+  const cls = [base, variants[variant], className].filter(Boolean).join(" ");
+  // Same-page anchors and downloads are plain links: the browser then does a
+  // real fragment jump (scroll, :target) or a real download, which the
+  // client-side router would not.
+  const href = typeof rest.href === "string" ? rest.href : null;
+  if (href && (href.startsWith("#") || "download" in rest)) {
+    const anchor = { ...(rest as ComponentProps<"a">), href };
+    return <a className={cls} {...anchor} />;
+  }
+  return <Link className={cls} {...rest} />;
 }

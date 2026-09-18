@@ -3,6 +3,7 @@ import { HeroArt, heroExists } from "@/illustrations/HeroArt";
 import { Flow } from "@/illustrations/Flow";
 import { Emblem } from "@/illustrations/Emblem";
 import { AddToBrowser } from "@/components/AddToBrowser";
+import { InstallNote } from "@/components/InstallNote";
 import { ButtonLink } from "@/components/Button";
 import { PopupDemo } from "@/components/PopupDemo";
 import { NotificationPreview } from "@/components/NotificationPreview";
@@ -226,39 +227,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div id="install" className="mt-16 lg:mt-20 scroll-mt-10">
-            <div className="max-w-[56ch]">
-              <h3 className="font-display font-semibold text-[1.375rem] leading-tight">Not on the Chrome Web Store yet.</h3>
-              <p className="mt-2 text-[1rem] leading-relaxed">
-                {SITE.packagedBuildUrl ? (
-                  <>
-                    Until it is listed, you can load it yourself:{" "}
-                    <a href={SITE.packagedBuildUrl} className="underline underline-offset-[5px] decoration-[1.5px]">
-                      download the packaged build
-                    </a>
-                    , open{" "}
-                  </>
-                ) : (
-                  <>Until it is listed, you can build it from the source (the README walks through it), then open{" "}</>
-                )}
-                <code className="font-ui text-[0.95em] bg-paper px-1.5 py-0.5 rounded-[var(--radius-sticker-sm)] border border-ink-hair">
-                  chrome://extensions
-                </code>
-                , switch on Developer mode, choose Load unpacked, and pick the built folder. The first-run screen opens on
-                its own.
-              </p>
-              <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink-soft">
-                {SITE.browsers}{" "}
-                {SITE.firefoxAddonUrl ? (
-                  <a href={SITE.firefoxAddonUrl} className="underline underline-offset-[5px] decoration-[1.5px]">
-                    Get it for Firefox.
-                  </a>
-                ) : (
-                  <>The Firefox build comes from the same source.</>
-                )}
-              </p>
-            </div>
-          </div>
+          <InstallNote />
         </section>
       </main>
 

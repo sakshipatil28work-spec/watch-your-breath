@@ -67,6 +67,21 @@ body::after {
   mix-blend-mode: multiply;
 }
 
+/* the install card, when a button sends you to it: a wash of clay that settles back to paper */
+.install-note:target {
+  animation: settle 1.6s var(--ease-out-soft) both;
+}
+@keyframes settle {
+  0% {
+    background-color: var(--color-clay-wash);
+    border-color: var(--color-rust);
+  }
+  100% {
+    background-color: var(--color-paper);
+    border-color: var(--color-ink-hair);
+  }
+}
+
 /* one page-load moment: the hero rises in, staggered by --i */
 .reveal {
   animation: rise 560ms var(--ease-out-strong) both;
@@ -252,6 +267,7 @@ select.control-line {
   html {
     scroll-behavior: auto;
   }
+  .install-note:target,
   .reveal,
   .hero-breath,
   .emblem-breath,
