@@ -2,12 +2,12 @@
 
 A gentle reminder to notice the breath you're already breathing.
 
-A Chrome extension (Manifest V3) that, at an interval you choose, rings a soft bell and shows a small illustrated card with a different short reminder each time ("Watch your breath. / Just a moment.", "Nothing to change. / Just notice.", ...), and a one-page site that introduces it. No account, no backend, no tracking. It never tells you how to breathe.
+A browser extension (Manifest V3; Chrome, Edge, Brave, Opera, Arc, Vivaldi and Firefox) that, at an interval you choose, rings a soft bell and shows a small illustrated card with a different short reminder each time ("Watch your breath. / Just a moment.", "Nothing to change. / Just notice.", ...), and a one-page site that introduces it. No account, no backend, no tracking. It never tells you how to breathe.
 
 ```
 watch-your-breath/
 ├── illustrations/   the asset pipeline: cuts every image from one hand-drawn illustration
-├── extension/       Chrome extension, Manifest V3, TypeScript, esbuild
+├── extension/       Browser extension, Manifest V3, TypeScript, esbuild
 └── web/             Next.js + Tailwind landing page, deployable on Vercel
 ```
 
@@ -35,7 +35,19 @@ npm run build:extension      # → extension/dist
 npm run package:extension    # → extension/watch-your-breath-<version>.zip
 ```
 
-Load it in Chrome: open `chrome://extensions`, switch on **Developer mode**, click **Load unpacked**, choose `extension/dist`. The first-run screen opens on install.
+Load it in Chrome (or Edge, Brave, Opera, Arc, Vivaldi): open `chrome://extensions`, switch on **Developer mode**, click **Load unpacked**, choose `extension/dist`. The first-run screen opens on install.
+
+For Firefox, build the Firefox flavour and load it as a temporary add-on:
+
+```bash
+npm run build:firefox -w extension
+```
+
+Open `about:debugging#/runtime/this-firefox`, click **Load Temporary Add-on**, choose `extension/dist-firefox/manifest.json`. (Firefox 142 or newer.)
+
+Store packages, both from the same source: `npm run package:all -w extension` writes `extension/watch-your-breath-<version>.zip` (Chrome Web Store, Edge Add-ons) and `extension/watch-your-breath-<version>-firefox.zip` (Firefox Add-ons). The Firefox build passes `addons-linter` with no errors.
+
+How the two differ, all in `extension/src/lib/ext.ts` and `extension/scripts/build.mjs`: the code calls the extension API through `ext` (`browser` where it exists, promise-based; otherwise `chrome`). Firefox gets an event page instead of a service worker, no `offscreen` permission (its background page plays the bell itself), an add-on id, and no `focused: false` on the card window (Firefox cannot open a window unfocused, so the card opens and focus is handed straight back). Safari is not covered: it needs its own wrapper built with Apple's tools on a Mac.
 
 Preview the popup in a normal browser tab (chrome.* APIs are stubbed):
 
@@ -46,7 +58,7 @@ node extension/scripts/preview.mjs
 # http://localhost:4180/card.html?id=nothing-to-change&layout=expanded&preview=1
 ```
 
-How it works: `chrome.alarms` schedules one-shot alarms. On each one the service worker picks the next reminder (a shuffled cycle: every reminder before any repeats, never the same twice in a row), opens the card as a small popup window at the bottom right of the browser, and schedules the next alarm. The card plays the bell once, leaves on its own after a few seconds (or the moment it is closed), and in the Expanded layout offers a chevron that reveals a short reflection. If a window cannot be opened, the same reminder goes out as a system notification with the illustration as its icon and the bell plays through an offscreen document. Preferences persist in `chrome.storage.local`. Quiet hours push a reminder to after they end. "Randomize" stretches or shortens each interval by up to 25 %. Everything lives in `extension/src`:
+How it works: `chrome.alarms` schedules one-shot alarms. On each one the service worker picks the next reminder (a shuffled cycle: every reminder before any repeats, never the same twice in a row), opens the card as a small popup window at the bottom right of the browser, and schedules the next alarm. The card plays the bell once, leaves on its own after a few seconds (or the moment it is closed), and in the Expanded layout offers a chevron that reveals a short reflection. If a window cannot be opened, the same reminder goes out as a system notification with the illustration as its icon and the bell plays through an offscreen document. Preferences persist in the browser's local extension storage. Quiet hours push a reminder to after they end. "Randomize" stretches or shortens each interval by up to 25 %. Everything lives in `extension/src`:
 
 - `background/index.ts` scheduling, choosing, showing
 - `lib/reminders.ts` the twelve reminders (copy + illustration, designed together)

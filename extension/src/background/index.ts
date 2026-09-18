@@ -1,7 +1,12 @@
-// Background service worker: schedules reminders with chrome.alarms and shows
-// each one as a small illustrated card (its own little window at the bottom
-// right of the browser). If a window cannot be opened, a system notification
-// carries the same reminder, and the bell plays through an offscreen document.
+// Background: schedules reminders with alarms and shows each one as a small
+// illustrated card (its own little window at the bottom right of the browser).
+// If a window cannot be opened, a system notification carries the same
+// reminder and the bell plays from here instead: through an offscreen document
+// in Chrome (a service worker has no audio), or directly in Firefox (whose
+// background page does).
+//
+// Runs as a service worker in Chrome and as an event page in Firefox; the
+// same code, via `ext`.
 
 import {
   loadSettings,
@@ -16,6 +21,7 @@ import { computeNextFire, isQuiet, quietEndAfter } from "../lib/schedule.ts";
 import { getReminder, illustrationUrl, type Reminder } from "../lib/reminders.ts";
 import { pickNext } from "../lib/selection.ts";
 import { BELL_URL } from "../lib/audio.ts";
+import { ext, isFirefox } from "../lib/ext.ts";
 
 const ALARM = "wyb:reminder";
 const NOTIFICATION_ID = "wyb:reminder";
@@ -28,13 +34,13 @@ let cardWindowId: number | null = null;
 
 async function reschedule(settings?: Settings): Promise<void> {
   const s = settings ?? (await loadSettings());
-  await chrome.alarms.clear(ALARM);
+  await ext.alarms.clear(ALARM);
   if (!s.enabled) {
     await saveState({ nextFireAt: null });
     return;
   }
   const next = computeNextFire(new Date(), s);
-  await chrome.alarms.create(ALARM, { when: next.getTime() });
+  await ext.alarms.create(ALARM, { when: next.getTime() });
   await saveState({ nextFireAt: next.getTime() });
 }
 
@@ -42,7 +48,7 @@ async function reschedule(settings?: Settings): Promise<void> {
 async function ensureScheduled(): Promise<void> {
   const s = await loadSettings();
   if (!s.enabled) return;
-  const existing = await chrome.alarms.get(ALARM);
+  const existing = await ext.alarms.get(ALARM);
   if (!existing || existing.scheduledTime < Date.now()) await reschedule(s);
 }
 
@@ -63,7 +69,7 @@ async function showCard(r: Reminder, s: Settings): Promise<boolean> {
     // one card at a time
     if (cardWindowId != null) {
       try {
-        await chrome.windows.remove(cardWindowId);
+        await ext.windows.remove(cardWindowId);
       } catch {
         /* already gone */
       }
@@ -72,8 +78,9 @@ async function showCard(r: Reminder, s: Settings): Promise<boolean> {
     const size = CARD[s.layout];
     let left: number | undefined;
     let top: number | undefined;
+    let anchor: chrome.windows.Window | undefined;
     try {
-      const anchor = await chrome.windows.getLastFocused({ windowTypes: ["normal"] });
+      anchor = await ext.windows.getLastFocused({ windowTypes: ["normal"] });
       if (anchor.left != null && anchor.top != null && anchor.width && anchor.height) {
         left = Math.max(0, anchor.left + anchor.width - size.width - 24);
         top = Math.max(0, anchor.top + anchor.height - size.height - 24);
@@ -82,16 +89,22 @@ async function showCard(r: Reminder, s: Settings): Promise<boolean> {
       /* no anchor window: let Chrome place it */
     }
     const params = new URLSearchParams({ id: r.id, layout: s.layout, sound: s.soundEnabled ? "1" : "0" });
-    const win = await chrome.windows.create({
-      url: chrome.runtime.getURL(`card.html?${params}`),
+    const create: chrome.windows.CreateData = {
+      url: ext.runtime.getURL(`card.html?${params}`),
       type: "popup",
-      focused: false,
       width: size.width,
       height: size.height,
       left,
       top,
-    });
+    };
+    // Chrome can open the card without taking focus. Firefox cannot, so there
+    // we open it and hand focus straight back to the window that had it.
+    if (!isFirefox) create.focused = false;
+    const win = await ext.windows.create(create);
     cardWindowId = win?.id ?? null;
+    if (isFirefox && anchor?.id != null) {
+      await ext.windows.update(anchor.id, { focused: true }).catch(() => undefined);
+    }
     return cardWindowId != null;
   } catch {
     return false;
@@ -100,30 +113,45 @@ async function showCard(r: Reminder, s: Settings): Promise<boolean> {
 
 /** Fallback: the system notification, illustration as its icon. */
 async function showNotification(r: Reminder, s: Settings): Promise<void> {
-  await chrome.notifications.clear(NOTIFICATION_ID);
-  await chrome.notifications.create(NOTIFICATION_ID, {
+  await ext.notifications.clear(NOTIFICATION_ID);
+  const options: chrome.notifications.NotificationOptions<true> = {
     type: "basic",
     iconUrl: illustrationUrl(r, "icon"),
     title: r.title,
     message: s.layout === "expanded" && r.reflection ? `${r.supporting}\n${r.reflection}` : r.supporting,
-    silent: true, // the bell is ours, not the system's
-    priority: 0,
-  });
-  if (s.soundEnabled) await ringOffscreen();
+  };
+  if (!isFirefox) {
+    // Chrome-only options; Firefox rejects properties it does not know
+    options.silent = true; // the bell is ours, not the system's
+    options.priority = 0;
+  }
+  await ext.notifications.create(NOTIFICATION_ID, options);
+  if (s.soundEnabled) await ringFromBackground();
 }
 
-/** Play the bell from an offscreen document (service workers cannot play audio). */
-async function ringOffscreen(): Promise<void> {
+/**
+ * Play the bell without a card. Chrome's service worker cannot play audio, so
+ * it asks an offscreen document to; Firefox's background page simply plays it.
+ */
+async function ringFromBackground(): Promise<void> {
   try {
-    const has = await chrome.offscreen.hasDocument();
+    const url = ext.runtime.getURL(BELL_URL);
+    if (typeof Audio === "function") {
+      const audio = new Audio(url);
+      audio.loop = false;
+      audio.volume = 0.7;
+      await audio.play();
+      return;
+    }
+    const has = await ext.offscreen.hasDocument();
     if (!has) {
-      await chrome.offscreen.createDocument({
+      await ext.offscreen.createDocument({
         url: "offscreen.html",
-        reasons: [chrome.offscreen.Reason.AUDIO_PLAYBACK],
+        reasons: ["AUDIO_PLAYBACK" as chrome.offscreen.Reason],
         justification: "Play the reminder bell once when a reminder appears.",
       });
     }
-    await chrome.runtime.sendMessage({ type: "wyb:offscreen-ring", url: chrome.runtime.getURL(BELL_URL) });
+    await ext.runtime.sendMessage({ type: "wyb:offscreen-ring", url });
   } catch {
     /* no sound is still a reminder */
   }
@@ -141,7 +169,7 @@ async function fire(): Promise<void> {
   if (isQuiet(now, s)) {
     // quiet hours changed after the alarm was set: resume when they end
     const resume = quietEndAfter(now, s);
-    await chrome.alarms.create(ALARM, { when: resume.getTime() });
+    await ext.alarms.create(ALARM, { when: resume.getTime() });
     await saveState({ nextFireAt: resume.getTime() });
     return;
   }
@@ -153,27 +181,27 @@ async function fire(): Promise<void> {
 
 // ---------- events ----------
 
-chrome.runtime.onInstalled.addListener(async (details) => {
+ext.runtime.onInstalled.addListener(async (details) => {
   if (details.reason === "install") {
     await saveSettings({});
-    await chrome.tabs.create({ url: chrome.runtime.getURL("onboarding.html") });
+    await ext.tabs.create({ url: ext.runtime.getURL("onboarding.html") });
   }
   await ensureScheduled();
 });
 
-chrome.runtime.onStartup.addListener(() => {
+ext.runtime.onStartup.addListener(() => {
   void ensureScheduled();
 });
 
-chrome.alarms.onAlarm.addListener((alarm) => {
+ext.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === ALARM) void fire();
 });
 
-chrome.notifications.onClicked.addListener((id) => {
-  if (id === NOTIFICATION_ID) void chrome.notifications.clear(id);
+ext.notifications.onClicked.addListener((id) => {
+  if (id === NOTIFICATION_ID) void ext.notifications.clear(id);
 });
 
-chrome.windows.onRemoved.addListener((id) => {
+ext.windows.onRemoved.addListener((id) => {
   if (id === cardWindowId) cardWindowId = null;
 });
 
@@ -188,7 +216,7 @@ type Msg =
   | { type: "wyb:card-resize"; width?: number; height: number }
   | { type: "wyb:card-close" };
 
-chrome.runtime.onMessage.addListener((msg: Msg, sender, sendResponse) => {
+ext.runtime.onMessage.addListener((msg: Msg, sender, sendResponse) => {
   switch (msg?.type) {
     case "wyb:preview": {
       loadSettings()
@@ -206,7 +234,7 @@ chrome.runtime.onMessage.addListener((msg: Msg, sender, sendResponse) => {
     case "wyb:card-resize": {
       const id = sender.tab?.windowId ?? cardWindowId;
       if (id != null) {
-        void chrome.windows.getLastFocused({ windowTypes: ["normal"] })
+        void ext.windows.getLastFocused({ windowTypes: ["normal"] })
           .then((anchor) => {
             // keep the card pinned to the bottom-right corner as it changes size
             const width = msg.width ? Math.round(msg.width) : undefined;
@@ -217,7 +245,7 @@ chrome.runtime.onMessage.addListener((msg: Msg, sender, sendResponse) => {
               update.left = Math.max(0, anchor.left + anchor.width - (width ?? CARD.compact.width) - 24);
               update.top = Math.max(0, anchor.top + anchor.height - height - 24);
             }
-            return chrome.windows.update(id, update);
+            return ext.windows.update(id, update);
           })
           .catch(() => undefined);
       }
@@ -226,7 +254,7 @@ chrome.runtime.onMessage.addListener((msg: Msg, sender, sendResponse) => {
     }
     case "wyb:card-close": {
       const id = sender.tab?.windowId ?? cardWindowId;
-      if (id != null) void chrome.windows.remove(id).catch(() => undefined);
+      if (id != null) void ext.windows.remove(id).catch(() => undefined);
       sendResponse({ ok: true });
       return false;
     }

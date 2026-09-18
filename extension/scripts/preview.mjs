@@ -32,10 +32,13 @@ const STUB = `<script>
       getManifest: () => ({ version: "0.1.0 (preview)" }),
       getURL: (p) => "/" + p,
       sendMessage: (msg, cb) => {
-        if (msg.type === "wyb:ensure") cb && cb(store.state);
-        else if (msg.type === "wyb:preview") { window.open("/card.html?id=nothing-to-change&layout=" + store.settings.layout + "&sound=0", "wyb-card", "popup,width=412,height=188"); cb && cb({ ok: true }); }
-        else if (msg.type === "wyb:card-close") { window.close(); cb && cb({ ok: true }); }
-        else if (msg.type === "wyb:card-resize") { try { window.resizeTo(msg.width || 412, msg.height); } catch {} cb && cb({ ok: true }); }
+        let res;
+        if (msg.type === "wyb:ensure") res = store.state;
+        else if (msg.type === "wyb:preview") { window.open("/card.html?id=nothing-to-change&layout=" + store.settings.layout + "&sound=0", "wyb-card", "popup,width=412,height=188"); res = { ok: true }; }
+        else if (msg.type === "wyb:card-close") { window.close(); res = { ok: true }; }
+        else if (msg.type === "wyb:card-resize") { try { window.resizeTo(msg.width || 412, msg.height); } catch {} res = { ok: true }; }
+        cb && cb(res);
+        return Promise.resolve(res);
       },
       lastError: null,
     },

@@ -16,6 +16,10 @@ export const SITE = {
    * Null until then: the install note then points at building from source.
    */
   packagedBuildUrl: null as string | null,
+  /** Firefox Add-ons listing, once published. */
+  firefoxAddonUrl: null as string | null,
+  /** Where it runs. Safari would need its own build through Apple's tools; not yet. */
+  browsers: "Works in Chrome, Edge, Brave, Opera, Arc, Vivaldi and Firefox.",
 } as const;
 
 export const COPY = {

@@ -1,3 +1,4 @@
+import { ext } from "./ext.ts";
 // The reminder library. Copy and illustration are designed together: each
 // entry names the one illustration that carries its meaning. Never recombine.
 // Illustrations live in assets/illustrations/<illustrationId>.png, cut from the
@@ -151,5 +152,5 @@ export function getReminder(id: string | null | undefined): Reminder {
 
 export function illustrationUrl(r: Reminder, variant: "card" | "icon" = "card"): string {
   const file = variant === "icon" ? `${r.illustrationId}-icon.png` : `${r.illustrationId}.png`;
-  return chrome.runtime.getURL(`assets/illustrations/${file}`);
+  return ext.runtime.getURL(`assets/illustrations/${file}`);
 }

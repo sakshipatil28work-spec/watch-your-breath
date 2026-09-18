@@ -3,6 +3,8 @@
 // Only extension pages can play audio (the card, the popup, the offscreen
 // document); the service worker asks the offscreen document instead.
 
+import { ext } from "./ext.ts";
+
 export const BELL_URL = "assets/audio/reminder-bell.mp3";
 
 let current: HTMLAudioElement | null = null;
@@ -15,7 +17,7 @@ export async function playReminderSound(soundEnabled: boolean): Promise<boolean>
       current.pause();
       current = null;
     }
-    const audio = new Audio(chrome.runtime.getURL(BELL_URL));
+    const audio = new Audio(ext.runtime.getURL(BELL_URL));
     audio.loop = false;
     audio.volume = 0.7;
     current = audio;

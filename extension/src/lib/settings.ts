@@ -1,4 +1,5 @@
-// User preferences. Stored in chrome.storage.local; no account, no backend.
+// User preferences. Stored in the browser's local extension storage; no account, no backend.
+import { ext } from "./ext.ts";
 
 export type IntervalPreset = 30 | 60 | 120;
 /** Compact: illustration + reminder. Expanded: the same, with an optional reflection behind a chevron. */
@@ -100,26 +101,26 @@ export function isTime(v: unknown): v is string {
 }
 
 export async function loadSettings(): Promise<Settings> {
-  const got = await chrome.storage.local.get(SETTINGS_KEY);
+  const got = await ext.storage.local.get(SETTINGS_KEY);
   return sanitize(got[SETTINGS_KEY]);
 }
 
 export async function saveSettings(patch: Partial<Settings>): Promise<Settings> {
   const current = await loadSettings();
   const next = sanitize({ ...current, ...patch });
-  await chrome.storage.local.set({ [SETTINGS_KEY]: next });
+  await ext.storage.local.set({ [SETTINGS_KEY]: next });
   return next;
 }
 
 export async function loadState(): Promise<RuntimeState> {
-  const got = await chrome.storage.local.get(STATE_KEY);
+  const got = await ext.storage.local.get(STATE_KEY);
   return { ...DEFAULT_STATE, ...((got[STATE_KEY] as Partial<RuntimeState>) ?? {}) };
 }
 
 export async function saveState(patch: Partial<RuntimeState>): Promise<RuntimeState> {
   const current = await loadState();
   const next = { ...current, ...patch };
-  await chrome.storage.local.set({ [STATE_KEY]: next });
+  await ext.storage.local.set({ [STATE_KEY]: next });
   return next;
 }
 
@@ -128,8 +129,8 @@ export function onSettingsChanged(cb: (s: Settings) => void): () => void {
   const handler = (changes: Record<string, chrome.storage.StorageChange>, area: string) => {
     if (area === "local" && changes[SETTINGS_KEY]) cb(sanitize(changes[SETTINGS_KEY].newValue));
   };
-  chrome.storage.onChanged.addListener(handler);
-  return () => chrome.storage.onChanged.removeListener(handler);
+  ext.storage.onChanged.addListener(handler);
+  return () => ext.storage.onChanged.removeListener(handler);
 }
 
 export function onStateChanged(cb: (s: RuntimeState) => void): () => void {
@@ -138,6 +139,6 @@ export function onStateChanged(cb: (s: RuntimeState) => void): () => void {
       cb({ ...DEFAULT_STATE, ...((changes[STATE_KEY].newValue as Partial<RuntimeState>) ?? {}) });
     }
   };
-  chrome.storage.onChanged.addListener(handler);
-  return () => chrome.storage.onChanged.removeListener(handler);
+  ext.storage.onChanged.addListener(handler);
+  return () => ext.storage.onChanged.removeListener(handler);
 }

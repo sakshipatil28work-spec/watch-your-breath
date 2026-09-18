@@ -4,6 +4,7 @@
 
 import { getReminder, illustrationUrl } from "../lib/reminders.ts";
 import { playReminderSound } from "../lib/audio.ts";
+import { ext } from "../lib/ext.ts";
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 
@@ -38,9 +39,8 @@ let held = false; // hovered, focused, or expanded
 
 function close() {
   if (preview) return;
-  chrome.runtime.sendMessage({ type: "wyb:card-close" }, () => {
-    if (chrome.runtime.lastError) window.close();
-  });
+  // ask the background to remove the window; if nobody answers, close ourselves
+  ext.runtime.sendMessage({ type: "wyb:card-close" }).catch(() => window.close());
 }
 
 function arm() {
@@ -71,7 +71,7 @@ function fitWindow() {
   const box = card.getBoundingClientRect();
   const width = Math.ceil(box.width + 20);
   const height = Math.ceil(box.height + 20 + 40);
-  chrome.runtime.sendMessage({ type: "wyb:card-resize", width, height }, () => void chrome.runtime.lastError);
+  void ext.runtime.sendMessage({ type: "wyb:card-resize", width, height }).catch(() => undefined);
 }
 // once fonts and the illustration are in, so the measurement is honest
 Promise.all([document.fonts.ready, img.decode().catch(() => undefined)]).then(() => requestAnimationFrame(fitWindow));

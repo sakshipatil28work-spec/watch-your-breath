@@ -13,6 +13,7 @@ import {
 import { isQuiet, quietEndAfter, formatClock } from "../lib/schedule.ts";
 import { COPY } from "../lib/copy.ts";
 import { playReminderSound } from "../lib/audio.ts";
+import { ext } from "../lib/ext.ts";
 import { REMINDERS } from "../lib/reminders.ts";
 import { emblemHtml, gearSvg, arrowLeftSvg, bellSvg, playSvg, chevronDataUri } from "../ui/ink.ts";
 
@@ -35,7 +36,7 @@ $("open-settings").innerHTML = gearSvg();
 $("close-settings").innerHTML = arrowLeftSvg();
 $("bell-glyph").innerHTML = bellSvg();
 document.querySelector(".play-glyph")!.innerHTML = playSvg();
-$("version").textContent = COPY.settings.version(chrome.runtime.getManifest().version);
+$("version").textContent = COPY.settings.version(ext.runtime.getManifest().version);
 
 // ---------- controls (home + settings share the same settings) ----------
 const toggles = {
@@ -196,11 +197,14 @@ document.addEventListener("keydown", (e) => {
 const previewBtn = $("send-preview") as HTMLButtonElement;
 previewBtn.addEventListener("click", () => {
   previewBtn.disabled = true;
-  chrome.runtime.sendMessage({ type: "wyb:preview" }, (res?: { ok: boolean }) => {
-    const ok = !chrome.runtime.lastError && res?.ok;
-    flash($("preview-hint"), ok ? COPY.settings.previewSent : "Couldn't show it. Try once more.", !ok);
-    setTimeout(() => (previewBtn.disabled = false), 1200);
-  });
+  ext.runtime
+    .sendMessage({ type: "wyb:preview" })
+    .then((res?: { ok: boolean }) => Boolean(res?.ok))
+    .catch(() => false)
+    .then((ok) => {
+      flash($("preview-hint"), ok ? COPY.settings.previewSent : "Couldn't show it. Try once more.", !ok);
+      setTimeout(() => (previewBtn.disabled = false), 1200);
+    });
 });
 
 const playBtn = $("play-bell") as HTMLButtonElement;
@@ -212,12 +216,24 @@ playBtn.addEventListener("click", async () => {
 });
 
 $("open-chrome-settings").addEventListener("click", () => {
-  void chrome.tabs.create({ url: "chrome://settings/content/notifications" });
+  void ext.tabs.create({ url: "chrome://settings/content/notifications" });
 });
 
-// ---------- permission (only the fallback path needs it) ----------
+// ---------- permission (only the fallback path needs it; Chrome-only API) ----------
 async function checkPermission(): Promise<void> {
-  const level = await new Promise<string>((resolve) => chrome.notifications.getPermissionLevel(resolve));
+  const api = ext.notifications as { getPermissionLevel?: (cb: (level: string) => void) => unknown };
+  if (typeof api.getPermissionLevel !== "function") {
+    $("denied-note").hidden = true;
+    return;
+  }
+  const level = await new Promise<string>((resolve) => {
+    try {
+      const r = api.getPermissionLevel!(resolve);
+      if (r && typeof (r as Promise<string>).then === "function") void (r as Promise<string>).then(resolve);
+    } catch {
+      resolve("granted");
+    }
+  });
   $("denied-note").hidden = level !== "denied";
 }
 
@@ -228,12 +244,15 @@ async function boot() {
   render(s);
   showView("home");
   await checkPermission();
-  chrome.runtime.sendMessage({ type: "wyb:ensure" }, (fresh?: RuntimeState) => {
-    if (chrome.runtime.lastError || !fresh) return;
-    state = fresh;
-    renderStatus();
-    renderPreview(current);
-  });
+  ext.runtime
+    .sendMessage({ type: "wyb:ensure" })
+    .then((fresh?: RuntimeState) => {
+      if (!fresh) return;
+      state = fresh;
+      renderStatus();
+      renderPreview(current);
+    })
+    .catch(() => undefined);
 }
 
 onSettingsChanged((s) => render(s));

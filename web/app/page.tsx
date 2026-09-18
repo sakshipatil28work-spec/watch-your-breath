@@ -250,6 +250,16 @@ export default function Home() {
                 , switch on Developer mode, choose Load unpacked, and pick the built folder. The first-run screen opens on
                 its own.
               </p>
+              <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink-soft">
+                {SITE.browsers}{" "}
+                {SITE.firefoxAddonUrl ? (
+                  <a href={SITE.firefoxAddonUrl} className="underline underline-offset-[5px] decoration-[1.5px]">
+                    Get it for Firefox.
+                  </a>
+                ) : (
+                  <>The Firefox build comes from the same source.</>
+                )}
+              </p>
             </div>
           </div>
         </section>
