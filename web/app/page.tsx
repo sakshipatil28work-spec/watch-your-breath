@@ -84,9 +84,6 @@ export default function Home() {
                 {COPY.howItWorks}
               </ButtonLink>
             </div>
-            <p className="reveal mt-6 text-[0.9375rem] text-ink-soft" style={{ "--i": 4 } as React.CSSProperties}>
-              Free. No account. Nothing leaves your browser.
-            </p>
           </div>
         </section>
 
@@ -123,7 +120,8 @@ export default function Home() {
               </h2>
               <p className="mt-6 text-[1.0625rem] leading-relaxed max-w-[44ch]">
                 Click the icon, turn reminders on, choose how often. That is the whole interface. Quiet hours, the notification
-                layout and the bell live one tap deeper, and nothing is counted, scored or streaked. Try it here; it works.
+                layout and the bell live one tap deeper, and nothing is counted, scored or streaked. Free, with no account, and nothing leaves your browser. Try it
+                here.
               </p>
               <div className="mt-10">
                 <p className="font-display font-semibold text-[1.125rem] leading-tight">How a reminder arrives</p>
