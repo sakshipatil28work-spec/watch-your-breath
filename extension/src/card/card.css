@@ -178,7 +178,7 @@ body {
 }
 
 .card-x:active {
-  transform: scale(0.92);
+  transform: scale(0.96);
 }
 
 .card-x svg {
@@ -213,11 +213,11 @@ body {
 }
 
 .card-more:active {
-  transform: scale(0.92);
+  transform: scale(0.96);
 }
 
 .card-more[aria-expanded="true"]:active {
-  transform: rotate(180deg) scale(0.92);
+  transform: rotate(180deg) scale(0.96);
 }
 
 .card-more[aria-expanded="true"] {
@@ -236,9 +236,13 @@ body {
   border-top: 1px solid var(--ink-hair);
   gap: 10px;
   justify-items: start;
+  opacity: 0;
+  transform: translateY(-4px);
+  /* exit: softer and shorter than the entrance, and display waits for it */
   transition:
-    opacity 200ms var(--ease-out-strong),
-    transform 200ms var(--ease-out-strong);
+    opacity 150ms ease-out,
+    transform 150ms ease-out,
+    display 150ms allow-discrete;
 }
 
 .card[data-open="true"] .card-reflection {
@@ -282,7 +286,7 @@ body {
 }
 
 .card-close-button:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
 }
 
 /* ---------- the illustration's one slow motion ---------- */

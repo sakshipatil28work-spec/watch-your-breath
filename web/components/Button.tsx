@@ -4,7 +4,7 @@ import type { ComponentProps } from "react";
 type Variant = "primary" | "secondary" | "quiet";
 
 const base =
-  "inline-flex items-center justify-center gap-2 font-ui font-medium leading-none transition-[transform,background-color,color] duration-150 ease-out motion-safe:[@media(hover:hover)]:hover:-translate-y-px active:scale-[0.97] disabled:opacity-50 disabled:cursor-default disabled:hover:translate-y-0 disabled:active:scale-100 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-4";
+  "inline-flex items-center justify-center gap-2 font-ui font-medium leading-none transition-[transform,background-color,color] duration-150 ease-out motion-safe:[@media(hover:hover)]:hover:-translate-y-px active:scale-[0.96] disabled:opacity-50 disabled:cursor-default disabled:hover:translate-y-0 disabled:active:scale-100 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-4";
 
 const variants: Record<Variant, string> = {
   primary:

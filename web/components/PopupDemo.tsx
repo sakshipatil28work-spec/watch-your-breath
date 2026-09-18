@@ -68,7 +68,7 @@ export function PopupDemo() {
             type="button"
             onClick={() => setView("settings")}
             aria-label="Settings"
-            className="absolute right-2.5 top-2.5 grid place-items-center w-[30px] h-[30px] rounded-full text-ink-soft hover:text-ink motion-safe:[@media(hover:hover)]:hover:rotate-[22deg] active:scale-[0.94] transition-[color,transform] duration-[240ms] [&_svg]:w-5 [&_svg]:h-5"
+            className="absolute right-2.5 top-2.5 grid place-items-center w-[30px] h-[30px] rounded-full text-ink-soft hover:text-ink motion-safe:[@media(hover:hover)]:hover:rotate-[22deg] active:scale-[0.96] transition-[color,transform] duration-[240ms] [&_svg]:w-5 [&_svg]:h-5"
             dangerouslySetInnerHTML={{ __html: gearSvg() }}
           />
           <Image
@@ -195,7 +195,7 @@ export function PopupDemo() {
             <button
               type="button"
               onClick={() => layout === "expanded" && setReflectionOpen((o) => !o)}
-              className="block w-full text-left mt-1 rounded-[var(--radius-sticker-sm)] bg-clay p-2 origin-top-left"
+              className="block w-full text-left mt-1 rounded-[var(--radius-sticker)] bg-clay p-2 origin-top-left"
               aria-label={layout === "expanded" ? "Toggle the reflection in the preview" : "Reminder preview"}
             >
               <span className="block scale-[0.6] origin-top-left w-[166%]">

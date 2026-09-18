@@ -538,7 +538,7 @@ body {
 }
 
 .button:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
 }
 
 .button-secondary {
@@ -596,7 +596,7 @@ body {
 
 .gear-button:active,
 .back-button:active {
-  transform: scale(0.94);
+  transform: scale(0.96);
 }
 
 .gear-button .glyph,
@@ -734,7 +734,7 @@ body {
 /* the settings preview is the real card, in a frame */
 .card-preview {
   margin-top: 4px;
-  border-radius: var(--corner-sm);
+  border-radius: var(--corner);
   overflow: hidden;
   background: var(--clay);
   padding: 6px 0 2px;

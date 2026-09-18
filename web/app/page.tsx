@@ -135,7 +135,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex justify-center lg:justify-end lg:pt-2">
-              <div className="p-6 sm:p-10 bg-clay rounded-[var(--radius-sticker)]">
+              <div className="p-6 sm:p-10 bg-clay rounded-[var(--radius-sticker-lg)]">
                 <PopupDemo />
               </div>
             </div>
