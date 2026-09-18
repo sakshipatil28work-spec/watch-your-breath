@@ -36,7 +36,7 @@ export default function Home() {
         <nav aria-label="Primary" className="flex items-center gap-5 sm:gap-7">
           <a
             href="#how-it-works"
-            className="hidden sm:inline text-[0.9375rem] whitespace-nowrap underline-offset-[6px] decoration-[1.5px] decoration-rust hover:underline"
+            className="hidden sm:inline text-[0.9375rem] whitespace-nowrap underline underline-offset-[6px] decoration-[1.5px] decoration-ink-faint hover:decoration-rust transition-colors duration-150"
           >
             {COPY.howItWorks}
           </a>
@@ -78,7 +78,7 @@ export default function Home() {
             >
               {SITE.tagline}
             </p>
-            <div className="reveal mt-7 flex flex-wrap items-center gap-4" style={{ "--i": 3 } as React.CSSProperties}>
+            <div className="reveal mt-7 flex flex-wrap items-center gap-x-6 gap-y-3" style={{ "--i": 3 } as React.CSSProperties}>
               <AddToBrowser />
               <ButtonLink href="#how-it-works" variant="quiet">
                 {COPY.howItWorks}
@@ -199,7 +199,7 @@ export default function Home() {
                 <p className="font-script italic text-[1.5rem] sm:text-[1.75rem] leading-tight text-ink-soft mt-2">Just a moment.</p>
               </div>
             </div>
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
               <AddToBrowser />
               <ButtonLink href="#how-it-works" variant="quiet">
                 {COPY.howItWorks}
