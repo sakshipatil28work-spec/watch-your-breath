@@ -1,6 +1,6 @@
 ---
 name: Watch Your Breath
-description: A gentle reminder to notice the breath you're already breathing.
+description: A gentle reminder to notice the breath that's already happening.
 colors:
   cream: "#f3e8d2"
   paper: "#f9f2e4"

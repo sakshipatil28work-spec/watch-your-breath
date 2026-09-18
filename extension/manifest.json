@@ -3,7 +3,7 @@
   "name": "Watch Your Breath",
   "short_name": "Watch Your Breath",
   "version": "0.1.0",
-  "description": "A gentle reminder to notice the breath you're already breathing.",
+  "description": "A gentle reminder to notice the breath that's already happening.",
   "minimum_chrome_version": "117",
   "permissions": [
     "alarms",

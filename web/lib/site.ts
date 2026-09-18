@@ -2,7 +2,7 @@
 
 export const SITE = {
   name: "Watch Your Breath",
-  tagline: "A gentle reminder to notice the breath you're already breathing.",
+  tagline: "A gentle reminder to notice the breath that's already happening.",
   /** what the bell is, for the site */
   bell: "A single soft bell, once per reminder.",
   url: "https://watchyourbreath.vercel.app",

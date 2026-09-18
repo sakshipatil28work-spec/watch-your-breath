@@ -1,6 +1,6 @@
 # Watch Your Breath
 
-A gentle reminder to notice the breath you're already breathing.
+A gentle reminder to notice the breath that's already happening.
 
 A browser extension (Manifest V3; Chrome, Edge, Brave, Opera, Arc, Vivaldi and Firefox) that, at an interval you choose, rings a soft bell and shows a small illustrated card with a different short reminder each time ("Watch your breath. / Just a moment.", "Nothing to change. / Just notice.", ...), and a one-page site that introduces it. No account, no backend, no tracking. It never tells you how to breathe.
 

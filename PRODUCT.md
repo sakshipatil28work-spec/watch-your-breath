@@ -57,7 +57,7 @@ Undecided: Chrome Web Store URL (not yet published). Firefox support (out of MVP
 
 ## Brand Commitments
 
-Name: Watch Your Breath. Tagline: "A gentle reminder to notice the breath you're already breathing."
+Name: Watch Your Breath. Tagline: "A gentle reminder to notice the breath that's already happening."
 
 Binding visual constraints volunteered by the user (recorded, not expanded here):
 - The illustrations: the author's own hand-drawn sticker (web/public/illustrations/hero.png) and their twelve-panel reminder sheet (illustrations/source/reminders-sheet.png). Binding instruction (2026-09-17): use only the author's illustrations; no generated drawings. Every raster in the product is a crop of one of these two files.

@@ -4,7 +4,7 @@ export const COPY = {
   name: "Watch Your Breath",
   phrase: "Watch your breath.",
   moment: "Just a moment.",
-  tagline: "A gentle reminder to notice the breath you're already breathing.",
+  tagline: "A gentle reminder to notice the breath that's already happening.",
   about: "Watch Your Breath is a small reminder to notice something that is already happening.",
 
   notification: {
@@ -14,7 +14,7 @@ export const COPY = {
 
   onboarding: {
     heading: "Watch your breath.",
-    sub: "A small reminder to notice the breath you're already breathing.",
+    sub: "A small reminder to notice the breath that's already happening.",
     frequency: "Reminder frequency",
     cta: "Start reminders",
     done: "You're set.",

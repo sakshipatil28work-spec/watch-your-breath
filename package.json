@@ -2,7 +2,7 @@
   "name": "watch-your-breath",
   "private": true,
   "version": "0.1.0",
-  "description": "A gentle reminder to notice the breath you're already breathing.",
+  "description": "A gentle reminder to notice the breath that's already happening.",
   "workspaces": [
     "illustrations",
     "extension",
