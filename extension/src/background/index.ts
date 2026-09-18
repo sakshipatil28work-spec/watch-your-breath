@@ -1,7 +1,7 @@
 // Background: schedules reminders with alarms and shows each one as a small
-// illustrated card (its own little window at the bottom right of the browser).
-// If a window cannot be opened, a system notification carries the same
-// reminder and the bell plays from here instead: through an offscreen document
+// illustrated card (its own little window at the bottom right of the browser)
+// while the browser is the app in front. Otherwise, or if a window cannot be
+// opened, a system notification carries the same reminder and the bell plays from here instead: through an offscreen document
 // in Chrome (a service worker has no audio), or directly in Firefox (whose
 // background page does).
 //
@@ -157,8 +157,23 @@ async function ringFromBackground(): Promise<void> {
   }
 }
 
+/**
+ * Is the browser the app in front? A card is a browser window; when the
+ * browser is not in front, Windows and macOS keep a new unfocused window
+ * behind the app in use, so nobody would see it. Then the system notification
+ * carries the reminder: it shows over everything.
+ */
+async function browserInFront(): Promise<boolean> {
+  try {
+    const w = await ext.windows.getLastFocused();
+    return w?.focused === true;
+  } catch {
+    return false;
+  }
+}
+
 async function show(r: Reminder, s: Settings): Promise<void> {
-  const ok = await showCard(r, s);
+  const ok = (await browserInFront()) && (await showCard(r, s));
   if (!ok) await showNotification(r, s);
 }
 
