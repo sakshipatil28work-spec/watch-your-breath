@@ -40,9 +40,7 @@ export function HeroArt({ className }: { className?: string }) {
         height={616}
         priority
         sizes="(min-width: 1024px) 58vw, 100vw"
-        // on large screens the art is sized by the viewport's height, so the
-        // tagline and the button stay above the fold on a 768px-tall laptop
-        className="w-full h-auto lg:w-auto lg:h-[min(54dvh,583px)] lg:max-w-full object-contain object-left"
+        className="w-full h-auto"
       />
     </div>
   );

@@ -94,13 +94,18 @@ function guideFor(browser: Browser): Guide {
  * offers that browser’s packaged build, and lights up briefly when arrived at
  * by link (see #install:target in globals.css), so the click is seen to land.
  */
-export function InstallNote() {
+export function InstallNote({ className }: { className?: string }) {
   const browser = useBrowser();
   const g = guideFor(browser);
   return (
     <div
       id="install"
-      className="install-note mt-16 lg:mt-20 scroll-mt-6 max-w-[62ch] bg-paper border-[1.5px] border-ink-hair rounded-[var(--radius-sticker)] px-6 py-6 sm:px-8 sm:py-7"
+      className={[
+        "install-note scroll-mt-6 max-w-[62ch] bg-paper border-[1.5px] border-ink-hair rounded-[var(--radius-sticker)] px-6 py-6 sm:px-8 sm:py-7",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
     >
       <h3 className="font-display font-semibold text-[1.375rem] leading-tight text-balance">{g.title}</h3>
       {g.download && (
