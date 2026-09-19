@@ -25,6 +25,9 @@ import { ext, isFirefox } from "../lib/ext.ts";
 
 const ALARM = "wyb:reminder";
 const NOTIFICATION_ID = "wyb:reminder";
+/** How long a reminder stays on screen before it clears itself. */
+const LINGER_MS = 12_000;
+let clearTimer: ReturnType<typeof setTimeout> | null = null;
 
 // ---------- scheduling ----------
 
@@ -59,8 +62,14 @@ async function nextReminder(): Promise<Reminder> {
 
 // ---------- showing ----------
 
-/** The reminder, as the system's own notification: illustration, words, and (separately) the bell. */
+/**
+ * The reminder, as the system's own notification: the round icon, the words,
+ * and in Chrome the drawing large on a sand panel beneath them. It is asked to
+ * stay (the system would hide it after a few seconds) and cleared by us after
+ * LINGER_MS, so it is seen without ever nagging. The bell plays separately.
+ */
 async function show(r: Reminder, s: Settings): Promise<void> {
+  if (clearTimer) clearTimeout(clearTimer);
   await ext.notifications.clear(NOTIFICATION_ID);
   const options: chrome.notifications.NotificationOptions<true> = {
     type: "basic",
@@ -70,11 +79,15 @@ async function show(r: Reminder, s: Settings): Promise<void> {
     message: s.layout === "expanded" && r.reflection ? `${r.supporting}\n${r.reflection}` : r.supporting,
   };
   if (!isFirefox) {
-    // Chrome-only options; Firefox rejects properties it does not know
+    // Chrome-only: the large picture, and the options Firefox would reject
+    options.type = "image";
+    options.imageUrl = illustrationUrl(r, "wide");
+    options.requireInteraction = true; // stays until we clear it below
     options.silent = true; // the bell is ours, not the system's
     options.priority = 0;
   }
   await ext.notifications.create(NOTIFICATION_ID, options);
+  clearTimer = setTimeout(() => void ext.notifications.clear(NOTIFICATION_ID), LINGER_MS);
   if (s.soundEnabled) await ring();
 }
 

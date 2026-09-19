@@ -169,6 +169,13 @@ for (let i = 0; i < IDS.length; i++) {
   const tight = await sharp(await keyed.png().toBuffer()).trim({ threshold: 12 }).png().toBuffer();
   const icon = await discIcon(tight);
   writeFileSync(join(EXT, `${id}-icon.png`), withProvenance(icon, `${note}; on a 192×192 warm-sand disc, fitted to the circle`));
+  // notification panel: the drawing large on a wide warm-sand field, for the
+  // picture the system shows under the words (Chrome "image" notifications)
+  const panel = await sharp({ create: { width: 728, height: 364, channels: 4, background: SAND } })
+    .composite([{ input: await sharp(tight).resize(600, 300, { fit: "inside" }).png().toBuffer(), gravity: "centre" }])
+    .png()
+    .toBuffer();
+  writeFileSync(join(EXT, `${id}-wide.png`), withProvenance(panel, `${note}; large on a 728×364 warm-sand panel`));
   sheetCells.push({ id, buf: trimmed, w: meta.width, h: meta.height });
   console.log(`${id}: ${meta.width}×${meta.height}`);
 }

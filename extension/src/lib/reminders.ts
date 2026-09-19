@@ -150,7 +150,13 @@ export function getReminder(id: string | null | undefined): Reminder {
   return REMINDERS.find((r) => r.id === id) ?? REMINDERS[0];
 }
 
-export function illustrationUrl(r: Reminder, variant: "card" | "icon" = "card"): string {
-  const file = variant === "icon" ? `${r.illustrationId}-icon.png` : `${r.illustrationId}.png`;
+/**
+ * "icon": the round 192px disc (the notification's icon, the popup preview).
+ * "wide": the 728×364 sand panel (the picture under the words).
+ * "card": the bare drawing on transparency (the site, the sheet).
+ */
+export function illustrationUrl(r: Reminder, variant: "card" | "icon" | "wide" = "card"): string {
+  const file =
+    variant === "icon" ? `${r.illustrationId}-icon.png` : variant === "wide" ? `${r.illustrationId}-wide.png` : `${r.illustrationId}.png`;
   return ext.runtime.getURL(`assets/illustrations/${file}`);
 }
