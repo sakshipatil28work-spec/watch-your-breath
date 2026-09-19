@@ -171,8 +171,12 @@ for (let i = 0; i < IDS.length; i++) {
   writeFileSync(join(EXT, `${id}-icon.png`), withProvenance(icon, `${note}; on a 192×192 warm-sand disc, fitted to the circle`));
   // notification panel: the drawing large on a wide warm-sand field, for the
   // picture the system shows under the words (Chrome "image" notifications)
+  // the words above it are set flush left, so the drawing starts at the same
+  // edge rather than floating in the middle of the sand
+  const drawing = await sharp(tight).resize(640, 316, { fit: "inside" }).png().toBuffer();
+  const dm = await sharp(drawing).metadata();
   const panel = await sharp({ create: { width: 728, height: 364, channels: 4, background: SAND } })
-    .composite([{ input: await sharp(tight).resize(600, 300, { fit: "inside" }).png().toBuffer(), gravity: "centre" }])
+    .composite([{ input: drawing, left: 40, top: Math.round((364 - dm.height) / 2) }])
     .png()
     .toBuffer();
   writeFileSync(join(EXT, `${id}-wide.png`), withProvenance(panel, `${note}; large on a 728×364 warm-sand panel`));
