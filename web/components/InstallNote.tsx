@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { ButtonLink } from "./Button";
 import { SITE } from "@/lib/site";
 import { useBrowser, type Browser } from "./AddToBrowser";
@@ -11,11 +12,36 @@ type Guide = {
   after: string;
 };
 
-const Code = ({ children }: { children: React.ReactNode }) => (
-  <code className="font-ui text-[0.95em] bg-cream px-1.5 py-0.5 rounded-[var(--radius-sticker-sm)] border border-ink-hair whitespace-nowrap">
-    {children}
-  </code>
-);
+/**
+ * A browser-internal address. Web pages are not allowed to open chrome://
+ * or about: addresses, so a link would do nothing; clicking this copies the
+ * address instead, ready to paste into the address bar.
+ */
+function Code({ children }: { children: string }) {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(children);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* clipboard refused: the address is still selectable */
+    }
+  };
+  return (
+    <button
+      type="button"
+      onClick={copy}
+      title="Copy the address"
+      className="inline-flex items-baseline gap-1.5 font-ui text-[0.95em] bg-cream px-1.5 py-0.5 rounded-[var(--radius-sticker-sm)] border border-ink-hair whitespace-nowrap cursor-copy transition-[background-color,transform] duration-150 [@media(hover:hover)]:hover:bg-paper active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
+    >
+      <code>{children}</code>
+      <span aria-live="polite" className={["text-[0.8em] text-ink-soft", copied ? "" : "sr-only"].join(" ")}>
+        {copied ? "Copied" : ""}
+      </span>
+    </button>
+  );
+}
 
 /** Hand-install steps for each browser; the extension is not in any store yet. */
 function guideFor(browser: Browser): Guide {
@@ -25,7 +51,8 @@ function guideFor(browser: Browser): Guide {
     steps: [
       <>Unzip the file you downloaded.</>,
       <>
-        Open <Code>{page}</Code> and switch on <strong className="font-medium">Developer mode</strong> (top right).
+        Paste <Code>{page}</Code> into the address bar (click it to copy) and switch on{" "}
+        <strong className="font-medium">Developer mode</strong> (top right).
       </>,
       <>
         Click <strong className="font-medium">Load unpacked</strong> and choose the unzipped folder.
@@ -44,7 +71,7 @@ function guideFor(browser: Browser): Guide {
         download: { label: "Download for Firefox", href: SITE.downloads.firefox },
         steps: [
           <>
-            Open <Code>about:debugging#/runtime/this-firefox</Code>.
+            Paste <Code>about:debugging#/runtime/this-firefox</Code> into the address bar (click it to copy).
           </>,
           <>
             Click <strong className="font-medium">Load Temporary Add-on</strong> and choose the file you downloaded.
