@@ -35,7 +35,7 @@ export function Toggle({ checked, onChange, labelledBy, describedBy, className }
       >
         <span
           className={[
-            "absolute left-[2px] top-[2px] h-[17px] w-[17px] transition-[transform,background-color] duration-250 motion-safe-only",
+            "absolute left-[2px] top-[2px] h-[17px] w-[17px] transition-[transform,background-color] duration-[220ms] motion-safe-only",
             "rounded-[62%_38%_55%_45%_/_45%_55%_40%_60%]",
             checked ? "translate-x-[18px] rotate-[12deg] bg-rust" : "",
           ].join(" ")}

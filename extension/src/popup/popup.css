@@ -424,8 +424,10 @@ body {
   font-weight: 500;
 }
 
-.toggle:hover .toggle-track {
-  box-shadow: 0 0 0 3px var(--paper-edge);
+@media (hover: hover) and (pointer: fine) {
+  .toggle:hover .toggle-track {
+    box-shadow: 0 0 0 3px var(--paper-edge);
+  }
 }
 
 /* select & inputs: a written line, not a box */
@@ -463,9 +465,11 @@ body {
   text-align: left;
 }
 
-.select:hover,
-.input:hover {
-  border-bottom-color: var(--rust);
+@media (hover: hover) and (pointer: fine) {
+  .select:hover,
+  .input:hover {
+    border-bottom-color: var(--rust);
+  }
 }
 
 .select:focus-visible,
@@ -587,9 +591,11 @@ body {
   border-color: var(--ink);
 }
 
-.button-secondary:hover {
-  background: var(--paper-edge);
-  border-color: var(--ink);
+@media (hover: hover) and (pointer: fine) {
+  .button-secondary:hover {
+    background: var(--paper-edge);
+    border-color: var(--ink);
+  }
 }
 
 .button[disabled] {
@@ -947,6 +953,16 @@ body.onboarding .phrase {
 
 .onboarding-done {
   text-align: center;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 240ms var(--ease-out-strong),
+    transform 240ms var(--ease-out-strong);
+
+  @starting-style {
+    opacity: 0;
+    transform: translateY(6px);
+  }
 }
 
 .onboarding-done .emblem {
@@ -971,6 +987,11 @@ body.onboarding .phrase {
   .view-home .rows > .row,
   .view-home .status {
     animation: none !important;
+  }
+
+  .onboarding-done {
+    transition: opacity 200ms ease-out;
+    transform: none;
   }
 
   .emblem.is-active .emblem-ring {

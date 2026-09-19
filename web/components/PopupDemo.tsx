@@ -68,7 +68,7 @@ export function PopupDemo() {
             type="button"
             onClick={() => setView("settings")}
             aria-label="Settings"
-            className="absolute right-2.5 top-2.5 grid place-items-center w-[30px] h-[30px] rounded-full text-ink-soft hover:text-ink motion-safe:[@media(hover:hover)]:hover:rotate-[22deg] active:scale-[0.96] transition-[color,transform] duration-[240ms] [&_svg]:w-5 [&_svg]:h-5"
+            className="absolute right-2.5 top-2.5 grid place-items-center w-[30px] h-[30px] rounded-full text-ink-soft [@media(hover:hover)]:hover:text-ink motion-safe:[@media(hover:hover)]:hover:rotate-[22deg] active:scale-[0.96] transition-[color,transform] duration-[240ms] [&_svg]:w-5 [&_svg]:h-5"
             dangerouslySetInnerHTML={{ __html: gearSvg() }}
           />
           <Image
@@ -77,7 +77,7 @@ export function PopupDemo() {
             width={1000}
             height={530}
             className={[
-              "w-full h-auto mt-0.5 transition-opacity duration-300",
+              "w-full h-auto mt-0.5 transition-opacity duration-[240ms]",
               enabled ? "emblem-breath" : "opacity-40",
             ].join(" ")}
             style={{ transformOrigin: "25% 51%" }}
@@ -143,7 +143,7 @@ export function PopupDemo() {
               type="button"
               onClick={() => setView("home")}
               aria-label="Back"
-              className="grid place-items-center w-[30px] h-[30px] rounded-full text-ink-soft hover:text-ink [&_svg]:w-5 [&_svg]:h-5"
+              className="grid place-items-center w-[30px] h-[30px] rounded-full text-ink-soft [@media(hover:hover)]:hover:text-ink active:scale-[0.96] transition-[color,transform] duration-150 [&_svg]:w-5 [&_svg]:h-5"
               dangerouslySetInnerHTML={{ __html: arrowLeftSvg() }}
             />
             <h3 className="font-display font-semibold text-[22px] leading-none">Settings</h3>
