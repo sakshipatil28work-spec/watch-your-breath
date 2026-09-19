@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { HeroArt, heroExists } from "@/illustrations/HeroArt";
-import { Flow } from "@/illustrations/Flow";
 import { Emblem } from "@/illustrations/Emblem";
 import { AddToBrowser } from "@/components/AddToBrowser";
 import { InstallNote } from "@/components/InstallNote";
@@ -88,8 +87,7 @@ export default function Home() {
         </section>
 
         {/* ---------- how it works ---------- */}
-        <section id="how-it-works" aria-labelledby="how-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 pt-4 pb-14 lg:pb-18 scroll-mt-10">
-          <Flow className="w-[62%] sm:w-[44%] lg:w-[36%] -mt-10 lg:-mt-16 mb-10 lg:mb-14" />
+        <section id="how-it-works" aria-labelledby="how-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 pt-14 lg:pt-18 pb-14 lg:pb-18 scroll-mt-10">
           <h2 id="how-title" className="font-display font-bold text-[2.25rem] sm:text-[3rem] leading-none tracking-[-0.01em]">
             How it works.
           </h2>
@@ -176,7 +174,6 @@ export default function Home() {
           <h2 id="phil-title" className="sr-only">
             What this is, and is not
           </h2>
-          <Flow className="w-[58%] sm:w-[40%] lg:w-[30%] ml-auto -mt-8 lg:-mt-14 mb-8 lg:mb-10" flip />
           <div className="grid gap-3 sm:gap-2 font-display font-bold leading-[1.05] tracking-[-0.015em] text-[2.2rem] min-[420px]:text-[2.6rem] sm:text-[4rem] lg:text-[5.5rem]">
             <p className="sm:pl-0">{COPY.philosophy[0]}</p>
             <p className="sm:pl-[12%] lg:pl-[16%] text-rust">{COPY.philosophy[1]}</p>
