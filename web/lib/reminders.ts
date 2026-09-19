@@ -142,4 +142,6 @@ export const REMINDERS: readonly Reminder[] = [
   },
 ];
 
-export const illustrationSrc = (r: Reminder) => `/illustrations/reminders/${r.illustrationId}.png`;
+/** "card": the bare drawing. "icon": the round sand disc. "wide": the sand panel under the notification's words. */
+export const illustrationSrc = (r: Reminder, variant: "card" | "icon" | "wide" = "card") =>
+  `/illustrations/reminders/${r.illustrationId}${variant === "card" ? "" : `-${variant}`}.png`;

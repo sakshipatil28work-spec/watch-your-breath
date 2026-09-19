@@ -180,6 +180,8 @@ for (let i = 0; i < IDS.length; i++) {
     .png()
     .toBuffer();
   writeFileSync(join(EXT, `${id}-wide.png`), withProvenance(panel, `${note}; large on a 728×364 warm-sand panel`));
+  writeFileSync(join(WEB, `${id}-wide.png`), withProvenance(panel, `${note}; large on a 728×364 warm-sand panel`));
+  writeFileSync(join(WEB, `${id}-icon.png`), withProvenance(icon, `${note}; on a 192×192 warm-sand disc, fitted to the circle`));
   sheetCells.push({ id, buf: trimmed, w: meta.width, h: meta.height });
   console.log(`${id}: ${meta.width}×${meta.height}`);
 }

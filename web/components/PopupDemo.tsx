@@ -8,7 +8,7 @@ import { Toggle } from "./Toggle";
 import { Select } from "./Select";
 import { FrequencySelector, type Frequency } from "./FrequencySelector";
 import { SettingsSection } from "./SettingsSection";
-import { NotificationPreview, type NotificationLayout } from "./NotificationPreview";
+import { NoticePreview, type NotificationLayout } from "./NotificationPreview";
 import { Button } from "./Button";
 
 function subscribeMinute(onChange: () => void) {
@@ -38,7 +38,6 @@ export function PopupDemo() {
   const [quietEnd, setQuietEnd] = useState("07:00");
   const [layout, setLayout] = useState<NotificationLayout>("compact");
   const [sound, setSound] = useState(true);
-  const [reflectionOpen, setReflectionOpen] = useState(false);
 
   // a minute clock as an external store, so rendering stays pure and the server render has no time
   const nowMs = useSyncExternalStore(subscribeMinute, minuteSnapshot, () => null);
@@ -192,16 +191,10 @@ export function PopupDemo() {
                 </label>
               ))}
             </fieldset>
-            <button
-              type="button"
-              onClick={() => layout === "expanded" && setReflectionOpen((o) => !o)}
-              className="block w-full text-left mt-1 rounded-[var(--radius-sticker)] bg-clay p-2 origin-top-left"
-              aria-label={layout === "expanded" ? "Toggle the reflection in the preview" : "Reminder preview"}
-            >
-              <span className="block scale-[0.6] origin-top-left w-[166%]">
-                <NotificationPreview reminder={REMINDERS[6]} layout={layout} open={layout === "expanded" && reflectionOpen} />
-              </span>
-            </button>
+            <p className="text-[0.78rem] leading-snug text-ink-soft">
+              Reminders arrive as your system’s notifications, at the corner of the screen. The next one reads:
+            </p>
+            <NoticePreview reminder={REMINDERS[6]} layout={layout} />
           </SettingsSection>
 
           <SettingsSection title="Sound" id="demo-s-sound">
