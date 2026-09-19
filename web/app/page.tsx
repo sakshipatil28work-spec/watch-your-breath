@@ -4,9 +4,7 @@ import { Emblem } from "@/illustrations/Emblem";
 import { AddToBrowser } from "@/components/AddToBrowser";
 import { InstallNote } from "@/components/InstallNote";
 import { PopupDemo } from "@/components/PopupDemo";
-import { NotificationPreview } from "@/components/NotificationPreview";
 import { COPY, SITE } from "@/lib/site";
-import { REMINDERS } from "@/lib/reminders";
 
 
 export default function Home() {
@@ -85,21 +83,10 @@ export default function Home() {
                 Click the icon, turn reminders on, choose how often. That is the whole interface. Quiet hours, the notification
                 layout and the bell live one tap deeper, and nothing is counted, scored or streaked. Free, with no account, and nothing leaves your browser.
               </p>
-              <div className="mt-10">
-                <p className="font-display font-semibold text-[1.125rem] leading-tight">How a reminder arrives</p>
-                <p className="mt-1 text-[0.9375rem] text-ink-soft max-w-[40ch] text-pretty">
-                  A soft bell, then a notification at the corner of your screen: the drawing and a few words. It leaves
-                  on its own.
-                </p>
-                <NotificationPreview reminder={REMINDERS[1]} className="mt-4" />
-              </div>
             </div>
             <div className="flex justify-center lg:justify-end lg:pt-2">
-              <div className="grid gap-3 justify-items-center">
-                <div className="p-6 sm:p-10 bg-clay rounded-[var(--radius-sticker-lg)]">
-                  <PopupDemo />
-                </div>
-                <p className="text-[0.9375rem] text-ink-soft">This one works. Try it.</p>
+              <div className="p-6 sm:p-10 bg-clay rounded-[var(--radius-sticker-lg)]">
+                <PopupDemo />
               </div>
             </div>
           </div>
