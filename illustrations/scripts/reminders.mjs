@@ -171,8 +171,9 @@ for (let i = 0; i < IDS.length; i++) {
   writeFileSync(join(EXT, `${id}-icon.png`), withProvenance(icon, `${note}; on a 192×192 warm-sand disc, fitted to the circle`));
   // notification panel: the drawing large on a wide warm-sand field, for the
   // picture the system shows under the words (Chrome "image" notifications)
-  // the drawing large and centred on the sand
-  const drawing = await sharp(tight).resize(640, 316, { fit: "inside" }).png().toBuffer();
+  // the drawing large and centred on the sand, with equal air above and below
+  // (the system crops a few pixels off the panel's edges, so the ink stays clear of them)
+  const drawing = await sharp(tight).resize(600, 276, { fit: "inside" }).png().toBuffer();
   const panel = await sharp({ create: { width: 728, height: 364, channels: 4, background: SAND } })
     .composite([{ input: drawing, gravity: "centre" }])
     .png()
