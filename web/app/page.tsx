@@ -3,14 +3,11 @@ import { HeroArt, heroExists } from "@/illustrations/HeroArt";
 import { Emblem } from "@/illustrations/Emblem";
 import { AddToBrowser } from "@/components/AddToBrowser";
 import { InstallNote } from "@/components/InstallNote";
-import { ButtonLink } from "@/components/Button";
 import { PopupDemo } from "@/components/PopupDemo";
 import { NotificationPreview } from "@/components/NotificationPreview";
 import { COPY, SITE } from "@/lib/site";
-import { REMINDERS, illustrationSrc } from "@/lib/reminders";
+import { REMINDERS } from "@/lib/reminders";
 
-// the twelve sit a touch askew, like stickers on a sheet; never more than a degree and a half
-const TILTS = [-1.4, 1.1, -0.7, 1.5, 0.9, -1.2, 1.3, -0.6, -1.5, 0.8, 1.2, -1.0];
 
 export default function Home() {
   const heroIsRaster = heroExists();
@@ -33,12 +30,6 @@ export default function Home() {
           <span>Watch Your Breath</span>
         </a>
         <nav aria-label="Primary" className="flex items-center gap-5 sm:gap-7">
-          <a
-            href="#how-it-works"
-            className="hidden sm:inline text-[0.9375rem] whitespace-nowrap underline underline-offset-[6px] decoration-[1.5px] decoration-ink-faint hover:decoration-rust transition-colors duration-150"
-          >
-            {COPY.howItWorks}
-          </a>
           <AddToBrowser
             variant="secondary"
             className="px-3.5 sm:px-4 py-2.5 text-[0.875rem] sm:text-[0.9375rem] whitespace-nowrap"
@@ -79,34 +70,8 @@ export default function Home() {
             </p>
             <div className="reveal mt-7 flex flex-wrap items-center gap-x-6 gap-y-3" style={{ "--i": 3 } as React.CSSProperties}>
               <AddToBrowser />
-              <ButtonLink href="#how-it-works" variant="quiet">
-                {COPY.howItWorks}
-              </ButtonLink>
             </div>
           </div>
-        </section>
-
-        {/* ---------- how it works ---------- */}
-        <section id="how-it-works" aria-labelledby="how-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 pt-14 lg:pt-18 pb-14 lg:pb-18 scroll-mt-10">
-          <h2 id="how-title" className="font-display font-bold text-[2.25rem] sm:text-[3rem] leading-none tracking-[-0.01em]">
-            How it works.
-          </h2>
-          <ol className="mt-12 lg:mt-16 grid gap-12 md:grid-cols-3 md:gap-10 list-none p-0 m-0">
-            {COPY.steps.map((step) => (
-              <li key={step.number} className="grid content-start gap-3">
-                <span
-                  className="font-display font-semibold text-[3.5rem] sm:text-[4.5rem] leading-[0.9] text-ochre tabular-nums"
-                  aria-hidden="true"
-                >
-                  {step.number}
-                </span>
-                <h3 className="font-display font-bold text-[1.75rem] leading-none uppercase tracking-[0.01em] mt-3">
-                  {step.title}
-                </h3>
-                <p className="max-w-[30ch] text-[1.0625rem] leading-relaxed text-pretty">{step.body}</p>
-              </li>
-            ))}
-          </ol>
         </section>
 
         {/* ---------- in your toolbar ---------- */}
@@ -138,37 +103,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ---------- the twelve reminders ---------- */}
-        <section aria-labelledby="twelve-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 py-14 lg:py-18">
-          <h2 id="twelve-title" className="font-display font-bold text-[2.25rem] sm:text-[3rem] leading-[1.08] tracking-[-0.01em] text-balance">
-            A different small thought each time.
-          </h2>
-          <p className="mt-5 max-w-[58ch] text-[1.125rem] sm:text-[1.25rem] leading-[1.5] text-pretty">
-            Twelve reminders, each drawn with its own words. They take turns: never the same one twice, and all twelve
-            before any repeats.
-          </p>
-          <ol className="mt-12 grid gap-x-8 gap-y-12 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 list-none p-0 m-0">
-            {REMINDERS.map((r, i) => (
-              <li key={r.id} className="grid content-start justify-items-center text-center gap-3">
-                <span
-                  className="tilt grid place-items-end w-full h-[150px] md:h-[170px]"
-                  style={{ "--tilt": `${TILTS[i % TILTS.length]}deg` } as React.CSSProperties}
-                >
-                  <Image
-                    src={illustrationSrc(r)}
-                    alt={r.alt}
-                    width={320}
-                    height={280}
-                    className="w-full max-w-[200px] max-h-full h-auto object-contain object-bottom justify-self-center"
-                  />
-                </span>
-                <span className="font-display font-bold text-[1.25rem] leading-[1.15] text-balance mt-1">{r.title}</span>
-                <span className="font-script italic text-[1.0625rem] leading-tight text-ink-soft -mt-2">{r.supporting}</span>
-              </li>
-            ))}
-          </ol>
-        </section>
-
         {/* ---------- philosophy ---------- */}
         <section aria-labelledby="phil-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 py-16 lg:py-24 relative">
           <h2 id="phil-title" className="sr-only">
@@ -198,9 +132,6 @@ export default function Home() {
             </div>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
               <AddToBrowser />
-              <ButtonLink href="#how-it-works" variant="quiet">
-                {COPY.howItWorks}
-              </ButtonLink>
             </div>
           </div>
 
