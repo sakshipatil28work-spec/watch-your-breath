@@ -21,6 +21,15 @@
         ],
         "createdAt": "2026-09-17T13:47:43.488Z",
         "reason": "user pinned: brief section 14 names Warm Sand #F3E8D2 as the background"
+      },
+      {
+        "rule": "tight-leading",
+        "value": "*",
+        "files": [
+          "extension/src/popup/onboarding.html"
+        ],
+        "createdAt": "2026-09-19T12:39:30.467Z",
+        "reason": "the 1.1-1.25 values belong to one-line headings (.phrase, the group and notice titles); body, hints and radio text are 1.3-1.5"
       }
     ]
   }
