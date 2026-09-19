@@ -26,22 +26,23 @@
               <option value="custom">Custom</option>
             </select>
           </div>
-          <div class="row row-custom row-stack" id="row-custom" hidden>
-            <div class="row">
-              <label class="row-label sr-only" for="input-custom">Custom minutes</label>
-              <span class="field-suffix">
-                <input class="input" id="input-custom" type="number" inputmode="numeric" min="5" max="720" step="5" value="45" aria-describedby="hint-custom" />
-                <span>minutes</span>
-              </span>
-            </div>
-            <p class="hint hint-right" id="hint-custom">Between 5 minutes and 12 hours.</p>
+          <div class="row-custom" id="row-custom" hidden>
+            <label class="row-label" for="input-custom">Every</label>
+            <span class="field-suffix">
+              <input class="input" id="input-custom" type="number" inputmode="numeric" min="5" max="720" step="5" value="45" aria-describedby="hint-custom" />
+              <span>minutes</span>
+            </span>
+            <p class="hint" id="hint-custom">Between 5 minutes and 12 hours.</p>
           </div>
 
-          <fieldset class="radios radios-row">
-            <legend class="row-label">Notification style</legend>
-            <label class="radio"><input type="radio" name="layout" value="compact" checked /><span class="radio-mark" aria-hidden="true"></span><span>Compact</span></label>
-            <label class="radio"><input type="radio" name="layout" value="expanded" /><span class="radio-mark" aria-hidden="true"></span><span>Expanded</span></label>
-          </fieldset>
+          <div class="row-stack">
+            <fieldset class="radios radios-row" aria-describedby="hint-layout">
+              <legend class="row-label">Notification style</legend>
+              <label class="radio"><input type="radio" name="layout" value="compact" checked /><span class="radio-mark" aria-hidden="true"></span><span>Compact</span></label>
+              <label class="radio"><input type="radio" name="layout" value="expanded" /><span class="radio-mark" aria-hidden="true"></span><span>Expanded</span></label>
+            </fieldset>
+            <p class="hint" id="hint-layout">Expanded adds a short reflection to each reminder.</p>
+          </div>
 
           <fieldset class="radios radios-row">
             <legend class="row-label">Reminder sound</legend>

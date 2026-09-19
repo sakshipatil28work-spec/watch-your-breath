@@ -306,6 +306,22 @@ body {
   gap: 4px;
 }
 
+/* "Every [ 45 ] minutes": the control sits on the same trailing edge as every
+   other control, the hint beneath it on that edge */
+.row-custom {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 12px;
+  row-gap: 4px;
+  min-height: 28px;
+}
+
+.row-custom .hint {
+  grid-column: 2;
+  text-align: end;
+}
+
 .row-label {
   font-weight: 500;
   color: var(--ink);
@@ -450,6 +466,13 @@ body {
 .select:hover,
 .input:hover {
   border-bottom-color: var(--rust);
+}
+
+.select:focus-visible,
+.input:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
 .input {
@@ -673,6 +696,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  min-height: 28px;
   cursor: pointer;
 }
 
@@ -871,8 +895,26 @@ body.onboarding {
 }
 
 body.onboarding .sticker {
-  width: min(100%, 420px);
+  width: min(100%, 440px);
   padding: 32px 32px 28px;
+}
+
+body.onboarding .row-label,
+body.onboarding .radio,
+body.onboarding .select,
+body.onboarding .input,
+body.onboarding .field-suffix {
+  font-size: 15px;
+}
+
+body.onboarding .hint {
+  font-size: 13px;
+}
+
+body.onboarding .row,
+body.onboarding .row-custom,
+body.onboarding .radios-row {
+  min-height: 32px;
 }
 
 body.onboarding .phrase {
@@ -884,7 +926,7 @@ body.onboarding .phrase {
   max-width: 30ch;
   text-align: center;
   color: var(--ink-soft);
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .onboarding-form {
@@ -898,8 +940,8 @@ body.onboarding .phrase {
 }
 
 .onboarding-form .button {
-  font-size: 15px;
-  padding: 11px 18px;
+  font-size: 16px;
+  padding: 12px 18px;
   margin-top: 4px;
 }
 
