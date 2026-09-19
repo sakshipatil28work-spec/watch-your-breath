@@ -35,24 +35,6 @@ export const COPY = {
     firefox: "Add to Firefox",
     other: "Get the extension",
   },
-  howItWorks: "How it works",
-  steps: [
-    {
-      number: "01",
-      title: "Set it",
-      body: "Choose how often you’d like to be reminded.",
-    },
-    {
-      number: "02",
-      title: "Forget it",
-      body: "Go about your work, browsing, reading or creating.",
-    },
-    {
-      number: "03",
-      title: "Notice it",
-      body: "A soft bell, a small drawing, a few words. Notice your breath for a moment. Then continue.",
-    },
-  ],
   philosophy: ["Nothing to fix.", "Nothing to achieve.", "Simply notice."],
   philosophyBody:
     "This isn’t a practice. There’s no technique, no timer, no score. The breath is already here. The reminder only points at it, then gets out of the way.",

@@ -20,7 +20,7 @@ const Code = ({ children }: { children: React.ReactNode }) => (
 /** Hand-install steps for each browser; the extension is not in any store yet. */
 function guideFor(browser: Browser): Guide {
   const chromeLike = (name: string, page: string): Guide => ({
-    title: `Not in the ${name} store yet. Two minutes by hand:`,
+    title: `Not in the ${name} store yet. Two minutes to set up:`,
     download: { label: `Download for ${name}`, href: SITE.downloads.chrome },
     steps: [
       <>Unzip the file you downloaded.</>,
@@ -40,7 +40,7 @@ function guideFor(browser: Browser): Guide {
       return chromeLike("Edge", "edge://extensions");
     case "firefox":
       return {
-        title: "Not on Firefox Add-ons yet. One minute by hand:",
+        title: "Not on Firefox Add-ons yet. One minute to try it:",
         download: { label: "Download for Firefox", href: SITE.downloads.firefox },
         steps: [
           <>

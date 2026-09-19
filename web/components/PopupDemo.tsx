@@ -186,7 +186,7 @@ export function PopupDemo() {
                   <span className="grid leading-tight">
                     <span>{s === "compact" ? "Compact" : "Expanded"}</span>
                     <small className="text-[0.75rem] text-ink-soft">
-                      {s === "compact" ? "Illustration and a short reminder" : "Illustration, reminder and an optional reflection"}
+                      {s === "compact" ? "The drawing and a short reminder" : "The drawing, the reminder and a short reflection"}
                     </small>
                   </span>
                 </label>

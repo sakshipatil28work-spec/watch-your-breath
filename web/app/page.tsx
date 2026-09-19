@@ -83,8 +83,7 @@ export default function Home() {
               </h2>
               <p className="mt-5 text-[1.125rem] sm:text-[1.25rem] leading-[1.5] max-w-[46ch] text-pretty">
                 Click the icon, turn reminders on, choose how often. That is the whole interface. Quiet hours, the notification
-                layout and the bell live one tap deeper, and nothing is counted, scored or streaked. Free, with no account, and nothing leaves your browser. Try it
-                here.
+                layout and the bell live one tap deeper, and nothing is counted, scored or streaked. Free, with no account, and nothing leaves your browser.
               </p>
               <div className="mt-10">
                 <p className="font-display font-semibold text-[1.125rem] leading-tight">How a reminder arrives</p>
@@ -96,8 +95,11 @@ export default function Home() {
               </div>
             </div>
             <div className="flex justify-center lg:justify-end lg:pt-2">
-              <div className="p-6 sm:p-10 bg-clay rounded-[var(--radius-sticker-lg)]">
-                <PopupDemo />
+              <div className="grid gap-3 justify-items-center">
+                <div className="p-6 sm:p-10 bg-clay rounded-[var(--radius-sticker-lg)]">
+                  <PopupDemo />
+                </div>
+                <p className="text-[0.9375rem] text-ink-soft">This one works. Try it.</p>
               </div>
             </div>
           </div>

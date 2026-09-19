@@ -203,7 +203,7 @@ previewBtn.addEventListener("click", () => {
     .then((res?: { ok: boolean }) => Boolean(res?.ok))
     .catch(() => false)
     .then((ok) => {
-      flash($("preview-hint"), ok ? COPY.settings.previewSent : "Couldn’t show it. Try once more.", !ok);
+      flash($("preview-hint"), ok ? COPY.settings.previewSent : "Couldn’t show the reminder. Try once more.", !ok);
       setTimeout(() => (previewBtn.disabled = false), 1200);
     });
 });

@@ -53,7 +53,7 @@ export const COPY = {
     expanded: "Expanded",
     preview: "Send one now",
     previewHint: "Shows it right away, so you can see how one arrives.",
-    previewSent: "Sent. It will close on its own.",
+    previewSent: "Sent. It leaves on its own after a few seconds.",
     sound: "Reminder sound",
     playBell: "Play bell",
     bellHint: "A single soft bell. It plays once with each reminder.",
@@ -63,8 +63,8 @@ export const COPY = {
   },
 
   denied: {
-    body: "Chrome is set to block notifications from this extension, so reminders cannot be shown. To allow them, open Chrome’s notification settings and switch Watch Your Breath on.",
-    open: "Open Chrome settings",
+    body: "Your browser is set to block notifications from this extension, so reminders cannot be shown. To allow them, open its notification settings and switch Watch Your Breath on.",
+    open: "Open browser settings",
   },
 
   freq: {
