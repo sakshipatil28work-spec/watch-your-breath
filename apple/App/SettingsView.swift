@@ -43,6 +43,7 @@ struct SettingsView: View {
             .frame(maxWidth: .infinity)
         }
         .scrollBounceBehavior(.basedOnSize)
+        .background(Palette.clay.ignoresSafeArea()) // the navigation stack paints its own white otherwise
         #if os(iOS)
         .toolbar(.hidden, for: .navigationBar)
         #endif

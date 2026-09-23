@@ -55,6 +55,7 @@ struct HomeView: View {
             .frame(maxWidth: .infinity)
         }
         .scrollBounceBehavior(.basedOnSize)
+        .background(Palette.clay.ignoresSafeArea()) // the navigation stack paints its own white otherwise
         .navigationDestination(isPresented: $model.settingsOpen) { SettingsView() }
         #if os(iOS)
         .toolbar(.hidden, for: .navigationBar)
