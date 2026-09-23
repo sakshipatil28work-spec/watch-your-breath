@@ -1,0 +1,180 @@
+# Watch Your Breath for iPhone, iPad and Mac, with its Safari extension.
+# XcodeGen spec: apple/scripts/prepare.sh turns it into WatchYourBreath.xcodeproj
+# (which is not committed). See apple/README.md.
+
+name: WatchYourBreath
+options:
+  bundleIdPrefix: dev.sakshipatil
+  deploymentTarget:
+    iOS: "17.0"
+    macOS: "14.0"
+  createIntermediateGroups: true
+  developmentLanguage: en
+
+settings:
+  base:
+    MARKETING_VERSION: "0.1.0" # keep in step with extension/manifest.json
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: "" # your Apple Developer team id, once you have one
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    DEAD_CODE_STRIPPING: YES
+    # the plists below are merged with the INFOPLIST_KEY_* settings
+    GENERATE_INFOPLIST_FILE: YES
+
+targetTemplates:
+  App:
+    type: application
+    sources:
+      - path: App
+        excludes: ["*.entitlements", "*.plist"]
+      - path: Shared
+      # the fonts, converted from the extension's own
+      - path: Resources/Fonts
+        type: folder
+        buildPhase: resources
+      # the twelve drawings, from the extension (bundle path: illustrations/)
+      - path: ../extension/assets/illustrations
+        type: folder
+        buildPhase: resources
+      # made by prepare.sh from the extension's source
+      - path: Generated/reminders.json
+        buildPhase: resources
+      - path: Generated/reminder-bell.caf
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.sakshipatil.WatchYourBreath
+        PRODUCT_NAME: Watch Your Breath
+        PRODUCT_MODULE_NAME: WatchYourBreath
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        INFOPLIST_KEY_CFBundleDisplayName: Watch Your Breath
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.healthcare-fitness
+        INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
+
+  Extension:
+    type: app-extension
+    sources:
+      - path: Extension
+        excludes: ["*.entitlements", "*.plist"]
+      - path: Shared
+      - path: Generated/reminders.json
+        buildPhase: resources
+      - path: Generated/reminder-bell.caf
+        buildPhase: resources
+      # the web extension itself (extension/, built for Safari by prepare.sh);
+      # Safari reads manifest.json from the root of the bundle's resources
+      - path: ../extension/dist-safari/manifest.json
+        buildPhase: resources
+      - path: ../extension/dist-safari/background.js
+        buildPhase: resources
+      - path: ../extension/dist-safari/popup.html
+        buildPhase: resources
+      - path: ../extension/dist-safari/popup.js
+        buildPhase: resources
+      - path: ../extension/dist-safari/popup.css
+        buildPhase: resources
+      - path: ../extension/dist-safari/onboarding.html
+        buildPhase: resources
+      - path: ../extension/dist-safari/onboarding.js
+        buildPhase: resources
+      - path: ../extension/dist-safari/assets
+        type: folder
+        buildPhase: resources
+      - path: ../extension/dist-safari/fonts
+        type: folder
+        buildPhase: resources
+      - path: ../extension/dist-safari/icons
+        type: folder
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.sakshipatil.WatchYourBreath.Extension
+        PRODUCT_NAME: Watch Your Breath Extension
+        PRODUCT_MODULE_NAME: WatchYourBreathExtension
+        SKIP_INSTALL: YES
+    info:
+      path: Extension/Info.plist
+      properties:
+        CFBundleDisplayName: Watch Your Breath
+        NSHumanReadableDescription: A gentle reminder to notice the breath that’s already happening.
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.Safari.web-extension
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).SafariWebExtensionHandler
+
+targets:
+  WatchYourBreath-iOS:
+    templates: [App]
+    platform: iOS
+    settings:
+      base:
+        TARGETED_DEVICE_FAMILY: "1,2"
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: UIInterfaceOrientationPortrait
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+    info:
+      path: App/Info-iOS.plist
+      properties:
+        UILaunchScreen: {}
+        # a background refresh now and then tops up the reminders handed to the system
+        UIBackgroundModes: [fetch]
+        BGTaskSchedulerPermittedIdentifiers: [dev.sakshipatil.WatchYourBreath.refresh]
+    entitlements:
+      path: App/WatchYourBreath-iOS.entitlements
+      properties:
+        com.apple.security.application-groups: [group.dev.sakshipatil.WatchYourBreath]
+    dependencies:
+      - target: WatchYourBreathExtension-iOS
+    scheme:
+      gatherCoverageData: false
+
+  WatchYourBreath-macOS:
+    templates: [App]
+    platform: macOS
+    settings:
+      base:
+        ENABLE_HARDENED_RUNTIME: YES
+    info:
+      path: App/Info-macOS.plist
+      properties:
+        LSMinimumSystemVersion: $(MACOSX_DEPLOYMENT_TARGET)
+    entitlements:
+      path: App/WatchYourBreath-macOS.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+        com.apple.security.application-groups: [group.dev.sakshipatil.WatchYourBreath]
+    dependencies:
+      - target: WatchYourBreathExtension-macOS
+    scheme:
+      testTargets: [WatchYourBreathTests]
+
+  WatchYourBreathExtension-iOS:
+    templates: [Extension]
+    platform: iOS
+    entitlements:
+      path: Extension/WatchYourBreathExtension-iOS.entitlements
+      properties:
+        com.apple.security.application-groups: [group.dev.sakshipatil.WatchYourBreath]
+
+  WatchYourBreathExtension-macOS:
+    templates: [Extension]
+    platform: macOS
+    settings:
+      base:
+        ENABLE_HARDENED_RUNTIME: YES
+    entitlements:
+      path: Extension/WatchYourBreathExtension-macOS.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+        com.apple.security.application-groups: [group.dev.sakshipatil.WatchYourBreath]
+
+  # The pure logic (timing, choosing, planning, settings), tested without an app.
+  WatchYourBreathTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: Tests
+      - path: Shared/Settings.swift
+      - path: Shared/Schedule.swift
+      - path: Shared/Planner.swift
+      - path: Shared/Reminder.swift

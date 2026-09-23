@@ -65,6 +65,8 @@ export const COPY = {
   denied: {
     body: "Your browser is set to block notifications from this extension, so reminders cannot be shown. To allow them, open its notification settings and switch Watch Your Breath on.",
     open: "Open browser settings",
+    // Safari: the reminders come from the Watch Your Breath app, so its switch is the one that matters
+    apple: "Notifications for Watch Your Breath are switched off, so reminders cannot be shown. To allow them, open Settings, then Notifications, and switch Watch Your Breath on.",
   },
 
   freq: {

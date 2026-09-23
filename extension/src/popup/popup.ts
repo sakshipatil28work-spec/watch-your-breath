@@ -13,7 +13,7 @@ import {
 import { isQuiet, quietEndAfter, formatClock } from "../lib/schedule.ts";
 import { COPY } from "../lib/copy.ts";
 import { playReminderSound } from "../lib/audio.ts";
-import { ext } from "../lib/ext.ts";
+import { ext, isSafari } from "../lib/ext.ts";
 import { REMINDERS, illustrationUrl } from "../lib/reminders.ts";
 import { emblemHtml, gearSvg, arrowLeftSvg, bellSvg, playSvg, chevronDataUri } from "../ui/ink.ts";
 
@@ -222,8 +222,18 @@ $("open-chrome-settings").addEventListener("click", () => {
 
 // ---------- permission (only the fallback path needs it; Chrome-only API) ----------
 async function checkPermission(): Promise<void> {
-  const api = ext.notifications as { getPermissionLevel?: (cb: (level: string) => void) => unknown };
-  if (typeof api.getPermissionLevel !== "function") {
+  if (isSafari) {
+    // the app shows the reminders; the background knows whether it may
+    const level = await ext.runtime.sendMessage({ type: "wyb:permission" }).catch(() => "granted");
+    if (level === "denied") {
+      document.querySelector("#denied-note .hint")!.textContent = COPY.denied.apple;
+      $("open-chrome-settings").hidden = true;
+    }
+    $("denied-note").hidden = level !== "denied";
+    return;
+  }
+  const api = ext.notifications as { getPermissionLevel?: (cb: (level: string) => void) => unknown } | undefined;
+  if (typeof api?.getPermissionLevel !== "function") {
     $("denied-note").hidden = true;
     return;
   }

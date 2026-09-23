@@ -1,0 +1,86 @@
+# Builds and tests the Apple app (apple/) on a Mac runner, so it can be worked
+# on without owning a Mac. Each run uploads:
+#   screenshots   the app in the iPhone simulator, one image per screen
+#   (the build is unsigned: signing and the App Store need an Apple Developer
+#    account, see apple/README.md)
+name: Apple
+
+on:
+  push:
+    branches: [main]
+    paths: ["apple/**", "extension/**", "illustrations/**", ".github/workflows/apple.yml"]
+  pull_request:
+    paths: ["apple/**", "extension/**", "illustrations/**", ".github/workflows/apple.yml"]
+  workflow_dispatch:
+
+concurrency:
+  group: apple-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install tools
+        run: |
+          brew install xcodegen
+          npm ci
+
+      - name: Prepare the project
+        run: bash apple/scripts/prepare.sh
+
+      - name: Test the scheduling logic (macOS)
+        run: |
+          xcodebuild test \
+            -project apple/WatchYourBreath.xcodeproj \
+            -scheme WatchYourBreath-macOS \
+            -destination 'platform=macOS' \
+            CODE_SIGNING_ALLOWED=NO > build-macos.log 2>&1 || { grep -E "error:|failed" build-macos.log; tail -60 build-macos.log; exit 1; }
+          grep -E "Executed [0-9]+ tests" build-macos.log || true
+
+      - name: Build for the iPhone simulator
+        run: |
+          xcodebuild build \
+            -project apple/WatchYourBreath.xcodeproj \
+            -scheme WatchYourBreath-iOS \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO > build-ios.log 2>&1 || { grep -E "error:" build-ios.log; tail -60 build-ios.log; exit 1; }
+          grep -E "warning: .*\.swift" build-ios.log | sort -u || true
+
+      - name: Photograph each screen in the simulator
+        run: |
+          set -euo pipefail
+          app="$(find build/Build/Products/Debug-iphonesimulator -maxdepth 1 -name '*.app' | head -1)"
+          udid="$(xcrun simctl list devices available -j | jq -r '[.devices[][] | select(.name | startswith("iPhone"))][0].udid')"
+          xcrun simctl boot "$udid"
+          xcrun simctl bootstatus "$udid" -b
+          xcrun simctl install "$udid" "$app"
+          mkdir -p screenshots
+          for screen in onboarding home settings reminder; do
+            xcrun simctl terminate "$udid" dev.sakshipatil.WatchYourBreath || true
+            xcrun simctl launch "$udid" dev.sakshipatil.WatchYourBreath -wyb-screen "$screen"
+            sleep 6
+            xcrun simctl io "$udid" screenshot "screenshots/$screen.png"
+          done
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screenshots
+          path: screenshots/
+          if-no-files-found: ignore
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: build-logs
+          path: "*.log"

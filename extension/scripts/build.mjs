@@ -1,7 +1,9 @@
 // Bundles the extension with esbuild and copies static files.
 //   node scripts/build.mjs                   → dist/          (Chrome, Edge, Brave, Opera, Arc, Vivaldi)
 //   node scripts/build.mjs --target firefox  → dist-firefox/  (Firefox)
-// Same source; only the manifest differs. See manifestFor().
+//   node scripts/build.mjs --target safari   → dist-safari/   (Safari, inside the Apple app: see apple/)
+// Same source; the manifest differs (see manifestFor()), and Safari gets its own
+// background, because there the app shows the reminders (src/background/safari.ts).
 import { build, context } from "esbuild";
 import { cpSync, mkdirSync, rmSync, existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -11,12 +13,21 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const watch = process.argv.includes("--watch");
 const targetIdx = process.argv.indexOf("--target");
 const target = targetIdx >= 0 ? process.argv[targetIdx + 1] : "chrome";
-if (!["chrome", "firefox"].includes(target)) throw new Error(`unknown --target ${target}`);
-const dist = join(root, target === "firefox" ? "dist-firefox" : "dist");
+if (!["chrome", "firefox", "safari"].includes(target)) throw new Error(`unknown --target ${target}`);
+const dist = join(root, target === "chrome" ? "dist" : `dist-${target}`);
 
 /** The manifest for each browser, derived from manifest.json (the Chrome one). */
 function manifestFor(browser) {
   const m = JSON.parse(readFileSync(join(root, "manifest.json"), "utf8"));
+  if (browser === "safari") {
+    // Safari: no notifications or offscreen API; the app reminds, and this
+    // extension talks to it by native messaging. A non-persistent background
+    // page, which iOS requires.
+    delete m.minimum_chrome_version;
+    m.permissions = ["alarms", "storage", "nativeMessaging"];
+    m.background = { scripts: ["background.js"], persistent: false };
+    return m;
+  }
   if (browser !== "firefox") return m;
   // Firefox: an event page instead of a service worker, no offscreen API
   // (its background page can play audio itself), and an add-on id.
@@ -42,25 +53,26 @@ function copyStatic() {
   cpSync(join(root, "src/popup/popup.html"), join(dist, "popup.html"));
   cpSync(join(root, "src/popup/popup.css"), join(dist, "popup.css"));
   cpSync(join(root, "src/popup/onboarding.html"), join(dist, "onboarding.html"));
-  if (target !== "firefox") cpSync(join(root, "src/offscreen/offscreen.html"), join(dist, "offscreen.html"));
+  if (target === "chrome") cpSync(join(root, "src/offscreen/offscreen.html"), join(dist, "offscreen.html"));
   cpSync(join(root, "assets"), join(dist, "assets"), { recursive: true });
   cpSync(join(root, "fonts"), join(dist, "fonts"), { recursive: true });
   if (existsSync(join(root, "icons"))) cpSync(join(root, "icons"), join(dist, "icons"), { recursive: true });
 }
 
 const entryPoints = {
-  background: join(root, "src/background/index.ts"),
+  background: join(root, target === "safari" ? "src/background/safari.ts" : "src/background/index.ts"),
   popup: join(root, "src/popup/popup.ts"),
   onboarding: join(root, "src/popup/onboarding.ts"),
 };
-if (target !== "firefox") entryPoints.offscreen = join(root, "src/offscreen/offscreen.ts");
+if (target === "chrome") entryPoints.offscreen = join(root, "src/offscreen/offscreen.ts");
 
 const options = {
   entryPoints,
   outdir: dist,
   bundle: true,
-  format: "esm",
-  target: target === "firefox" ? ["firefox115"] : ["chrome116"],
+  // Safari's background page is a classic script; an IIFE also runs as a module in the pages
+  format: target === "safari" ? "iife" : "esm",
+  target: { chrome: ["chrome116"], firefox: ["firefox115"], safari: ["safari16"] }[target],
   minify: !watch,
   sourcemap: watch ? "inline" : false,
   legalComments: "none",

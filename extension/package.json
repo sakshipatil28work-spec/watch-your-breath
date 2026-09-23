@@ -2,17 +2,18 @@
   "name": "@wyb/extension",
   "version": "0.1.0",
   "private": true,
-  "description": "Watch Your Breath browser extension (Manifest V3): Chrome, Edge, Brave, Opera, Arc, Vivaldi and Firefox.",
+  "description": "Watch Your Breath browser extension (Manifest V3): Chrome, Edge, Brave, Opera, Arc, Vivaldi, Firefox and Safari (inside the Apple app).",
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
     "build:firefox": "node scripts/build.mjs --target firefox",
-    "build:all": "node scripts/build.mjs && node scripts/build.mjs --target firefox",
+    "build:all": "node scripts/build.mjs && node scripts/build.mjs --target firefox && node scripts/build.mjs --target safari",
     "watch": "node scripts/build.mjs --watch",
     "package": "node scripts/build.mjs && node scripts/package.mjs",
     "package:firefox": "node scripts/build.mjs --target firefox && node scripts/package.mjs --target firefox",
     "package:all": "npm run package && npm run package:firefox",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "build:safari": "node scripts/build.mjs --target safari"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.287",

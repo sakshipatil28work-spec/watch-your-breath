@@ -8,6 +8,7 @@ A browser extension (Manifest V3; Chrome, Edge, Brave, Opera, Arc, Vivaldi and F
 watch-your-breath/
 ├── illustrations/   the asset pipeline: cuts every image from one hand-drawn illustration
 ├── extension/       Browser extension, Manifest V3, TypeScript, esbuild
+├── apple/           iPhone, iPad and Mac app (SwiftUI) with the Safari extension: see apple/README.md
 └── web/             Next.js + Tailwind landing page, deployable on Vercel
 ```
 
@@ -47,7 +48,7 @@ Open `about:debugging#/runtime/this-firefox`, click **Load Temporary Add-on**, c
 
 Store packages, both from the same source: `npm run package:all -w extension` writes `extension/watch-your-breath-<version>.zip` (Chrome Web Store, Edge Add-ons) and `extension/watch-your-breath-<version>-firefox.zip` (Firefox Add-ons). The Firefox build passes `addons-linter` with no errors.
 
-How the two differ, all in `extension/src/lib/ext.ts` and `extension/scripts/build.mjs`: the code calls the extension API through `ext` (`browser` where it exists, promise-based; otherwise `chrome`). Firefox gets an event page instead of a service worker, no `offscreen` permission (its background page plays the bell itself), and an add-on id. Safari is not covered: it needs its own wrapper built with Apple's tools on a Mac.
+How the two differ, all in `extension/src/lib/ext.ts` and `extension/scripts/build.mjs`: the code calls the extension API through `ext` (`browser` where it exists, promise-based; otherwise `chrome`). Firefox gets an event page instead of a service worker, no `offscreen` permission (its background page plays the bell itself), and an add-on id. Safari gets a third flavour (`npm run build:safari -w extension` → `extension/dist-safari`): the same popup, with a background that hands scheduling to the Apple app, because Safari has no notifications API. It ships inside that app; see `apple/README.md`.
 
 Preview the popup in a normal browser tab (chrome.* APIs are stubbed):
 

@@ -10,3 +10,9 @@ export const ext: typeof chrome = g.browser ?? g.chrome!;
 
 /** Firefox is the only browser that implements runtime.getBrowserInfo. */
 export const isFirefox: boolean = typeof (ext.runtime as { getBrowserInfo?: unknown }).getBrowserInfo === "function";
+
+/** Safari's user agent says Safari and none of the others (Chrome's says both). */
+export const isSafari: boolean =
+  typeof navigator !== "undefined" &&
+  /Safari\//.test(navigator.userAgent) &&
+  !/Chrom(e|ium)|Edg|OPR|Firefox/.test(navigator.userAgent);

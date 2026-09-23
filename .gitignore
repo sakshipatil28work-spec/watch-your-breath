@@ -10,3 +10,13 @@ web/next-env.d.ts
 .impeccable/decision/
 *.log
 .DS_Store
+extension/dist-safari/
+# Apple: made by apple/scripts/prepare.sh (XcodeGen, the bell, the reminder export)
+apple/Generated/
+apple/WatchYourBreath.xcodeproj/
+apple/App/*.plist
+apple/App/*.entitlements
+apple/Extension/*.plist
+apple/Extension/*.entitlements
+build/
+xcuserdata/
