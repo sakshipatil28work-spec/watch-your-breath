@@ -7,7 +7,7 @@ name: Apple
 
 on:
   push:
-    branches: [main]
+    branches: [main, apple]
     paths: ["apple/**", "extension/**", "illustrations/**", ".github/workflows/apple.yml"]
   pull_request:
     paths: ["apple/**", "extension/**", "illustrations/**", ".github/workflows/apple.yml"]
