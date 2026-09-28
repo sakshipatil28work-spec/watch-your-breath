@@ -76,8 +76,9 @@ html {
 body {
   background: var(--color-cream);
   color: var(--color-ink);
-  font-size: 1.0625rem;
-  line-height: 1.55;
+  /* the base is the scale's `body` step, not a copy of its numbers */
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
   min-height: 100dvh;
   overflow-x: hidden;
 }

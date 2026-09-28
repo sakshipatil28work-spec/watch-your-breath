@@ -77,23 +77,23 @@ typography:
     fontWeight: 600
     lineHeight: 1.1
     letterSpacing: "normal"
-  script:
-    fontFamily: "'Cormorant Garamond', Georgia, serif"
-    fontSize: "1.5rem | 1.6rem | 1.75rem"
-    fontWeight: 600
-    lineHeight: 1.2
+  accent:
+    fontFamily: "Eczar, Georgia, 'Times New Roman', serif"
+    fontSize: "1.375rem | 2rem"
+    fontWeight: 500
+    lineHeight: 1.15
+    letterSpacing: "-0.005em"
+  accent-supporting:
+    fontFamily: "Eczar, Georgia, 'Times New Roman', serif"
+    fontSize: "0.9375rem | 17px"
+    fontWeight: 500
+    lineHeight: 1.25
     letterSpacing: "normal"
-  script-supporting:
-    fontFamily: "'Cormorant Garamond', Georgia, serif"
-    fontSize: "1.0625rem | 17px"
-    fontWeight: 600
-    lineHeight: 1.2
-    letterSpacing: "normal"
-  script-popup:
-    fontFamily: "'Cormorant Garamond', Georgia, serif"
-    fontSize: "17px | 20px"
-    fontWeight: 600
-    lineHeight: 1.2
+  accent-popup:
+    fontFamily: "Eczar, Georgia, 'Times New Roman', serif"
+    fontSize: "17px | 18px"
+    fontWeight: 500
+    lineHeight: 1.3
     letterSpacing: "normal"
   body:
     fontFamily: "Mukta, system-ui, -apple-system, 'Segoe UI', sans-serif"
@@ -246,7 +246,7 @@ Motion is a single slow breath. Every drawing moves on the same nine-second cloc
 - One ink (#243c3a) on warm sand (#f3e8d2) for every drawing and all text; tone within ink comes from alpha (72 / 34 / 18 percent), never from grey.
 - Burnt clay is the action family: rust (#a85f43) on knobs, dots and one philosophy line; rust-deep (#8c4d36) as the button fill; rust-deeper (#7a4230) on hover.
 - Ochre (#c0954a) on the step numerals and the bell when on; clay (#e4c4a6) as the desk; sage (#87947a) only when quiet hours are on.
-- Eczar bold for everything spoken, Mukta for everything operated, Cormorant Garamond italic for the supporting line under every title.
+- Eczar bold for everything spoken, Eczar 500 for the supporting line under every title, Mukta for everything operated. Two families, no italic.
 - Twelve reminders, each an illustration designed with its own words and its own motion; never recombined.
 - Organic corners: every radius is an eight-value elliptical shape so no two corners match.
 - Flat sand; the only lift is the sticker's 4px paper edge and, on the popup alone, a soft ink drop.
@@ -258,7 +258,7 @@ Ink on warm sand, with four earthy tones each holding one job: burnt clay asks, 
 
 ### Primary
 - **Ink** (`{colors.ink}`): every drawing, all text, every border (1.5px), the secondary button outline, focus outlines, the chevron drawn into selects. There is no second dark.
-- **Ink Soft** (`{colors.ink-soft}`): secondary copy, every Cormorant supporting line, status lines, hints, off-state toggle words, resting icon buttons.
+- **Ink Soft** (`{colors.ink-soft}`): secondary copy, every Eczar 500 supporting line, status lines, hints, off-state toggle words, resting icon buttons.
 - **Ink Faint** (`{colors.ink-faint}`): the resting underline under quiet links, the card's × and chevron at rest, the bell when sound is off, thin scrollbars.
 - **Ink Hair** (`{colors.ink-hair}`): hairlines only: above a card's reflection, around the popup's notice box.
 - **Ink Shade** (`{colors.ink-shade}`): the soft drop beneath the popup sticker, nowhere else.
@@ -289,29 +289,38 @@ Ink on warm sand, with four earthy tones each holding one job: burnt clay asks, 
 
 **Display Font:** Eczar (with Georgia, Times New Roman, serif)
 **Body Font:** Mukta (with system-ui, Segoe UI, sans-serif)
-**Script Font:** Cormorant Garamond italic 600 (with Georgia, serif)
 
-**Character:** Eczar's heavy Devanagari-rooted serifs carry the sticker's hand-lettered voice into HTML; Mukta, from the same family, runs the controls without changing accent. Cormorant Garamond italic is the quiet second voice: it sits under every Eczar title as the supporting line, and nowhere else.
+Two families, each with one job. Eczar's heavy Devanagari-rooted serifs carry the sticker's hand-lettered voice into HTML and own every heading and every quiet accent line; Mukta, from the same family, runs the controls and the prose without changing accent.
 
-Weights present in the build: Eczar 500–700 (extension self-hosts 500–700; the site also loads 800 and does not use it), Mukta 400 / 500 / 600 (the site also loads 300, unused), Cormorant Garamond italic 600 only.
+**No third family, and no italic.** Eczar ships upright weights only, so a browser asked for italic would slant the face synthetically and distort it. The accent lines ("Just a moment.") are therefore Eczar 500 upright in ink-soft, one step down from the title above them. Cormorant Garamond, which carried those lines until the two-family pass, is gone from both builds.
 
-### Hierarchy
-- **Display** (Eczar 700, 2.2rem → 2.6rem at 420px → 4rem at sm → 5.5rem at lg, line-height 1.05, tracking -0.015em): the philosophy triad only, each line stepped further right (12% / 24% at sm, 16% / 32% at lg); the middle line is set in rust.
-- **Numeral** (Eczar 600, 3.5rem → 4.5rem at sm, line-height 0.9, tabular, ochre): the 01 / 02 / 03 above the steps. The twelve-reminder grid carries no numerals.
-- **Headline** (Eczar 700, 2rem → 2.75rem for the close, 2.25rem → 3rem for sections, line-height 1, tracking -0.01em): section titles and "Watch your breath." The popup phrase is 27px and the first-run phrase 34px at line-height 1.1.
-- **Tagline** (Eczar 600, 1.75rem → 2.25rem at sm, line-height 1.15, tracking -0.005em, balanced): the one-sentence tagline under the hero.
-- **Step title** (Eczar 700, 1.75rem, line-height 1, tracking 0.01em, uppercase): SET IT / FORGET IT / NOTICE IT, the only uppercase in the world.
-- **Card title** (Eczar 700, 21px on the reminder card, 1.25rem on the site's card mirror and in the twelve-reminder grid, line-height 1.15, tracking -0.005em, balanced): a reminder's title.
-- **Title** (Eczar 600, 1.125rem for preview labels and 1.375rem for the install note; 22px settings title and 17px group titles in the popup; line-height 1.1–1.2): small serif labels above a preview or a settings group.
-- **Script** (Cormorant Garamond italic 600, ink-soft, line-height 1.2): "Just a moment." at 1.5rem → 1.75rem at the close and 1.6rem under the hero on mobile; 20px in the popup and 17px for its active status; and every reminder's supporting line at 17px on the card and 1.0625rem on the site.
-- **Body** (Mukta 400, 1.0625rem, line-height 1.55; 1.125rem for the philosophy body; 14px / 1.4–1.5 in the popup, card reflection and about text): paragraphs held to 30–48ch, reflections to 34ch.
-- **Body small** (Mukta 400–600, 1rem header name and install note, 0.9375rem nav / toggle word, 0.9rem footer, 0.875rem card reflection on the site and popup demo body): support copy and the compact chrome around the sticker.
-- **Label** (Mukta 400–500, 0.84rem / 0.8125rem hints and the site card's small Close, 0.78rem popup demo status; 14px row labels, 13.5px the card's Close, 13px toggle words and small buttons, 12.5px status, 12px hints and time labels in the popup; sentence case, no tracking): row labels (500), status and hint lines (ink-soft).
+Weights present: Eczar 500 / 600 / 700 (the site also loads 800, unused), Mukta 400 / 500 / 600 (the site also loads 300, unused).
+
+### The scale
+One nine-step scale, shared by the site and the extension. Every step carries its own line height, so leading can never drift from size; nothing in either build sits outside it.
+
+| Step | Size | Line height | Carries |
+| --- | --- | --- | --- |
+| `display-2xl` | 4.5rem / 72px | 1.05 | the philosophy triad at lg, and nothing else |
+| `display-xl` | 3rem / 48px | 1.08 | section headings at sm and up |
+| `display-lg` | 2rem / 32px | 1.15 | the tagline, the closing title, the first-run phrase |
+| `display-md` | 1.375rem / 22px | 1.25 | card titles, the install note, the settings title |
+| `display-sm` | 1.125rem / 18px | 1.3 | the header name, small headings, popup accent lines |
+| `body-lg` | 1.25rem / 20px | 1.5 | the lede under a section heading |
+| `body` | 1.0625rem / 17px | 1.55 | prose, and a reminder's supporting line on the card |
+| `body-sm` | 0.9375rem / 15px | 1.5 | secondary text, row labels and controls |
+| `caption` | 0.8125rem / 13px | 1.45 | hints, status lines and time labels |
+
+In Tailwind these are `--text-*` theme tokens (`text-display-xl`, `text-body-sm`); in the popup they are the CSS variables `--text-display-lg` down to `--text-caption`. The extension reaches six of the nine; the site uses all nine.
+
+The philosophy triad steps through three of them rather than inventing sizes: `display-lg`, `display-xl` at 420px, `display-2xl` at lg, each line stepped further right (12% / 24% at sm, 16% / 32% at lg), the middle line in rust.
+
+Numerals in the install note are Eczar 600, tabular, in ochre.
 
 ### Named Rules
-**The Two Voices Rule.** A title is Eczar bold; the line beneath it is Cormorant Garamond italic in ink-soft. "Watch your breath." / "Just a moment." is the first pair; every reminder repeats the pairing with its own words. The italic is never lent to anything that is not a supporting line (the popup's momentary status being the one exception the build carries).
+**The Two Voices Rule.** A title is Eczar bold; the line beneath it is Eczar 500 in ink-soft, one step down the scale. "Watch your breath." / "Just a moment." is the first pair; every reminder repeats the pairing with its own words. The lighter weight is never lent to anything that is not a supporting line.
 
-**The No Uppercase Label Rule.** Small text is sentence case with normal tracking. The only uppercase in the world is the three step titles, set in Eczar 700 at 1.75rem as headings, not as labels.
+**The No Uppercase Label Rule.** Small text is sentence case with normal tracking. No uppercase labels anywhere.
 
 ## Layout
 
@@ -385,15 +394,17 @@ The one container in the extension's toolbar surface. Sand ground, 1.5px ink edg
 How a reminder arrives: one of twelve drawings beside its own words, on a sand sticker with a paper edge.
 - **Frame:** 448px, sand ground, 1.5px ink border, `{rounded.card}` (the site mirror uses `{rounded.sticker}`), 4px paper edge, `14px 40px 14px 14px` padding, `112px | 1fr` grid with a 14px gap.
 - **Art:** a 112px paper circle (`{rounded.circle}`, 96px on the site) holding the illustration at 96px (82px on the site), `object-fit: contain`, transform-origin `50% 55%`.
-- **Copy:** Eczar 700 title at 21px (1.25rem on the site), Cormorant italic supporting at 17px (1.0625rem) in ink-soft, 2px apart, vertically centred.
+- **Copy:** Eczar 700 title at 21px (1.25rem on the site), Eczar 500 supporting at 17px (1.0625rem) in ink-soft, 2px apart, vertically centred.
 - **Dismiss:** a 28px × at bottom right (8px in), ink-faint, ink on hover, 16px glyph. Hidden when expanded.
 - **Expanded:** a 26 × 22px chevron button at the copy's left (4px below), rotating 180deg when open; then an 8px gap, a 1px ink-hair rule, 10px, a Mukta 14px reflection at line-height 1.5 and max 34ch, and a small secondary Close button; the art top-aligns.
 - **Arrival:** 520ms fade from 0 with a 6px rise, `cubic-bezier(0.2, 0.8, 0.3, 1)`, once.
 - **Motion:** the illustration moves on the nine-second clock in the way its entry names: `flow` (translateX 2.5px + scaleX 1.02 at 45%, easing back through 65%), `ripple` (scale 1.03), `drift` (translate 2px, -2px and rotate -1.2deg), `breathe` (scale 1.025 at 42%, 1.02 at 62%). Reduced motion removes arrival and breath and the control transitions.
 - **Preview:** in settings the real card renders in an iframe at 0.56 scale on a clay strip (`{rounded.sticker-sm}`, `6px 0 2px`).
 
-### Reminder Grid (site)
-Twelve illustrations in a 2 / 3 / 4-column grid, each bottom-aligned in a 150px (md: 170px) box at up to 200px wide, with its Eczar 700 1.25rem title and Cormorant 1.0625rem supporting line centred beneath. No numerals, no frames, no motion.
+### What You Will See (site)
+Three screenshots of the built extension - the first-run page, a reminder as it arrived on a Windows desktop, and the popup - each centred on a clay panel with the large sticker radius, capped to one height (212px, 252px at lg) so the three align whatever their shape, with an Eczar 600 `display-md` title and a `body-sm` ink-soft line beneath. Three columns at sm and up, one column below.
+
+The twelve-illustration grid and the numbered "How it works" steps that preceded it were removed from the site; the twelve still drive the extension.
 
 ### Navigation
 A single header row: the 28px icon crop plus the name in Eczar 600 (1rem / 1.125rem) on the left; a quiet text link (hidden below sm, rust underline on hover) and a secondary button on the right. No bar, no border, no background.
@@ -424,7 +435,7 @@ One bell, the author's recording (`extension/assets/audio/reminder-bell.mp3`), p
 - **Don't** recolour or tint a drawing, place one on anything but sand or paper, set text in ochre or clay, or use sage as decoration. Masks that fade a crop into sand are the only gradients.
 - **Don't** give an earthy tone a second job: no ochre outside the numerals and the bell, no rust on non-actions beyond the one philosophy line, no clay as a card fill.
 - **Don't** generate, trace or import any drawing, icon set, lotus, lung or breath diagram; if it is not a cut from the author's sheets or one of the UI glyphs it does not exist.
-- **Don't** set a supporting line in anything but Cormorant Garamond italic, or lend that italic to body copy, labels or buttons.
+- **Don't** set a supporting line in anything but Eczar 500 ink-soft, or lend that weight to body copy, labels or buttons. Never ask for Eczar italic: the face has none, and the browser will fake it.
 - **Don't** add uppercase tracked labels, kickers or eyebrows above headings, or number the reminders.
 - **Don't** put a drop shadow on anything but the popup sticker; the card gets its paper edge only.
 - **Don't** make sound the only way a reminder arrives.
