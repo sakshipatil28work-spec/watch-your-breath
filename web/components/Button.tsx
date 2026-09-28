@@ -8,11 +8,11 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-rust-deep text-cream border-[1.5px] border-rust-deep hover:bg-rust-deeper hover:border-rust-deeper rounded-[var(--radius-sticker-sm)] px-6 py-3.5 text-[1.0625rem]",
+    "bg-rust-deep text-cream border-[1.5px] border-rust-deep hover:bg-rust-deeper hover:border-rust-deeper rounded-[var(--radius-sticker-sm)] px-6 py-3.5 text-body",
   secondary:
-    "bg-transparent text-ink border-[1.5px] border-ink rounded-[var(--radius-sticker-sm)] px-6 py-3.5 text-[1.0625rem] hover:bg-paper",
+    "bg-transparent text-ink border-[1.5px] border-ink rounded-[var(--radius-sticker-sm)] px-6 py-3.5 text-body hover:bg-paper",
   quiet:
-    "bg-transparent text-ink px-1 py-1 underline decoration-[1.5px] underline-offset-[6px] decoration-ink-faint hover:decoration-rust text-[1.0625rem]",
+    "bg-transparent text-ink px-1 py-1 underline decoration-[1.5px] underline-offset-[6px] decoration-ink-faint hover:decoration-rust text-body",
 };
 
 type ButtonProps = ComponentProps<"button"> & { variant?: Variant };

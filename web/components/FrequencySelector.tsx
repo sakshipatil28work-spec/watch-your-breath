@@ -59,7 +59,7 @@ export function FrequencySelector({ id, value, customMinutes, onChange, onCustom
         </div>
       )}
       {value === "custom" && (
-        <p id={`${id}-custom-hint`} className="text-[0.75rem] text-ink-soft text-right -mt-2">
+        <p id={`${id}-custom-hint`} className="text-caption text-ink-soft text-right -mt-2">
           Between 5 minutes and 12 hours.
         </p>
       )}

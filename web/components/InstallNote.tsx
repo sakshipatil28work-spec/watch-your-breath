@@ -107,17 +107,17 @@ export function InstallNote({ className }: { className?: string }) {
         .filter(Boolean)
         .join(" ")}
     >
-      <h3 className="font-display font-semibold text-[1.375rem] leading-tight text-balance">{g.title}</h3>
+      <h3 className="font-display font-semibold text-display-md text-balance">{g.title}</h3>
       {g.download && (
         <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5">
-          <ButtonLink href={g.download.href} download className="px-5 py-3 text-[1rem]">
+          <ButtonLink href={g.download.href} download className="px-5 py-3 text-body-sm">
             {g.download.label}
           </ButtonLink>
-          <span className="text-[0.875rem] text-ink-soft whitespace-nowrap">zip, about 2 MB</span>
+          <span className="text-caption text-ink-soft whitespace-nowrap">zip, about 2 MB</span>
         </div>
       )}
       {g.steps.length > 0 && (
-        <ol className="mt-5 grid gap-2.5 text-[1rem] leading-relaxed list-none p-0 m-0 text-pretty">
+        <ol className="mt-5 grid gap-2.5 text-body list-none p-0 m-0 text-pretty">
           {g.steps.map((s, i) => (
             <li key={i} className="grid grid-cols-[1.75rem_1fr] gap-1 items-baseline">
               <span className="font-display font-semibold text-ochre tabular-nums">{String(i + 1).padStart(2, "0")}</span>
@@ -126,7 +126,7 @@ export function InstallNote({ className }: { className?: string }) {
           ))}
         </ol>
       )}
-      <p className="mt-4 text-[0.9375rem] leading-relaxed text-ink-soft text-pretty">{g.after}</p>
+      <p className="mt-4 text-body-sm text-ink-soft text-pretty">{g.after}</p>
     </div>
   );
 }

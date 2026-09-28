@@ -17,9 +17,34 @@
   --color-clay: #e4c4a6; /* the desk a sticker sits on */
   --color-clay-wash: rgba(168, 95, 67, 0.18);
 
+  /* two families, each with a job: Eczar carries every heading and the quiet
+     accent lines, Mukta carries everything you read as interface or prose */
   --font-display: var(--font-eczar), Georgia, "Times New Roman", serif;
-  --font-script: var(--font-cormorant), Georgia, serif;
   --font-ui: var(--font-mukta), system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* One type scale. Nine steps, each carrying its own line height so leading
+     can never drift from size. Nothing on the page sits outside it. */
+  --text-display-2xl: 4.5rem; /* 72px, the philosophy only */
+  --text-display-2xl--line-height: 1.05;
+  --text-display-2xl--letter-spacing: -0.015em;
+  --text-display-xl: 3rem; /* 48px, section headings */
+  --text-display-xl--line-height: 1.08;
+  --text-display-xl--letter-spacing: -0.01em;
+  --text-display-lg: 2rem; /* 32px, the tagline and the closing */
+  --text-display-lg--line-height: 1.15;
+  --text-display-lg--letter-spacing: -0.005em;
+  --text-display-md: 1.375rem; /* 22px, card titles */
+  --text-display-md--line-height: 1.25;
+  --text-display-sm: 1.125rem; /* 18px, small headings and accent lines */
+  --text-display-sm--line-height: 1.3;
+  --text-body-lg: 1.25rem; /* 20px, the lede under a heading */
+  --text-body-lg--line-height: 1.5;
+  --text-body: 1.0625rem; /* 17px, prose */
+  --text-body--line-height: 1.55;
+  --text-body-sm: 0.9375rem; /* 15px, secondary text and controls */
+  --text-body-sm--line-height: 1.5;
+  --text-caption: 0.8125rem; /* 13px, hints */
+  --text-caption--line-height: 1.45;
 
   --radius-sticker: 18px 22px 16px 24px / 22px 16px 24px 18px;
   --radius-sticker-sm: 9px 11px 8px 12px / 11px 8px 12px 9px;

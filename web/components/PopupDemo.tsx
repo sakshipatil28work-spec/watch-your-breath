@@ -57,7 +57,7 @@ export function PopupDemo() {
 
   return (
     <div
-      className="relative w-[320px] max-w-full bg-cream border-[1.5px] border-ink rounded-[var(--radius-sticker)] px-[22px] pt-[22px] pb-5 text-ink text-[0.875rem] leading-[1.45]"
+      className="relative w-[320px] max-w-full bg-cream border-[1.5px] border-ink rounded-[var(--radius-sticker)] px-[22px] pt-[22px] pb-5 text-ink text-caption leading-[1.45]"
       style={{ boxShadow: "0 0 0 4px var(--color-paper), 0 3px 10px rgba(36,60,58,0.14)" }}
       data-enabled={enabled}
     >
@@ -125,7 +125,7 @@ export function PopupDemo() {
             </div>
           </div>
 
-          <p className="mt-3.5 text-center text-[0.78rem] text-ink-soft min-h-[1.4em]" aria-live="polite">
+          <p className="mt-3.5 text-center text-caption text-ink-soft min-h-[1.4em]" aria-live="polite">
             {!enabled
               ? "Reminders are off. Switch them on when you’re ready."
               : quietNow
@@ -145,7 +145,7 @@ export function PopupDemo() {
               className="grid place-items-center w-[30px] h-[30px] rounded-full text-ink-soft [@media(hover:hover)]:hover:text-ink active:scale-[0.96] transition-[color,transform] duration-150 [&_svg]:w-5 [&_svg]:h-5"
               dangerouslySetInnerHTML={{ __html: arrowLeftSvg() }}
             />
-            <h3 className="font-display font-semibold text-[22px] leading-none">Settings</h3>
+            <h3 className="font-display font-semibold text-display-md">Settings</h3>
           </header>
 
           <SettingsSection title="Reminders" id="demo-s-reminders">
@@ -184,14 +184,14 @@ export function PopupDemo() {
                   />
                   <span className="grid leading-tight">
                     <span>{s === "compact" ? "Compact" : "Expanded"}</span>
-                    <small className="text-[0.75rem] text-ink-soft">
+                    <small className="text-caption text-ink-soft">
                       {s === "compact" ? "The drawing and a short reminder" : "The drawing, the reminder and a short reflection"}
                     </small>
                   </span>
                 </label>
               ))}
             </fieldset>
-            <p className="text-[0.78rem] leading-snug text-ink-soft">
+            <p className="text-caption text-ink-soft">
               Reminders arrive as your system’s notifications, at the corner of the screen. The next one reads:
             </p>
             <NoticePreview reminder={REMINDERS[6]} layout={layout} />
@@ -206,7 +206,7 @@ export function PopupDemo() {
             </div>
             <Button
               variant="secondary"
-              className="justify-self-start px-3.5 py-2 text-[0.84rem] gap-1.5"
+              className="justify-self-start px-3.5 py-2 text-body-sm gap-1.5"
               onClick={() => new Audio("/audio/reminder-bell.mp3").play().catch(() => undefined)}
             >
               <span aria-hidden="true" className="w-4 h-4 [&_svg]:w-full [&_svg]:h-full" dangerouslySetInnerHTML={{ __html: playSvg() }} />
@@ -222,7 +222,7 @@ export function PopupDemo() {
           >
             <div className="flex gap-5">
               <label className="grid gap-0.5">
-                <span className="text-[0.78rem] text-ink-soft">Start</span>
+                <span className="text-caption text-ink-soft">Start</span>
                 <input
                   type="time"
                   value={quietStart}
@@ -231,7 +231,7 @@ export function PopupDemo() {
                 />
               </label>
               <label className="grid gap-0.5">
-                <span className="text-[0.78rem] text-ink-soft">End</span>
+                <span className="text-caption text-ink-soft">End</span>
                 <input
                   type="time"
                   value={quietEnd}
@@ -250,17 +250,17 @@ export function PopupDemo() {
                 </span>
                 <Toggle checked={randomize} onChange={setRandomize} labelledBy="demo-randomize" describedBy="demo-randomize-hint" />
               </div>
-              <p id="demo-randomize-hint" className="text-[0.78rem] leading-snug text-ink-soft">
+              <p id="demo-randomize-hint" className="text-caption text-ink-soft">
                 Lets each reminder drift a little, so it never lands on the same predictable minute.
               </p>
             </div>
           </SettingsSection>
 
           <SettingsSection title="About" id="demo-s-about">
-            <p className="text-[0.84rem] leading-relaxed">
+            <p className="text-body-sm leading-relaxed">
               Watch Your Breath is a small reminder to notice something that is already happening.
             </p>
-            <Button variant="quiet" className="justify-self-start text-[0.84rem]" onClick={() => setView("home")}>
+            <Button variant="quiet" className="justify-self-start text-body-sm" onClick={() => setView("home")}>
               Back to the sticker
             </Button>
           </SettingsSection>

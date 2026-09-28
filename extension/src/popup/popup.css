@@ -17,9 +17,19 @@
   --clay: #e4c4a6; /* the desk the sticker sits on: sand warmed toward clay */
   --clay-wash: rgba(168, 95, 67, 0.18);
 
+  /* two families: Eczar for headings and the quiet accent lines, Mukta for
+     everything read as interface. Eczar has no true italic, so accent lines are
+     upright at weight 500 rather than a browser-slanted fake. */
   --display: "Eczar", Georgia, "Times New Roman", serif;
-  --script: "Cormorant Garamond", "Georgia", serif;
   --ui: "Mukta", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* One type scale, shared with the site. Six steps reach this popup. */
+  --text-display-lg: 32px;
+  --text-display-md: 22px;
+  --text-display-sm: 18px;
+  --text-body: 17px;
+  --text-body-sm: 15px;
+  --text-caption: 13px;
 
   /* organic corners: no two the same */
   --corner: 18px 22px 16px 24px / 22px 16px 24px 18px;
@@ -40,7 +50,7 @@ html {
   background: var(--clay);
   color: var(--ink);
   font-family: var(--ui);
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   line-height: 1.45;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -237,7 +247,7 @@ body {
 .phrase {
   font-family: var(--display);
   font-weight: 700;
-  font-size: 27px;
+  font-size: var(--text-display-md);
   line-height: 1.1;
   letter-spacing: -0.005em;
   text-align: center;
@@ -245,10 +255,9 @@ body {
 }
 
 .moment {
-  font-family: var(--script);
-  font-style: italic;
-  font-weight: 600;
-  font-size: 20px;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: var(--text-display-sm);
   line-height: 1.2;
   text-align: center;
   color: var(--ink-soft);
@@ -257,7 +266,7 @@ body {
 
 .status {
   margin: 14px 0 0;
-  font-size: 12.5px;
+  font-size: var(--text-caption);
   color: var(--ink-soft);
   text-align: center;
   min-height: 1.4em;
@@ -279,9 +288,9 @@ body {
 }
 
 .status[data-tone="active"] {
-  font-family: var(--script);
-  font-style: italic;
-  font-size: 17px;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: var(--text-body);
   color: var(--ink);
 }
 
@@ -329,7 +338,7 @@ body {
 
 .hint {
   margin: 0;
-  font-size: 12px;
+  font-size: var(--text-caption);
   line-height: 1.4;
   color: var(--ink-soft);
 }
@@ -397,7 +406,7 @@ body {
 }
 
 .toggle-text {
-  font-size: 13px;
+  font-size: var(--text-caption);
   min-width: 22px;
   color: var(--ink-soft);
 }
@@ -436,7 +445,7 @@ body {
   appearance: none;
   -webkit-appearance: none;
   font: inherit;
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   color: var(--ink);
   background: transparent;
   border: 0;
@@ -552,7 +561,7 @@ body {
 }
 
 .time-field .row-label {
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: var(--ink-soft);
 }
 
@@ -560,7 +569,7 @@ body {
 .button {
   font: inherit;
   font-weight: 500;
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   color: var(--cream);
   background: var(--rust-deep);
   border: 1.5px solid var(--rust-deep);
@@ -663,7 +672,7 @@ body {
 .settings-title {
   font-family: var(--display);
   font-weight: 600;
-  font-size: 22px;
+  font-size: var(--text-display-md);
   line-height: 1;
   margin: 0;
 }
@@ -677,14 +686,14 @@ body {
 .group-title {
   font-family: var(--display);
   font-weight: 600;
-  font-size: 17px;
+  font-size: var(--text-body);
   line-height: 1.1;
   margin: 0 0 2px;
 }
 
 .group-about .about {
   margin: 0;
-  font-size: 13.5px;
+  font-size: var(--text-caption);
   line-height: 1.5;
   color: var(--ink);
 }
@@ -721,7 +730,7 @@ body {
 }
 
 .radio-text small {
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: var(--ink-soft);
 }
 
@@ -805,14 +814,14 @@ body {
 .notice-title {
   font-family: var(--display);
   font-weight: 600;
-  font-size: 15px;
+  font-size: var(--text-body-sm);
   line-height: 1.25;
   color: var(--ink);
 }
 
 .notice-message {
   margin-top: 2px !important;
-  font-size: 13px;
+  font-size: var(--text-caption);
   line-height: 1.4;
   color: var(--ink-soft);
   white-space: pre-line;
@@ -829,7 +838,7 @@ body {
 }
 
 .button-small {
-  font-size: 13px;
+  font-size: var(--text-caption);
   padding: 6px 12px;
 }
 
@@ -861,7 +870,7 @@ body {
 .denied-title {
   font-family: var(--display);
   font-weight: 700;
-  font-size: 22px;
+  font-size: var(--text-display-md);
   line-height: 1.15;
   margin: 8px 0 0;
 }
@@ -910,11 +919,11 @@ body.onboarding .radio,
 body.onboarding .select,
 body.onboarding .input,
 body.onboarding .field-suffix {
-  font-size: 15px;
+  font-size: var(--text-body-sm);
 }
 
 body.onboarding .hint {
-  font-size: 13px;
+  font-size: var(--text-caption);
 }
 
 body.onboarding .row,
@@ -924,7 +933,7 @@ body.onboarding .radios-row {
 }
 
 body.onboarding .phrase {
-  font-size: 34px;
+  font-size: var(--text-display-lg);
 }
 
 .onboarding-sub {
@@ -932,7 +941,7 @@ body.onboarding .phrase {
   max-width: 30ch;
   text-align: center;
   color: var(--ink-soft);
-  font-size: 16px;
+  font-size: var(--text-body);
 }
 
 .onboarding-form {
@@ -946,7 +955,7 @@ body.onboarding .phrase {
 }
 
 .onboarding-form .button {
-  font-size: 16px;
+  font-size: var(--text-body);
   padding: 12px 18px;
   margin-top: 4px;
 }
@@ -974,7 +983,7 @@ body.onboarding .phrase {
 }
 
 .onboarding-done .hint {
-  font-size: 14px;
+  font-size: var(--text-body-sm);
   margin: 8px auto 20px;
   max-width: 34ch;
 }

@@ -36,7 +36,7 @@ export function NotificationPreview({ reminder = REMINDERS[0], layout = "compact
         className="block w-full h-auto"
       />
       <div className="px-4 pt-3 pb-4 font-[system-ui,'Segoe_UI',sans-serif]">
-        <div className="flex items-center justify-between text-[0.8125rem] text-[#dcdcdc]">
+        <div className="flex items-center justify-between text-caption text-[#dcdcdc]">
           <span className="flex items-center gap-2">
             <span aria-hidden="true" className="grid h-4 w-4 place-items-center rounded-[3px] bg-[#f2f2f2]">
               <span className="h-2.5 w-2.5 rounded-full bg-[conic-gradient(#ea4335_0_33%,#fbbc05_0_66%,#34a853_0)] ring-[2px] ring-[#4285f4] ring-inset" />
@@ -56,11 +56,11 @@ export function NotificationPreview({ reminder = REMINDERS[0], layout = "compact
             className="h-[72px] w-[72px] shrink-0 rounded-full"
           />
           <span className="grid gap-0.5 min-w-0">
-            <span className="text-[1.0625rem] font-semibold leading-tight">{reminder.title}</span>
-            <span className="text-[1rem] leading-snug text-[#c9c9c9] whitespace-pre-line">{message}</span>
+            <span className="text-body font-semibold leading-tight">{reminder.title}</span>
+            <span className="text-body-sm leading-snug text-[#c9c9c9] whitespace-pre-line">{message}</span>
           </span>
         </div>
-        <span aria-hidden="true" className="mt-4 block rounded-[4px] bg-[#2f2f2f] py-2 text-center text-[0.9375rem] text-[#f2f2f2]">
+        <span aria-hidden="true" className="mt-4 block rounded-[4px] bg-[#2f2f2f] py-2 text-center text-body-sm text-[#f2f2f2]">
           Close
         </span>
       </div>
@@ -82,8 +82,8 @@ export function NoticePreview({ reminder = REMINDERS[0], layout = "compact" }: {
     >
       <Image src={illustrationSrc(reminder, "icon")} alt="" width={192} height={192} className="h-12 w-12 rounded-[var(--radius-sticker-sm)]" />
       <span className="grid">
-        <span className="font-display font-semibold text-[15px] leading-[1.25]">{reminder.title}</span>
-        <span className="mt-0.5 text-[13px] leading-[1.4] text-ink-soft whitespace-pre-line">{message}</span>
+        <span className="font-display font-semibold text-body-sm leading-[1.25]">{reminder.title}</span>
+        <span className="mt-0.5 text-caption text-ink-soft whitespace-pre-line">{message}</span>
       </span>
     </div>
   );

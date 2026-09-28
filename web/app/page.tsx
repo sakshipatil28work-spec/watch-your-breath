@@ -22,7 +22,7 @@ export default function Home() {
       <header className="mx-auto max-w-[1200px] px-5 sm:px-8 pt-5 sm:pt-7 flex items-center justify-between gap-4">
         <a
           href="#main"
-          className="flex items-center gap-2.5 font-display font-semibold text-[1rem] sm:text-[1.125rem] leading-none whitespace-nowrap"
+          className="flex items-center gap-2.5 font-display font-semibold text-display-sm leading-none whitespace-nowrap"
         >
           <Image src="/illustrations/icon-48.png" alt="" width={48} height={48} className="w-7 h-7" />
           <span>Watch Your Breath</span>
@@ -30,7 +30,7 @@ export default function Home() {
         <nav aria-label="Primary" className="flex items-center gap-5 sm:gap-7">
           <AddToBrowser
             variant="secondary"
-            className="px-3.5 sm:px-4 py-2.5 text-[0.875rem] sm:text-[0.9375rem] whitespace-nowrap"
+            className="px-3.5 sm:px-4 py-2.5 text-body-sm whitespace-nowrap"
           />
         </nav>
       </header>
@@ -44,7 +44,7 @@ export default function Home() {
           <HeroArt className="reveal w-full max-w-[640px] mx-auto lg:max-w-none lg:mx-0" />
           <p
             aria-hidden="true"
-            className="reveal sm:hidden font-script italic text-[1.6rem] leading-none text-ink-soft text-right -mt-3 pr-1"
+            className="reveal sm:hidden font-display font-medium text-display-lg text-ink-soft text-right -mt-3 pr-1"
             style={{ "--i": 1 } as React.CSSProperties}
           >
             Just a moment.
@@ -55,13 +55,13 @@ export default function Home() {
               className={
                 heroIsRaster
                   ? "sr-only"
-                  : "font-display font-bold text-[2.75rem] sm:text-[3.5rem] leading-[1.02] tracking-[-0.01em] uppercase mb-5"
+                  : "font-display font-bold text-display-xl uppercase mb-5"
               }
             >
               Watch your breath.
             </h1>
             <p
-              className="reveal font-display font-semibold text-[1.625rem] sm:text-[2rem] leading-[1.15] tracking-[-0.005em] text-balance"
+              className="reveal font-display font-semibold text-display-md sm:text-display-lg text-balance"
               style={{ "--i": 2 } as React.CSSProperties}
             >
               {SITE.tagline}
@@ -76,10 +76,10 @@ export default function Home() {
         <section aria-labelledby="toolbar-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 py-12 lg:py-16">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16 items-start">
             <div className="max-w-[36rem]">
-              <h2 id="toolbar-title" className="font-display font-bold text-[2.25rem] sm:text-[2.75rem] leading-[1.08] tracking-[-0.01em] text-balance">
+              <h2 id="toolbar-title" className="font-display font-bold text-display-lg sm:text-display-xl text-balance">
                 A small sticker in your toolbar.
               </h2>
-              <p className="mt-4 text-[1.125rem] leading-[1.5] max-w-[46ch] text-pretty">
+              <p className="mt-4 text-body-lg max-w-[46ch] text-pretty">
                 Click the icon, turn reminders on, choose how often. That is the whole interface. Quiet hours, the notification
                 layout and the bell live one tap deeper, and nothing is counted, scored or streaked. Free, with no account, and nothing leaves your browser.
               </p>
@@ -98,12 +98,12 @@ export default function Home() {
           <h2 id="phil-title" className="sr-only">
             What this is, and is not
           </h2>
-          <div className="grid gap-2 sm:gap-1 font-display font-bold leading-[1.05] tracking-[-0.015em] text-[2.2rem] min-[420px]:text-[2.6rem] sm:text-[3.5rem] lg:text-[4.5rem]">
+          <div className="grid gap-2 sm:gap-1 font-display font-bold text-display-lg min-[420px]:text-display-xl lg:text-display-2xl">
             <p className="sm:pl-0">{COPY.philosophy[0]}</p>
             <p className="sm:pl-[12%] lg:pl-[16%] text-rust">{COPY.philosophy[1]}</p>
             <p className="sm:pl-[24%] lg:pl-[32%]">{COPY.philosophy[2]}</p>
           </div>
-          <p className="mt-6 lg:mt-8 max-w-[46ch] text-[1.125rem] sm:text-[1.25rem] leading-[1.5] sm:ml-[24%] lg:ml-[32%] text-pretty">
+          <p className="mt-6 lg:mt-8 max-w-[46ch] text-body-lg sm:ml-[24%] lg:ml-[32%] text-pretty">
             {COPY.philosophyBody}
           </p>
         </section>
@@ -114,10 +114,10 @@ export default function Home() {
             <div className="flex items-center gap-6 sm:gap-10">
               <Emblem className="w-[120px] sm:w-[170px] shrink-0" label="" />
               <div>
-                <h2 id="close-title" className="font-display font-bold text-[2rem] sm:text-[2.5rem] leading-none tracking-[-0.01em]">
+                <h2 id="close-title" className="font-display font-bold text-display-lg sm:text-display-xl">
                   Watch your breath.
                 </h2>
-                <p className="font-script italic text-[1.5rem] sm:text-[1.75rem] leading-tight text-ink-soft mt-2">Just a moment.</p>
+                <p className="font-display font-medium text-display-md sm:text-display-lg text-ink-soft mt-2">Just a moment.</p>
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -127,7 +127,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="mx-auto max-w-[1200px] px-5 sm:px-8 pb-10 pt-6 flex flex-wrap items-center justify-between gap-4 text-[0.9rem] text-ink-soft">
+      <footer className="mx-auto max-w-[1200px] px-5 sm:px-8 pb-10 pt-6 flex flex-wrap items-center justify-between gap-4 text-body-sm text-ink-soft">
         <p>{COPY.about}</p>
         <p>Not a practice. Simply a reminder.</p>
       </footer>

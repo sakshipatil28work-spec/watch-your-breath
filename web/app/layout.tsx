@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Eczar, Mukta, Cormorant_Garamond } from "next/font/google";
+import { Eczar, Mukta } from "next/font/google";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
 const eczar = Eczar({
   subsets: ["latin"],
+  // 500 carries the quiet accent lines ("Just a moment."): Eczar has no true
+  // italic, and a browser-slanted one distorts the face, so those lines are
+  // upright at a lighter weight instead.
   weight: ["500", "600", "700", "800"],
   variable: "--font-eczar",
   display: "swap",
@@ -14,14 +17,6 @@ const mukta = Mukta({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
   variable: "--font-mukta",
-  display: "swap",
-});
-
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["600"],
-  style: ["italic"],
-  variable: "--font-cormorant",
   display: "swap",
 });
 
@@ -45,7 +40,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${eczar.variable} ${mukta.variable} ${cormorant.variable}`}>
+    <html lang="en" className={`${eczar.variable} ${mukta.variable}`}>
       <body>{children}</body>
     </html>
   );

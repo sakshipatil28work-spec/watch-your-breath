@@ -46,7 +46,7 @@ export function Toggle({ checked, onChange, labelledBy, describedBy, className }
           }}
         />
       </span>
-      <span className={["min-w-[22px] text-[0.9375rem]", checked ? "font-medium text-ink" : "text-ink-soft"].join(" ")}>
+      <span className={["min-w-[22px] text-body-sm", checked ? "font-medium text-ink" : "text-ink-soft"].join(" ")}>
         {checked ? "On" : "Off"}
       </span>
     </button>

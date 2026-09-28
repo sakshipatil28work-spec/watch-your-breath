@@ -7,7 +7,7 @@ export function SettingsSection({ title, hint, children, id, marked = false }: P
   const headingId = id ? `${id}-title` : undefined;
   return (
     <section aria-labelledby={headingId} className="grid gap-2.5 mt-5 first:mt-0">
-      <h3 id={headingId} className="font-display font-semibold text-[1.0625rem] leading-tight">
+      <h3 id={headingId} className="font-display font-semibold text-display-sm">
         {title}
         {marked && (
           <span
@@ -16,7 +16,7 @@ export function SettingsSection({ title, hint, children, id, marked = false }: P
           />
         )}
       </h3>
-      {hint && <p className="text-[0.8125rem] leading-snug text-ink-soft -mt-1">{hint}</p>}
+      {hint && <p className="text-caption text-ink-soft -mt-1">{hint}</p>}
       {children}
     </section>
   );
