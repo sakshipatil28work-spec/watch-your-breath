@@ -4,6 +4,7 @@ import { Emblem } from "@/illustrations/Emblem";
 import { AddToBrowser } from "@/components/AddToBrowser";
 import { InstallNote } from "@/components/InstallNote";
 import { PopupDemo } from "@/components/PopupDemo";
+import { Walkthrough } from "@/components/Walkthrough";
 import { COPY, SITE } from "@/lib/site";
 
 
@@ -92,6 +93,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* ---------- what you will see: three real screens ---------- */}
+        <Walkthrough />
 
         {/* ---------- philosophy ---------- */}
         <section aria-labelledby="phil-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 py-12 lg:py-16 relative">
