@@ -61,18 +61,22 @@
 
           <div class="row">
             <span class="row-label" id="label-sound">Sound</span>
-            <button
-              type="button"
-              class="toggle toggle-sound"
-              id="toggle-sound"
-              role="switch"
-              aria-checked="true"
-              aria-labelledby="label-sound"
-            >
-              <span class="bell-glyph" id="bell-glyph" aria-hidden="true"></span>
-              <span class="toggle-track" aria-hidden="true"><span class="toggle-knob"></span></span>
-              <span class="toggle-text" id="toggle-sound-text">On</span>
-            </button>
+            <span class="sound-control">
+              <button type="button" class="bell-button" id="bell-button" aria-label="Play the bell" title="Play the bell">
+                <span class="bell-glyph" id="bell-glyph" aria-hidden="true"></span>
+              </button>
+              <button
+                type="button"
+                class="toggle toggle-sound"
+                id="toggle-sound"
+                role="switch"
+                aria-checked="true"
+                aria-labelledby="label-sound"
+              >
+                <span class="toggle-track" aria-hidden="true"><span class="toggle-knob"></span></span>
+                <span class="toggle-text" id="toggle-sound-text">On</span>
+              </button>
+            </span>
           </div>
         </div>
 

@@ -38,6 +38,22 @@ export function PopupDemo() {
   const [quietEnd, setQuietEnd] = useState("07:00");
   const [layout, setLayout] = useState<NotificationLayout>("compact");
   const [sound, setSound] = useState(true);
+  const [ringing, setRinging] = useState(false);
+  // counts presses, and keys the glyph: a fresh element replays the sway from
+  // the start, where re-adding a class on the same element would not
+  const [rings, setRings] = useState(0);
+
+  /**
+   * The bell rings whenever it is pressed, whatever the switch beside it says:
+   * pressing a bell should make a sound, and hearing it is how a visitor
+   * decides whether they want it with every reminder.
+   */
+  function ringBell() {
+    setRings((n) => n + 1);
+    setRinging(true);
+    window.setTimeout(() => setRinging(false), 800);
+    void new Audio("/audio/reminder-bell.mp3").play().catch(() => undefined);
+  }
 
   // a minute clock as an external store, so rendering stays pure and the server render has no time
   const nowMs = useSyncExternalStore(subscribeMinute, minuteSnapshot, () => null);
@@ -114,12 +130,24 @@ export function PopupDemo() {
               <span id="demo-sound" className="font-medium">
                 Sound
               </span>
-              <span className="inline-flex items-center gap-1">
-                <span
-                  aria-hidden="true"
-                  className={["w-[18px] h-[18px] [&_svg]:w-full [&_svg]:h-full [--glyph-stroke:2]", sound ? "text-ochre" : "text-ink-faint"].join(" ")}
-                  dangerouslySetInnerHTML={{ __html: bellSvg() }}
-                />
+              <span className="inline-flex items-center gap-0.5">
+                <button
+                  type="button"
+                  aria-label="Play the bell"
+                  title="Play the bell"
+                  onClick={ringBell}
+                  className="grid place-items-center w-7 h-7 rounded-full active:scale-[0.94] transition-transform duration-[240ms]"
+                >
+                  <span
+                    key={rings}
+                    aria-hidden="true"
+                    className={[
+                      "w-[18px] h-[18px] [&_svg]:w-full [&_svg]:h-full [--glyph-stroke:2] origin-[50%_15%] transition-colors duration-200",
+                      ringing ? "text-ochre motion-safe:animate-[bell-sway_760ms_var(--ease-out-soft)]" : sound ? "text-ochre" : "text-ink-faint",
+                    ].join(" ")}
+                    dangerouslySetInnerHTML={{ __html: bellSvg() }}
+                  />
+                </button>
                 <Toggle checked={sound} onChange={setSound} labelledBy="demo-sound" />
               </span>
             </div>
@@ -207,7 +235,7 @@ export function PopupDemo() {
             <Button
               variant="secondary"
               className="justify-self-start px-3.5 py-2 text-body-sm gap-1.5"
-              onClick={() => new Audio("/audio/reminder-bell.mp3").play().catch(() => undefined)}
+              onClick={ringBell}
             >
               <span aria-hidden="true" className="w-4 h-4 [&_svg]:w-full [&_svg]:h-full" dangerouslySetInnerHTML={{ __html: playSvg() }} />
               Play bell

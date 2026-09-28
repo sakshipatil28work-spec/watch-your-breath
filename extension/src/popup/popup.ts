@@ -64,6 +64,7 @@ let state: RuntimeState = { nextFireAt: null, lastFiredAt: null, cycle: [], last
 function render(s: Settings) {
   current = s;
   app.dataset.enabled = String(s.enabled);
+  app.dataset.sound = String(s.soundEnabled);
   toggles.enabled.forEach((b) => setToggle(b, s.enabled));
   toggles.sound.forEach((b) => setToggle(b, s.soundEnabled));
   toggles.randomize.forEach((b) => setToggle(b, s.randomize));
@@ -130,6 +131,16 @@ function renderStatus() {
   el.dataset.tone = "on";
 }
 
+/** Say something on the home status line, then let the real status return. */
+let statusTimer = 0;
+function flashStatus(text: string) {
+  const el = $("status");
+  el.textContent = text;
+  el.dataset.tone = "off";
+  window.clearTimeout(statusTimer);
+  statusTimer = window.setTimeout(renderStatus, 5000);
+}
+
 /** Swap a hint’s text for a moment, then put the original back. */
 function flash(el: HTMLElement, text: string, error = false, ms = 2800) {
   const original = el.dataset.original ?? el.textContent ?? "";
@@ -193,6 +204,19 @@ $("open-settings").addEventListener("click", () => showView("settings"));
 $("close-settings").addEventListener("click", () => showView("home"));
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && app.dataset.view === "settings") showView("home");
+});
+
+// The bell on the home view rings on its own, whatever the switch beside it
+// says: pressing a bell should make a sound, and hearing it is how you decide
+// whether you want it with every reminder.
+const bellButton = $("bell-button") as HTMLButtonElement;
+bellButton.addEventListener("click", async () => {
+  bellButton.classList.remove("is-ringing");
+  void bellButton.offsetWidth; // restart the sway when it is pressed again
+  bellButton.classList.add("is-ringing");
+  window.setTimeout(() => bellButton.classList.remove("is-ringing"), 800);
+  const ok = await playReminderSound(true);
+  if (!ok) flashStatus(COPY.settings.bellFailed);
 });
 
 const previewBtn = $("send-preview") as HTMLButtonElement;

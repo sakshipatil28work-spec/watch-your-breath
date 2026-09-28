@@ -83,6 +83,28 @@ body {
   overflow-x: hidden;
 }
 
+/* one small sway, the way a struck bell settles */
+@keyframes bell-sway {
+  0% {
+    transform: rotate(0deg);
+  }
+  18% {
+    transform: rotate(11deg);
+  }
+  42% {
+    transform: rotate(-8deg);
+  }
+  66% {
+    transform: rotate(4deg);
+  }
+  85% {
+    transform: rotate(-2deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 /* One icon set at one optical weight, matching the extension: the rendered
    stroke stays 1.5px whether the glyph is drawn at 16, 18 or 20px. */
 .glyph {

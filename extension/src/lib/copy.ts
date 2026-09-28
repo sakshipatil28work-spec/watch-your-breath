@@ -35,6 +35,7 @@ export const COPY = {
     scheduling: "Setting the next reminder…",
     active: "Just a moment.",
     customRange: "Between 5 minutes and 12 hours.",
+    bell: "Play the bell",
   },
 
   settings: {

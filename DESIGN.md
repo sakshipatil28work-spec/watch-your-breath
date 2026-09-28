@@ -381,7 +381,7 @@ A hand-drawn pill whose knob is the drawn ring itself.
 - **Track:** 42 × 24px, 1.5px ink border, `{rounded.pill}`, transparent; on, it fills with clay-wash (220ms).
 - **Knob:** 17px, the `ring.png` crop as background; on, it slides 18px, rotates 12deg and fills solid rust (260ms, `cubic-bezier(0.2, 0.8, 0.3, 1)`).
 - **Word:** "Off" in ink-soft / "On" in ink 500 beside the track, so the state is never colour alone.
-- **Sound variant:** the 18px bell glyph sits before the track, ink-faint when off and ochre when on (200ms).
+- **Sound variant:** the 18px bell glyph sits before the track in a 28px round button of its own, ink-faint when off and ochre when on (200ms), and ochre on hover. It is not part of the switch: pressing it rings the bell once and sways it (760ms), whatever the switch says.
 - **Hover:** a 3px paper halo around the track (popup).
 
 ### Radio
@@ -413,7 +413,7 @@ A single header row: the 28px icon crop plus the name in Eczar 600 (1rem / 1.125
 The emblem is `ring.png` (the ring cut from the illustration) or `sticker.png` (the full sticker crop in the popup). It breathes on the nine-second clock: `scale(1) → scale(1.025) translateX(1.5px)` at 42% → `scale(1.02)` at 62% → back, `cubic-bezier(0.45, 0, 0.55, 1)`, infinite, transform-origin at the ring (25% 51% on the hero and sticker crops, 50% 50% on the ring alone). The hero uses a smaller amplitude (1.012, 2px). When a reminder has just fired in the popup, two copies of the ring settle outward once (`scale(1) → 1.7`, opacity 0.35 → 0, 3.2s, second delayed 0.7s). The flow crop carries the emblem's wind lines between site sections, masked at its cut edges. The crops are never tinted; they are ink.
 
 ### Sound
-One bell, the author's recording (`extension/assets/audio/reminder-bell.mp3`), played once per reminder and never looped; previewable from settings with the play glyph. The bell glyph in ochre is its only visual; sound is never the only channel a reminder arrives on.
+One bell, the author's recording (`extension/assets/audio/reminder-bell.mp3`), played once per reminder and never looped. It can be heard on demand in two places: the bell glyph on the popup's Sound row, and the play glyph in settings. Both ring whether or not reminders are set to make a sound, because a bell that is pressed should sound; hearing it is how the switch beside it gets decided. The bell glyph in ochre is its only visual; sound is never the only channel a reminder arrives on.
 
 ## Do's and Don'ts
 

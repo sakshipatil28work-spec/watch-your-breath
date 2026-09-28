@@ -414,11 +414,38 @@ body {
   color: var(--ink-soft);
 }
 
+/* The bell is a control of its own, not decoration on the switch: press it and
+   it rings once, so you can hear the sound before deciding to keep it. The
+   switch beside it decides whether a reminder rings; the bell answers what it
+   sounds like. */
+.sound-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.bell-button {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 240ms var(--ease-out-soft);
+}
+
+.bell-button:active {
+  transform: scale(0.94);
+}
+
 .bell-glyph {
   width: 18px;
   height: 18px;
   --glyph-stroke: 2; /* renders 1.5px */
-  margin-right: 2px;
   color: var(--ink-faint);
   transition: color 200ms ease-out;
 }
@@ -428,8 +455,43 @@ body {
   height: 100%;
 }
 
-.toggle-sound[aria-checked="true"] .bell-glyph {
+/* lit while the reminder sound is on, and while the bell is being heard */
+#app[data-sound="true"] .bell-glyph,
+.bell-button.is-ringing .bell-glyph {
   color: var(--ochre);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bell-button:hover .bell-glyph {
+    color: var(--ochre);
+  }
+}
+
+/* one small sway, the way a struck bell settles */
+.bell-button.is-ringing .bell-glyph {
+  transform-origin: 50% 15%;
+  animation: bell-sway 760ms var(--ease-out-soft);
+}
+
+@keyframes bell-sway {
+  0% {
+    transform: rotate(0deg);
+  }
+  18% {
+    transform: rotate(11deg);
+  }
+  42% {
+    transform: rotate(-8deg);
+  }
+  66% {
+    transform: rotate(4deg);
+  }
+  85% {
+    transform: rotate(-2deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .toggle[aria-checked="true"] .toggle-text {
@@ -1016,7 +1078,13 @@ body.onboarding .phrase {
   .toggle-knob,
   .radio-mark::after,
   .button,
-  .gear-button {
+  .gear-button,
+  .bell-button {
     transition: none;
+  }
+
+  /* the bell still lights, it just does not sway */
+  .bell-button.is-ringing .bell-glyph {
+    animation: none;
   }
 }
