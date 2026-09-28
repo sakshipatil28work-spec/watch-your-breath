@@ -124,18 +124,20 @@ body::after {
   mix-blend-mode: multiply;
 }
 
-/* the install card, when a button sends you to it: a wash of clay that settles back to paper */
+/* the way in, when a button sends you to it: a wash of clay that soaks away.
+   It bleeds past the text on a shadow rather than sitting in a box, so nothing
+   on the page has to be a panel for the arrival to be seen. */
 .install-note:target {
   animation: settle 1.6s var(--ease-out-soft) both;
 }
 @keyframes settle {
   0% {
     background-color: var(--color-clay-wash);
-    border-color: var(--color-rust);
+    box-shadow: 0 0 0 18px var(--color-clay-wash);
   }
   100% {
-    background-color: var(--color-paper);
-    border-color: var(--color-ink-hair);
+    background-color: transparent;
+    box-shadow: 0 0 0 18px transparent;
   }
 }
 

@@ -7,6 +7,7 @@ import { useBrowser, type Browser } from "./AddToBrowser";
 
 type Guide = {
   title: string;
+  lede: string;
   download: { label: string; href: string } | null;
   steps: React.ReactNode[];
   after: string;
@@ -46,7 +47,8 @@ function Code({ children }: { children: string }) {
 /** Hand-install steps for each browser; the extension is not in any store yet. */
 function guideFor(browser: Browser): Guide {
   const chromeLike = (name: string, page: string): Guide => ({
-    title: `Not in the ${name} store yet. Two minutes to set up:`,
+    title: `Not in the ${name} store yet.`,
+    lede: "Two minutes, once:",
     download: { label: `Download for ${name}`, href: SITE.downloads.chrome },
     steps: [
       <>Unzip the file you downloaded.</>,
@@ -67,7 +69,8 @@ function guideFor(browser: Browser): Guide {
       return chromeLike("Edge", "edge://extensions");
     case "firefox":
       return {
-        title: "Not on Firefox Add-ons yet. One minute to try it:",
+        title: "Not on Firefox Add-ons yet.",
+        lede: "One minute, to try it:",
         download: { label: "Download for Firefox", href: SITE.downloads.firefox },
         steps: [
           <>
@@ -82,6 +85,7 @@ function guideFor(browser: Browser): Guide {
     default:
       return {
         title: "Not in the stores yet.",
+        lede: "",
         download: null,
         steps: [],
         after: `${SITE.browsers} Open this page in one of them and the steps appear here.`,
@@ -101,32 +105,35 @@ export function InstallNote({ className }: { className?: string }) {
     <div
       id="install"
       className={[
-        "install-note scroll-mt-6 max-w-[62ch] bg-paper border-[1.5px] border-ink-hair rounded-[var(--radius-sticker)] px-6 py-6 sm:px-8 sm:py-7",
+        "install-note scroll-mt-8 max-w-[62ch] lg:max-w-none rounded-[var(--radius-sticker)]",
         className,
       ]
         .filter(Boolean)
         .join(" ")}
     >
       <h3 className="font-display font-semibold text-display-md text-balance">{g.title}</h3>
+      {g.lede && <p className="mt-1 text-body-sm text-ink-soft">{g.lede}</p>}
       {g.download && (
-        <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5">
-          <ButtonLink href={g.download.href} download className="px-5 py-3 text-body-sm">
+        <div className="mt-5">
+          <ButtonLink href={g.download.href} download className="px-6 py-3 text-body-sm">
             {g.download.label}
           </ButtonLink>
-          <span className="text-caption text-ink-soft whitespace-nowrap">zip, about 2 MB</span>
+          <p className="mt-2 text-caption text-ink-soft">zip, about 2 MB</p>
         </div>
       )}
       {g.steps.length > 0 && (
-        <ol className="mt-5 grid gap-2.5 text-body list-none p-0 m-0 text-pretty">
+        <ol className="mt-7 grid gap-y-4 text-body list-none p-0 m-0 text-pretty">
           {g.steps.map((s, i) => (
-            <li key={i} className="grid grid-cols-[1.75rem_1fr] gap-1 items-baseline">
-              <span className="font-display font-semibold text-ochre tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+            <li key={i} className="grid grid-cols-[2.25rem_minmax(0,1fr)] items-baseline">
+              <span className="font-display font-semibold text-display-sm text-ochre tabular-nums">
+                {String(i + 1).padStart(2, "0")}
+              </span>
               <span>{s}</span>
             </li>
           ))}
         </ol>
       )}
-      <p className="mt-4 text-body-sm text-ink-soft text-pretty">{g.after}</p>
+      <p className="mt-7 text-body-sm text-ink-soft text-pretty">{g.after}</p>
     </div>
   );
 }

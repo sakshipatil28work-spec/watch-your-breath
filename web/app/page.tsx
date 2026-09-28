@@ -75,19 +75,19 @@ export default function Home() {
 
         {/* ---------- in your toolbar: the popup beside the words, the way in beneath them ---------- */}
         <section aria-labelledby="toolbar-title" className="mx-auto max-w-[1200px] px-5 sm:px-8 py-12 lg:py-16">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16 items-start">
-            <div className="max-w-[36rem]">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-20 items-start lg:items-center">
+            <div className="max-w-[36rem] lg:max-w-none">
               <h2 id="toolbar-title" className="font-display font-bold text-display-lg sm:text-display-xl text-balance">
                 A small sticker in your toolbar.
               </h2>
-              <p className="mt-4 text-body-lg max-w-[46ch] text-pretty">
+              <p className="mt-4 text-body-lg max-w-[48ch] text-pretty">
                 Click the icon, turn reminders on, choose how often. That is the whole interface. Quiet hours, the notification
                 layout and the bell live one tap deeper, and nothing is counted, scored or streaked. Free, with no account, and nothing leaves your browser.
               </p>
-              <InstallNote className="mt-8" />
+              <InstallNote className="mt-10" />
             </div>
             <div className="flex justify-center lg:justify-end">
-              <div className="p-6 sm:p-8 bg-clay rounded-[var(--radius-sticker-lg)]">
+              <div className="p-6 sm:p-8 lg:p-10 bg-clay rounded-[var(--radius-sticker-lg)]">
                 <PopupDemo />
               </div>
             </div>
