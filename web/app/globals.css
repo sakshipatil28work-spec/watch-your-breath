@@ -82,6 +82,12 @@ body {
   overflow-x: hidden;
 }
 
+/* One icon set at one optical weight, matching the extension: the rendered
+   stroke stays 1.5px whether the glyph is drawn at 16, 18 or 20px. */
+.glyph {
+  stroke-width: var(--glyph-stroke, 1.8);
+}
+
 /* paper: a faint procedural grain over the sand, so the page reads as stock, not a flat fill */
 body::after {
   content: "";

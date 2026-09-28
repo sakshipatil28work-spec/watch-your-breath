@@ -67,7 +67,7 @@ export function PopupDemo() {
             type="button"
             onClick={() => setView("settings")}
             aria-label="Settings"
-            className="absolute right-2.5 top-2.5 grid place-items-center w-[30px] h-[30px] rounded-full text-ink-soft [@media(hover:hover)]:hover:text-ink motion-safe:[@media(hover:hover)]:hover:rotate-[22deg] active:scale-[0.96] transition-[color,transform] duration-[240ms] [&_svg]:w-5 [&_svg]:h-5"
+            className="absolute right-2.5 top-2.5 grid place-items-center w-[30px] h-[30px] rounded-full text-ink-soft [@media(hover:hover)]:hover:text-ink motion-safe:[@media(hover:hover)]:hover:rotate-[22deg] active:scale-[0.96] transition-[color,transform] duration-[240ms] [&_svg]:w-5 [&_svg]:h-5 [--glyph-stroke:1.8]"
             dangerouslySetInnerHTML={{ __html: gearSvg() }}
           />
           <Image
@@ -117,7 +117,7 @@ export function PopupDemo() {
               <span className="inline-flex items-center gap-1">
                 <span
                   aria-hidden="true"
-                  className={["w-[18px] h-[18px] [&_svg]:w-full [&_svg]:h-full", sound ? "text-ochre" : "text-ink-faint"].join(" ")}
+                  className={["w-[18px] h-[18px] [&_svg]:w-full [&_svg]:h-full [--glyph-stroke:2]", sound ? "text-ochre" : "text-ink-faint"].join(" ")}
                   dangerouslySetInnerHTML={{ __html: bellSvg() }}
                 />
                 <Toggle checked={sound} onChange={setSound} labelledBy="demo-sound" />
@@ -142,7 +142,7 @@ export function PopupDemo() {
               type="button"
               onClick={() => setView("home")}
               aria-label="Back"
-              className="grid place-items-center w-[30px] h-[30px] rounded-full text-ink-soft [@media(hover:hover)]:hover:text-ink active:scale-[0.96] transition-[color,transform] duration-150 [&_svg]:w-5 [&_svg]:h-5"
+              className="grid place-items-center w-[30px] h-[30px] rounded-full text-ink-soft [@media(hover:hover)]:hover:text-ink active:scale-[0.96] transition-[color,transform] duration-150 [&_svg]:w-5 [&_svg]:h-5 [--glyph-stroke:1.8]"
               dangerouslySetInnerHTML={{ __html: arrowLeftSvg() }}
             />
             <h3 className="font-display font-semibold text-display-md">Settings</h3>

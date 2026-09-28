@@ -236,10 +236,13 @@ body {
   animation-play-state: paused;
 }
 
+/* One icon set at one optical weight: --glyph-stroke is set per rendered
+   size below, so a 16px glyph carries the same ink as a 20px one. */
 .glyph {
   display: block;
   width: 100%;
   height: auto;
+  stroke-width: var(--glyph-stroke, 1.8);
 }
 
 /* ---------- type ---------- */
@@ -414,6 +417,7 @@ body {
 .bell-glyph {
   width: 18px;
   height: 18px;
+  --glyph-stroke: 2; /* renders 1.5px */
   margin-right: 2px;
   color: var(--ink-faint);
   transition: color 200ms ease-out;
@@ -658,6 +662,7 @@ body {
 .back-button .glyph {
   width: 20px;
   height: 20px;
+  --glyph-stroke: 1.8; /* renders 1.5px */
 }
 
 /* ---------- settings ---------- */
@@ -852,6 +857,7 @@ body {
   width: 16px;
   height: 16px;
   display: inline-block;
+  --glyph-stroke: 2.25; /* renders 1.5px */
 }
 
 .play-glyph .glyph {
