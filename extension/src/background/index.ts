@@ -24,6 +24,9 @@ import { BELL_URL } from "../lib/audio.ts";
 import { ext, isFirefox } from "../lib/ext.ts";
 
 const ALARM = "wyb:reminder";
+const WATCHDOG = "wyb:watchdog";
+/** How often the heartbeat checks that the schedule is still there. */
+const WATCHDOG_MINUTES = 15;
 const NOTIFICATION_ID = "wyb:reminder";
 /** How long a reminder stays on screen before it clears itself. */
 const LINGER_MS = 12_000;
@@ -49,6 +52,25 @@ async function ensureScheduled(): Promise<void> {
   if (!s.enabled) return;
   const existing = await ext.alarms.get(ALARM);
   if (!existing || existing.scheduledTime < Date.now()) await reschedule(s);
+}
+
+/**
+ * A heartbeat, so a lost schedule heals itself. Until this existed the only
+ * things that noticed a missing alarm were a browser restart and opening the
+ * popup, so a schedule lost mid-afternoon stayed lost until one of those
+ * happened. It only restores an alarm that has gone missing: an alarm that is
+ * merely overdue is left alone, because the browser fires those itself when it
+ * wakes, and replacing one would swallow the reminder it was about to deliver.
+ */
+async function healSchedule(): Promise<void> {
+  const s = await loadSettings();
+  if (!s.enabled) return;
+  const existing = await ext.alarms.get(ALARM);
+  if (!existing) await reschedule(s);
+}
+
+async function ensureWatchdog(): Promise<void> {
+  if (!(await ext.alarms.get(WATCHDOG))) await ext.alarms.create(WATCHDOG, { periodInMinutes: WATCHDOG_MINUTES });
 }
 
 // ---------- choosing ----------
@@ -130,10 +152,17 @@ async function fire(): Promise<void> {
     await saveState({ nextFireAt: resume.getTime() });
     return;
   }
+  // The next alarm is set BEFORE this reminder is shown, not after. Chrome may
+  // stop the service worker at any await, and showing one involves several:
+  // storage, the notification itself, and creating the offscreen document for
+  // the bell. If the worker were stopped after the notification but before the
+  // next alarm existed, the schedule would simply be gone and no further
+  // reminder would ever arrive. Setting it first means the worst case is a
+  // reminder that is missed, not a schedule that is lost.
+  await reschedule(s);
   const r = await nextReminder();
   await show(r, s);
   await saveState({ lastFiredAt: now.getTime() });
-  await reschedule(s);
 }
 
 // ---------- events ----------
@@ -144,14 +173,17 @@ ext.runtime.onInstalled.addListener(async (details) => {
     await ext.tabs.create({ url: ext.runtime.getURL("onboarding.html") });
   }
   await ensureScheduled();
+  await ensureWatchdog();
 });
 
 ext.runtime.onStartup.addListener(() => {
   void ensureScheduled();
+  void ensureWatchdog();
 });
 
 ext.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === ALARM) void fire();
+  else if (alarm.name === WATCHDOG) void healSchedule();
 });
 
 // a click is a dismissal; there is nothing to open
@@ -179,6 +211,7 @@ ext.runtime.onMessage.addListener((msg: Msg, _sender, sendResponse) => {
     }
     case "wyb:ensure": {
       ensureScheduled()
+        .then(ensureWatchdog)
         .then(() => loadState())
         .then((st: RuntimeState) => sendResponse(st));
       return true;
