@@ -7,6 +7,8 @@ type Shot = {
   alt: string;
   title: string;
   body: string;
+  /** A quieter line beneath, for a caveat the screenshot cannot show. */
+  note?: string;
 };
 
 /**
@@ -31,6 +33,12 @@ const SHOTS: Shot[] = [
     alt: "A Windows notification reading “Nothing to change. Simply notice.” with a drawing of a lotus on still water beneath it.",
     title: "A reminder arrives",
     body: "At the corner of your screen, over whatever you are doing. It leaves on its own after twelve seconds.",
+    // This screenshot was taken on Windows. Chrome hands notifications to
+    // macOS's own notification centre, which has no room for the large picture,
+    // so a Mac shows the drawing only as the small round icon. Chrome documents
+    // this; there is no setting for it, and saying so here is kinder than
+    // letting a Mac visitor think their install is broken.
+    note: "On a Mac, Chrome shows the drawing small beside the words. Chrome’s own limit, not a setting.",
   },
   {
     src: "/screenshots/popup.png",
@@ -71,6 +79,7 @@ export function Walkthrough({ className }: { className?: string }) {
             <span className="grid gap-1.5">
               <span className="font-display font-semibold text-display-md">{s.title}</span>
               <span className="text-body-sm text-ink-soft max-w-[34ch] text-pretty">{s.body}</span>
+              {s.note && <span className="mt-1 text-caption text-ink-faint max-w-[34ch] text-pretty">{s.note}</span>}
             </span>
           </li>
         ))}

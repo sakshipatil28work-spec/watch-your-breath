@@ -13,7 +13,7 @@ import {
 import { isQuiet, quietEndAfter, formatClock } from "../lib/schedule.ts";
 import { COPY } from "../lib/copy.ts";
 import { playReminderSound } from "../lib/audio.ts";
-import { ext } from "../lib/ext.ts";
+import { ext, isMac } from "../lib/ext.ts";
 import { REMINDERS, illustrationUrl } from "../lib/reminders.ts";
 import { emblemHtml, gearSvg, arrowLeftSvg, bellSvg, playSvg, chevronDataUri } from "../ui/ink.ts";
 
@@ -224,10 +224,13 @@ previewBtn.addEventListener("click", () => {
   previewBtn.disabled = true;
   ext.runtime
     .sendMessage({ type: "wyb:preview" })
-    .then((res?: { ok: boolean }) => Boolean(res?.ok))
-    .catch(() => false)
-    .then((ok) => {
-      flash($("preview-hint"), ok ? COPY.settings.previewSent : "Couldn’t show the reminder. Try once more.", !ok);
+    .then((res?: { ok: boolean; error?: string }) => res ?? { ok: false })
+    .catch((e: unknown) => ({ ok: false, error: String(e) }))
+    .then(({ ok, error }) => {
+      // The reason, not just "it failed": when a notification goes missing the
+      // cause is almost always the system rather than us, and the words the
+      // browser used are the only thing that tells us which.
+      flash($("preview-hint"), ok ? COPY.settings.previewSent : COPY.settings.previewFailed(error), !ok, ok ? 2800 : 9000);
       setTimeout(() => (previewBtn.disabled = false), 1200);
     });
 });
@@ -242,6 +245,14 @@ playBtn.addEventListener("click", async () => {
 
 $("open-chrome-settings").addEventListener("click", () => {
   void ext.tabs.create({ url: "chrome://settings/content/notifications" });
+});
+
+// macOS keeps its own notification switch per application, and neither the
+// browser nor this extension is told when it is off: the notification is
+// created without complaint and simply never appears. The only thing we can do
+// is say where to look.
+void isMac().then((mac) => {
+  $("mac-note").hidden = !mac;
 });
 
 // ---------- permission (only the fallback path needs it; Chrome-only API) ----------

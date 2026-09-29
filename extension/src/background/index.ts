@@ -21,7 +21,7 @@ import { computeNextFire, isQuiet, quietEndAfter } from "../lib/schedule.ts";
 import { getReminder, illustrationUrl, type Reminder } from "../lib/reminders.ts";
 import { pickNext } from "../lib/selection.ts";
 import { BELL_URL } from "../lib/audio.ts";
-import { ext, isFirefox } from "../lib/ext.ts";
+import { ext, isFirefox, isMac } from "../lib/ext.ts";
 
 const ALARM = "wyb:reminder";
 const WATCHDOG = "wyb:watchdog";
@@ -100,15 +100,31 @@ async function show(r: Reminder, s: Settings): Promise<void> {
     // Compact: the one supporting line. Expanded: the short reflection too.
     message: s.layout === "expanded" && r.reflection ? `${r.supporting}\n${r.reflection}` : r.supporting,
   };
-  if (!isFirefox) {
-    // Chrome-only: the large picture, and the options Firefox would reject
+  // The large picture and the options around it are for Chrome on Windows and
+  // Linux only. Firefox rejects them outright, and macOS shows Chrome's
+  // notifications through its own notification centre, which has never drawn
+  // the image and does not decide for itself how long one stays. Sending it
+  // options it cannot use buys nothing and risks the whole notification.
+  if (!isFirefox && !(await isMac())) {
     options.type = "image";
     options.imageUrl = illustrationUrl(r, "wide");
     options.requireInteraction = true; // stays until we clear it below
     options.silent = true; // the bell is ours, not the system's
     options.priority = 0;
   }
-  await ext.notifications.create(NOTIFICATION_ID, options);
+  try {
+    await ext.notifications.create(NOTIFICATION_ID, options);
+  } catch (e) {
+    // One option a platform dislikes loses the whole notification. A reminder
+    // with no picture is still a reminder; no reminder at all is a bug.
+    await ext.notifications.create(NOTIFICATION_ID, {
+      type: "basic",
+      iconUrl: illustrationUrl(r, "icon"),
+      title: r.title,
+      message: r.supporting,
+    });
+    console.warn("Watch Your Breath: fell back to a plain notification.", e);
+  }
   clearTimer = setTimeout(() => void ext.notifications.clear(NOTIFICATION_ID), LINGER_MS);
   if (s.soundEnabled) await ring();
 }

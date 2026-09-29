@@ -55,10 +55,16 @@ export const COPY = {
     preview: "Send one now",
     previewHint: "Shows it right away, so you can see how one arrives.",
     previewSent: "Sent. It leaves on its own after a few seconds.",
+    previewFailed: (why?: string) =>
+      why
+        ? `Your browser would not show it: ${why}`
+        : "Sent, but nothing appeared. Check that notifications are allowed for your browser in your system settings.",
     sound: "Reminder sound",
     playBell: "Play bell",
     bellHint: "A single soft bell. It plays once with each reminder.",
     bellFailed: "Couldn’t play the bell. Check that your sound is on, then try again.",
+    macNote:
+      "On a Mac, your system decides whether the browser may show notifications at all, and the browser is not told when it says no. If nothing appears, open System Settings, then Notifications, find your browser and allow them.",
     about: "About",
     version: (v: string) => `Version ${v}`,
   },

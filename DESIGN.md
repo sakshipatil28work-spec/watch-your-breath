@@ -404,7 +404,7 @@ How a reminder arrives: one of twelve drawings beside its own words, on a sand s
 - **Preview:** in settings the real card renders in an iframe at 0.56 scale on a clay strip (`{rounded.sticker-sm}`, `6px 0 2px`).
 
 ### What You Will See (site)
-Three screenshots of the built extension - the first-run page, a reminder as it arrived on a Windows desktop, and the popup - each centred on a clay panel with the large sticker radius, capped to one height (212px, 252px at lg) so the three align whatever their shape, with an Eczar 600 `display-md` title and a `body-sm` ink-soft line beneath. Three columns at sm and up, one column below.
+Three screenshots of the built extension - the first-run page, a reminder as it arrived on a Windows desktop, and the popup - each centred on a clay panel with the large sticker radius, capped to one height (212px, 252px at lg) so the three align whatever their shape, with an Eczar 600 `display-md` title and a `body-sm` ink-soft line beneath. A `caption` ink-faint line may follow it for a caveat the screenshot cannot show: the reminder card carries one, because Chrome on macOS hands notifications to the system and the large drawing does not survive the handover. Three columns at sm and up, one column below.
 
 The twelve-illustration grid and the numbered "How it works" steps that preceded it were removed from the site; the twelve still drive the extension.
 
