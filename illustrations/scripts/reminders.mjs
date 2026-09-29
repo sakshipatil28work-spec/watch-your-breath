@@ -36,20 +36,22 @@ export const IDS = [
 ];
 
 // Generous boxes around each drawing (number above and caption below excluded);
-// the script trims to the ink inside them.
+// the script trims to the ink inside them. On a 1536x1024 sheet the panels sit
+// on a clean 4 x 3 grid: each box starts below the numeral and ends above the
+// title, and every one clears its neighbours by at least 9px.
 const BOXES = [
-  [10, 70, 318, 272],
-  [338, 70, 646, 320],
-  [666, 70, 974, 296],
-  [994, 70, 1302, 296],
-  [10, 462, 318, 656],
-  [338, 462, 646, 682],
-  [666, 462, 974, 678],
-  [994, 462, 1302, 664],
-  [10, 850, 318, 1024],
-  [338, 850, 646, 1024],
-  [666, 850, 974, 1042],
-  [994, 850, 1302, 992],
+  [4, 44, 380, 271],
+  [388, 44, 764, 271],
+  [772, 43, 1148, 273],
+  [1156, 43, 1532, 272],
+  [4, 386, 380, 588],
+  [388, 388, 764, 591],
+  [772, 387, 1148, 589],
+  [1156, 393, 1532, 585],
+  [4, 702, 380, 905],
+  [388, 702, 764, 901],
+  [772, 703, 1148, 904],
+  [1156, 704, 1532, 894],
 ];
 
 if (!existsSync(SRC)) {
