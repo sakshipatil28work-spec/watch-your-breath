@@ -8,6 +8,9 @@ import { Walkthrough } from "@/components/Walkthrough";
 import { COPY, SITE } from "@/lib/site";
 
 
+/* The philosophy triad: one setting, stepped through three sizes of the scale. */
+const PHIL = "font-display font-bold text-display-lg min-[420px]:text-display-xl lg:text-display-2xl";
+
 export default function Home() {
   const heroIsRaster = heroExists();
 
@@ -108,14 +111,18 @@ export default function Home() {
           <h2 id="phil-title" className="sr-only">
             What this is, and is not
           </h2>
-          <div className="grid gap-2 sm:gap-1 font-display font-bold text-display-lg min-[420px]:text-display-xl lg:text-display-2xl">
-            <p className="sm:pl-0">{COPY.philosophy[0]}</p>
-            <p className="sm:pl-[12%] lg:pl-[16%] text-rust">{COPY.philosophy[1]}</p>
-            <p className="sm:pl-[24%] lg:pl-[32%]">{COPY.philosophy[2]}</p>
+          {/* The three lines step right; the step they open on the left is where
+              the prose goes, level with the last line rather than trailing it.
+              Both halves of the bottom row carry weight, so nothing hangs and no
+              corner is left empty. Line three and the prose share row three. */}
+          <div className="grid gap-2 sm:gap-1 lg:grid-cols-[40%_minmax(0,1fr)] lg:gap-x-10">
+            <p className={`lg:col-span-2 ${PHIL}`}>{COPY.philosophy[0]}</p>
+            <p className={`sm:pl-[12%] lg:pl-0 lg:col-span-2 lg:ml-[20%] text-rust ${PHIL}`}>{COPY.philosophy[1]}</p>
+            <p className={`sm:pl-[24%] lg:pl-0 lg:col-start-2 lg:row-start-3 ${PHIL}`}>{COPY.philosophy[2]}</p>
+            <p className="mt-8 lg:mt-0 max-w-[46ch] lg:max-w-none text-body-lg text-pretty lg:col-start-1 lg:row-start-3">
+              {COPY.philosophyBody}
+            </p>
           </div>
-          <p className="mt-6 lg:mt-8 max-w-[46ch] text-body-lg sm:ml-[24%] lg:ml-[32%] text-pretty">
-            {COPY.philosophyBody}
-          </p>
         </section>
 
         {/* ---------- close ---------- */}

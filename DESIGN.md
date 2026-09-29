@@ -313,7 +313,7 @@ One nine-step scale, shared by the site and the extension. Every step carries it
 
 In Tailwind these are `--text-*` theme tokens (`text-display-xl`, `text-body-sm`); in the popup they are the CSS variables `--text-display-lg` down to `--text-caption`. The extension reaches six of the nine; the site uses all nine.
 
-The philosophy triad steps through three of them rather than inventing sizes: `display-lg`, `display-xl` at 420px, `display-2xl` at lg, each line stepped further right (12% / 24% at sm, 16% / 32% at lg), the middle line in rust.
+The philosophy triad steps through three of them rather than inventing sizes: `display-lg`, `display-xl` at 420px, `display-2xl` at lg, each line stepped further right (12% / 24% at sm; at lg the second line is indented 20% and the third sits in the second column of a `40% / rest` grid with a `2.5rem` gutter), the middle line in rust. The step the lines open on the left is not empty: the supporting paragraph sits in it, sharing row three with the last line, so both corners of the bottom row carry weight and the triad leaves no dead triangle.
 
 Numerals in the install note are Eczar 600, tabular, in ochre.
 
