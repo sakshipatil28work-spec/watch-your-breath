@@ -9,7 +9,9 @@ import { COPY, SITE } from "@/lib/site";
 
 
 /* The philosophy triad: one setting, stepped through three sizes of the scale. */
-const PHIL = "font-display font-bold text-display-lg min-[420px]:text-display-xl lg:text-display-2xl";
+// 480px, not 420: at 420 the line "Nothing to achieve." needs 426px at
+// display-xl and only has 380, so it wrapped and broke the stair.
+const PHIL = "font-display font-bold text-display-lg min-[480px]:text-display-xl lg:text-display-2xl";
 
 export default function Home() {
   const heroIsRaster = heroExists();
@@ -111,18 +113,16 @@ export default function Home() {
           <h2 id="phil-title" className="sr-only">
             What this is, and is not
           </h2>
-          {/* The three lines step right; the step they open on the left is where
-              the prose goes, level with the last line rather than trailing it.
-              Both halves of the bottom row carry weight, so nothing hangs and no
-              corner is left empty. Line three and the prose share row three. */}
-          <div className="grid gap-2 sm:gap-1 lg:grid-cols-[40%_minmax(0,1fr)] lg:gap-x-10">
-            <p className={`lg:col-span-2 ${PHIL}`}>{COPY.philosophy[0]}</p>
-            <p className={`sm:pl-[12%] lg:pl-0 lg:col-span-2 lg:ml-[20%] text-rust ${PHIL}`}>{COPY.philosophy[1]}</p>
-            <p className={`sm:pl-[24%] lg:pl-0 lg:col-start-2 lg:row-start-3 ${PHIL}`}>{COPY.philosophy[2]}</p>
-            <p className="mt-8 lg:mt-0 max-w-[46ch] lg:max-w-none text-body-lg text-pretty lg:col-start-1 lg:row-start-3">
-              {COPY.philosophyBody}
-            </p>
+          {/* Three lines leaning right, then the prose back at the left margin
+              it shares with the first line. The lean is small on purpose: a wide
+              step leaves a dead triangle under it, and putting the prose inside
+              that triangle tangles it with the type above. */}
+          <div className="grid gap-2 sm:gap-1">
+            <p className={PHIL}>{COPY.philosophy[0]}</p>
+            <p className={`sm:pl-[6%] lg:pl-[10%] text-rust ${PHIL}`}>{COPY.philosophy[1]}</p>
+            <p className={`sm:pl-[12%] lg:pl-[20%] ${PHIL}`}>{COPY.philosophy[2]}</p>
           </div>
+          <p className="mt-8 lg:mt-10 max-w-[46ch] text-body-lg text-pretty">{COPY.philosophyBody}</p>
         </section>
 
         {/* ---------- close ---------- */}

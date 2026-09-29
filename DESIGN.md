@@ -301,7 +301,7 @@ One nine-step scale, shared by the site and the extension. Every step carries it
 
 | Step | Size | Line height | Carries |
 | --- | --- | --- | --- |
-| `display-2xl` | 4.5rem / 72px | 1.05 | the philosophy triad at lg, and nothing else |
+| `display-2xl` | 5.5rem / 88px | 1.05 | the philosophy triad at lg, and nothing else |
 | `display-xl` | 3rem / 48px | 1.08 | section headings at sm and up |
 | `display-lg` | 2rem / 32px | 1.15 | the tagline, the closing title, the first-run phrase |
 | `display-md` | 1.375rem / 22px | 1.25 | card titles, the install note, the settings title |
@@ -313,7 +313,7 @@ One nine-step scale, shared by the site and the extension. Every step carries it
 
 In Tailwind these are `--text-*` theme tokens (`text-display-xl`, `text-body-sm`); in the popup they are the CSS variables `--text-display-lg` down to `--text-caption`. The extension reaches six of the nine; the site uses all nine.
 
-The philosophy triad steps through three of them rather than inventing sizes: `display-lg`, `display-xl` at 420px, `display-2xl` at lg, each line stepped further right (12% / 24% at sm; at lg the second line is indented 20% and the third sits in the second column of a `40% / rest` grid with a `2.5rem` gutter), the middle line in rust. The step the lines open on the left is not empty: the supporting paragraph sits in it, sharing row three with the last line, so both corners of the bottom row carry weight and the triad leaves no dead triangle.
+The philosophy triad steps through three of them rather than inventing sizes: `display-lg`, `display-xl` from 480px, `display-2xl` at lg, the middle line in rust. The lean is small on purpose — 6% / 12% at sm, 10% / 20% at lg. A wider step leaves a dead triangle under the first line, and prose placed inside that triangle tangles with the type above it, so the supporting paragraph sits below the block at the same left margin as the first line. `display-2xl` is 88px rather than 72 so the longest line carries its column instead of floating in it; 480px is the lowest breakpoint at which "Nothing to achieve." still sets on one line, and none of the three ever wraps.
 
 Numerals in the install note are Eczar 600, tabular, in ochre.
 
