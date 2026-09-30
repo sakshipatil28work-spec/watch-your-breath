@@ -23,8 +23,9 @@ import { illustrationUrl, type Reminder } from "../lib/reminders.ts";
 export interface CardPayload {
   /** The wide illustration as a data URL. */
   image: string;
-  /** Eczar, as a data URL, so the card is set in the extension's own face. */
+  /** Eczar and Mukta as data URLs, so the card is set in the extension's own faces. */
   font: string;
+  fontUi: string;
   title: string;
   supporting: string;
   reflection: string;
@@ -33,7 +34,8 @@ export interface CardPayload {
   dismiss: string;
 }
 
-const FONT_PATH = "fonts/Eczar-normal-500-700.woff2";
+const FONT_DISPLAY = "fonts/Eczar-normal-500-700.woff2";
+const FONT_UI = "fonts/Mukta-normal-400.woff2";
 
 /** Base64 without blowing the stack on a 50 KB image. */
 function toBase64(bytes: Uint8Array): string {
@@ -88,29 +90,50 @@ function draw(p: CardPayload): boolean {
   const style = document.createElement("style");
   style.textContent = `
     @font-face{font-family:'WYB Eczar';font-style:normal;font-weight:500 700;src:url(${p.font}) format('woff2');}
+    @font-face{font-family:'WYB Mukta';font-style:normal;font-weight:400;src:url(${p.fontUi}) format('woff2');}
     :host{all:initial}
     *{margin:0;padding:0;box-sizing:border-box}
     .card{
+      /* the same steps of the one scale the popup uses, named here because a
+         shadow root cannot reach the extension's own custom properties */
+      --display-md:22px; --body:17px; --body-sm:15px;
+      --ink:#243c3a; --ink-soft:rgba(36,60,58,.72); --ink-faint:rgba(36,60,58,.34);
       width:360px;max-width:calc(100vw - 40px);
-      background:#f3e8d2;color:#243c3a;
-      border:1.5px solid #243c3a;
+      background:#f3e8d2;color:var(--ink);
+      border:1.5px solid var(--ink);
       border-radius:26px 24px 27px 25px / 25px 27px 24px 26px;
       overflow:hidden;
       box-shadow:0 12px 32px rgba(36,60,58,.22);
-      font-family:'WYB Eczar',Georgia,'Times New Roman',serif;
+      /* Mukta reads the prose; Eczar is asked for by name where it speaks */
+      font-family:'WYB Mukta',system-ui,-apple-system,'Segoe UI',sans-serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
       ${quiet ? "" : "animation:wyb-in 420ms cubic-bezier(.23,1,.32,1) both;"}
     }
     .art{display:block;width:100%;height:auto;background:#f3e8d2}
     .words{padding:14px 44px 16px 18px;position:relative}
-    .title{font-size:22px;line-height:1.25;font-weight:700;letter-spacing:-.005em}
-    .supporting{font-size:17px;line-height:1.3;font-weight:500;color:rgba(36,60,58,.72);margin-top:2px}
-    .reflection{font-size:15px;line-height:1.45;font-weight:500;color:rgba(36,60,58,.72);margin-top:8px}
+    /* the two voices: a title in Eczar bold, its one line beneath in Eczar 500
+       a step down. Anything longer than that line is prose, and prose is Mukta. */
+    .title{
+      font-family:'WYB Eczar',Georgia,'Times New Roman',serif;
+      font-size:var(--display-md);line-height:1.25;font-weight:700;letter-spacing:-.005em;
+      text-wrap:balance;
+    }
+    .supporting{
+      font-family:'WYB Eczar',Georgia,'Times New Roman',serif;
+      font-size:var(--body);line-height:1.25;font-weight:500;color:var(--ink-soft);
+      margin-top:2px;text-wrap:pretty;
+    }
+    .reflection{
+      font-size:var(--body-sm);line-height:1.5;font-weight:400;color:var(--ink-soft);
+      margin-top:8px;text-wrap:pretty;
+    }
     .close{
       position:absolute;top:10px;right:10px;width:28px;height:28px;
       display:grid;place-items:center;border:0;background:none;cursor:pointer;
-      border-radius:50%;color:rgba(36,60,58,.34);
+      border-radius:50%;color:var(--ink-faint);
     }
-    .close:hover{color:#243c3a}
+    .close:hover{color:var(--ink)}
     .close svg{width:14px;height:14px}
     @keyframes wyb-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
     @keyframes wyb-out{to{opacity:0;transform:translateY(6px)}}
@@ -203,13 +226,15 @@ export async function showInPage(r: Reminder, expanded: boolean, linger: number,
     if (!(await hostAccess())) return false;
     const tabId = await focusedTabId();
     if (tabId === null) return false;
-    const [image, font] = await Promise.all([
+    const [image, font, fontUi] = await Promise.all([
       dataUrl(illustrationUrl(r, "wide"), "image/png"),
-      dataUrl(ext.runtime.getURL(FONT_PATH), "font/woff2"),
+      dataUrl(ext.runtime.getURL(FONT_DISPLAY), "font/woff2"),
+      dataUrl(ext.runtime.getURL(FONT_UI), "font/woff2"),
     ]);
     const payload: CardPayload = {
       image,
       font,
+      fontUi,
       title: r.title,
       supporting: r.supporting,
       reflection: expanded && r.reflection ? r.reflection : "",
