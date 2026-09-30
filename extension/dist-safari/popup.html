@@ -61,22 +61,18 @@
 
           <div class="row">
             <span class="row-label" id="label-sound">Sound</span>
-            <span class="sound-control">
-              <button type="button" class="bell-button" id="bell-button" aria-label="Play the bell" title="Play the bell">
-                <span class="bell-glyph" id="bell-glyph" aria-hidden="true"></span>
-              </button>
-              <button
-                type="button"
-                class="toggle toggle-sound"
-                id="toggle-sound"
-                role="switch"
-                aria-checked="true"
-                aria-labelledby="label-sound"
-              >
-                <span class="toggle-track" aria-hidden="true"><span class="toggle-knob"></span></span>
-                <span class="toggle-text" id="toggle-sound-text">On</span>
-              </button>
-            </span>
+            <button
+              type="button"
+              class="toggle toggle-sound"
+              id="toggle-sound"
+              role="switch"
+              aria-checked="true"
+              aria-labelledby="label-sound"
+            >
+              <span class="bell-glyph" id="bell-glyph" aria-hidden="true"></span>
+              <span class="toggle-track" aria-hidden="true"><span class="toggle-knob"></span></span>
+              <span class="toggle-text" id="toggle-sound-text">On</span>
+            </button>
           </div>
         </div>
 
@@ -148,37 +144,10 @@
               <p class="notice-message" id="preview-message"></p>
             </div>
           </div>
-          <div class="row row-stack">
-            <div class="row">
-              <span class="row-label" id="label-in-page">Show it in the page</span>
-              <button
-                type="button"
-                class="toggle"
-                id="toggle-in-page"
-                role="switch"
-                aria-checked="false"
-                aria-labelledby="label-in-page"
-                aria-describedby="hint-in-page"
-              >
-                <span class="toggle-track" aria-hidden="true"><span class="toggle-knob"></span></span>
-                <span class="toggle-text" id="toggle-in-page-text">Off</span>
-              </button>
-            </div>
-            <p class="hint" id="hint-in-page" role="status">
-              When your browser is in front, the reminder is drawn in the page you are on, so the illustration looks the same in
-              every browser. Needs access to the pages you visit; nothing is read from them.
-            </p>
-          </div>
-
           <div class="row row-preview">
             <button type="button" class="button button-secondary" id="send-preview">Send one now</button>
             <span class="hint" id="preview-hint" role="status">Shows it right away, so you can see how one arrives.</span>
           </div>
-          <p class="hint" id="system-note">
-            If you hear the bell but see nothing, your system is holding the notification back rather than the browser, which is
-            never told. Allow notifications for your browser in your system settings, and check that Focus or Do Not Disturb is
-            off.
-          </p>
           <div class="notice" id="denied-note" hidden>
             <p class="hint">
               Your browser is set to block notifications from this extension, so reminders cannot be shown. To allow

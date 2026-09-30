@@ -22,6 +22,12 @@ export interface Settings {
   layout: NotificationLayout;
   /** Play the bell once when a reminder appears. */
   soundEnabled: boolean;
+  /**
+   * Draw the reminder in the page when the browser is in front, instead of
+   * handing it to the system. Off until asked for: it needs access to the
+   * pages you visit, which is requested at the moment it is switched on.
+   */
+  inPageCard: boolean;
   /** First-run screen has been completed or dismissed. */
   onboarded: boolean;
 }
@@ -48,6 +54,7 @@ export const DEFAULT_SETTINGS: Settings = {
   quietEnd: "07:00",
   layout: "compact",
   soundEnabled: true,
+  inPageCard: false,
   onboarded: false,
 };
 
@@ -92,6 +99,7 @@ function sanitize(raw: unknown): Settings {
     quietEnd: isTime(r.quietEnd) ? r.quietEnd : DEFAULT_SETTINGS.quietEnd,
     layout: r.layout === "expanded" ? "expanded" : "compact",
     soundEnabled: typeof r.soundEnabled === "boolean" ? r.soundEnabled : !legacySilent,
+    inPageCard: !!r.inPageCard,
     onboarded: !!r.onboarded,
   };
 }

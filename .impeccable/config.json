@@ -30,6 +30,12 @@
         ],
         "createdAt": "2026-09-19T12:39:30.467Z",
         "reason": "the 1.1-1.25 values belong to one-line headings (.phrase, the group and notice titles); body, hints and radio text are 1.3-1.5"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "wyb eczar",
+        "createdAt": "2026-09-30T18:47:00.907Z",
+        "reason": "Claude: it is Eczar, the documented display face. The card is drawn inside someone else's page, so the family is aliased to avoid colliding with a font that page may already have registered as Eczar."
       }
     ]
   }

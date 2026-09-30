@@ -43,6 +43,7 @@ const toggles = {
   enabled: [$("toggle-enabled"), $("toggle-enabled-2")] as HTMLButtonElement[],
   sound: [$("toggle-sound"), $("toggle-sound-2")] as HTMLButtonElement[],
   randomize: [$("toggle-randomize")] as HTMLButtonElement[],
+  inPage: [$("toggle-in-page")] as HTMLButtonElement[],
 };
 const selects = [$("select-interval"), $("select-interval-2")] as HTMLSelectElement[];
 const layoutSelect = $("select-layout") as HTMLSelectElement;
@@ -68,6 +69,7 @@ function render(s: Settings) {
   toggles.enabled.forEach((b) => setToggle(b, s.enabled));
   toggles.sound.forEach((b) => setToggle(b, s.soundEnabled));
   toggles.randomize.forEach((b) => setToggle(b, s.randomize));
+  toggles.inPage.forEach((b) => setToggle(b, s.inPageCard));
   selects.forEach((sel) => (sel.value = String(s.interval)));
   layoutSelect.value = s.layout;
   const isCustom = s.interval === "custom";
@@ -162,6 +164,28 @@ toggles.enabled.forEach((b) =>
 );
 toggles.sound.forEach((b) => b.addEventListener("click", () => void saveSettings({ soundEnabled: !current.soundEnabled })));
 toggles.randomize.forEach((b) => b.addEventListener("click", () => void saveSettings({ randomize: !current.randomize })));
+
+/**
+ * Drawing in the page needs access to the pages you visit, and that is asked
+ * for here rather than at install: someone who never switches this on is never
+ * asked. Switching it off gives the access back, so it is not kept for nothing.
+ */
+toggles.inPage.forEach((b) =>
+  b.addEventListener("click", async () => {
+    const wanted = !current.inPageCard;
+    if (!wanted) {
+      await ext.permissions.remove({ origins: ["<all_urls>"] }).catch(() => false);
+      void saveSettings({ inPageCard: false });
+      return;
+    }
+    const granted = await ext.permissions.request({ origins: ["<all_urls>"] }).catch(() => false);
+    if (!granted) {
+      flash($("hint-in-page"), COPY.settings.inPageDenied, true, 6000);
+      return;
+    }
+    void saveSettings({ inPageCard: true });
+  })
+);
 
 selects.forEach((sel) =>
   sel.addEventListener("change", () => {

@@ -21,7 +21,9 @@ import { computeNextFire, isQuiet, quietEndAfter } from "../lib/schedule.ts";
 import { getReminder, illustrationUrl, type Reminder } from "../lib/reminders.ts";
 import { pickNext } from "../lib/selection.ts";
 import { BELL_URL } from "../lib/audio.ts";
+import { COPY } from "../lib/copy.ts";
 import { ext, isFirefox, isMac } from "../lib/ext.ts";
+import { showInPage } from "./card.ts";
 
 const ALARM = "wyb:reminder";
 const WATCHDOG = "wyb:watchdog";
@@ -93,6 +95,16 @@ async function nextReminder(): Promise<Reminder> {
 async function show(r: Reminder, s: Settings): Promise<void> {
   if (clearTimer) clearTimeout(clearTimer);
   await ext.notifications.clear(NOTIFICATION_ID);
+
+  // Drawn in the page when the browser is in front of the person: it is the
+  // only way the illustration looks the same in every browser. When it is not
+  // in front, or the page will not take it, the system notification below is
+  // what reaches them instead. One reminder either way, never both.
+  if (s.inPageCard && (await showInPage(r, s.layout === "expanded", LINGER_MS, COPY.card.dismiss))) {
+    if (s.soundEnabled) await ring();
+    return;
+  }
+
   const options: chrome.notifications.NotificationOptions<true> = {
     type: "basic",
     iconUrl: illustrationUrl(r, "icon"),

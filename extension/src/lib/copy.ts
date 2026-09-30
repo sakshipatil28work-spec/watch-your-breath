@@ -63,10 +63,18 @@ export const COPY = {
     playBell: "Play bell",
     bellHint: "A single soft bell. It plays once with each reminder.",
     bellFailed: "Couldn’t play the bell. Check that your sound is on, then try again.",
+    inPage: "Show it in the page",
+    inPageHint:
+      "When your browser is in front, the reminder is drawn in the page you are on, so the illustration looks the same in every browser. Needs access to the pages you visit; nothing is read from them.",
+    inPageDenied: "Without that access the reminder cannot be drawn in the page, so it stays a system notification.",
     systemNote:
       "If you hear the bell but see nothing, your system is holding the notification back rather than the browser, which is never told. Allow notifications for your browser in your system settings, and check that Focus or Do Not Disturb is off.",
     about: "About",
     version: (v: string) => `Version ${v}`,
+  },
+
+  card: {
+    dismiss: "Dismiss this reminder",
   },
 
   denied: {
