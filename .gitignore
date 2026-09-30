@@ -1,6 +1,7 @@
 node_modules/
 extension/dist/
 extension/dist-firefox/
+extension/dist-safari/
 extension/*.zip
 web/.next/
 web/out/
