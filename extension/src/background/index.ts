@@ -143,17 +143,22 @@ async function ring(): Promise<void> {
       await audio.play();
       return;
     }
-    const has = await ext.offscreen.hasDocument();
-    if (!has) {
-      await ext.offscreen.createDocument({
-        url: "offscreen.html",
-        reasons: ["AUDIO_PLAYBACK" as chrome.offscreen.Reason],
-        justification: "Play the reminder bell once when a reminder appears.",
-      });
-    }
-    await ext.runtime.sendMessage({ type: "wyb:offscreen-ring", url });
-  } catch {
-    /* no sound is still a reminder */
+    // Close any document left over from a previous reminder, so the bell is
+    // always played by a document created for it. That makes one path instead
+    // of two: the document is told which sound to play in its own URL and
+    // plays it as it loads. Sending a message instead was a race the bell
+    // could lose, because createDocument() resolves when the document exists,
+    // not when its script has run and is listening.
+    if (await ext.offscreen.hasDocument()) await ext.offscreen.closeDocument();
+    await ext.offscreen.createDocument({
+      url: `offscreen.html?bell=${encodeURIComponent(url)}`,
+      reasons: ["AUDIO_PLAYBACK" as chrome.offscreen.Reason],
+      justification: "Play the reminder bell once when a reminder appears.",
+    });
+  } catch (e) {
+    // no sound is still a reminder, but say so: a silent failure here is
+    // exactly what made this hard to see from the outside
+    console.warn("Watch Your Breath: the bell could not be played.", e);
   }
 }
 

@@ -13,7 +13,7 @@ import {
 import { isQuiet, quietEndAfter, formatClock } from "../lib/schedule.ts";
 import { COPY } from "../lib/copy.ts";
 import { playReminderSound } from "../lib/audio.ts";
-import { ext, isMac } from "../lib/ext.ts";
+import { ext } from "../lib/ext.ts";
 import { REMINDERS, illustrationUrl } from "../lib/reminders.ts";
 import { emblemHtml, gearSvg, arrowLeftSvg, bellSvg, playSvg, chevronDataUri } from "../ui/ink.ts";
 
@@ -245,14 +245,6 @@ playBtn.addEventListener("click", async () => {
 
 $("open-chrome-settings").addEventListener("click", () => {
   void ext.tabs.create({ url: "chrome://settings/content/notifications" });
-});
-
-// macOS keeps its own notification switch per application, and neither the
-// browser nor this extension is told when it is off: the notification is
-// created without complaint and simply never appears. The only thing we can do
-// is say where to look.
-void isMac().then((mac) => {
-  $("mac-note").hidden = !mac;
 });
 
 // ---------- permission (only the fallback path needs it; Chrome-only API) ----------
