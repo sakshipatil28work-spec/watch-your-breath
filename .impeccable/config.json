@@ -36,6 +36,12 @@
         "value": "wyb eczar",
         "createdAt": "2026-09-30T18:47:00.907Z",
         "reason": "Claude: it is Eczar, the documented display face. The card is drawn inside someone else's page, so the family is aliased to avoid colliding with a font that page may already have registered as Eczar."
+      },
+      {
+        "rule": "design-system-font",
+        "value": "wyb mukta",
+        "createdAt": "2026-09-30T19:05:01.425Z",
+        "reason": "Claude: it is Mukta, the documented UI face. The card is drawn inside someone else's page, so the family is aliased to avoid colliding with a font that page may already have registered as Mukta. Same reason as Wyb Eczar."
       }
     ]
   }
